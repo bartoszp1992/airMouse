@@ -6,7 +6,7 @@
  */
 
 #include <stdint.h>
-#include "espat.h"s
+#include "espat.h"
 
 //---------------------------IMPLICIT FUNCTIONS---------------------------
 /*
@@ -20,8 +20,7 @@ espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 		return ESPAT_STATE_ERR;
 }
 
-espat_state_t uartReceive(espat_uartInstance_t *uart, char *data,
-		uint32_t size) {
+espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
 	uint16_t receivedBytes = 0;
 
@@ -31,8 +30,6 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data,
 	else
 		return ESPAT_STATE_ERR;
 }
-
-
 
 //---------------------------PUBLIC FUNCTIONS---------------------------
 /*
@@ -52,25 +49,64 @@ espat_state_t espAt_Init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 
 }
 
-espat_state_t espAt_sendCommand(espathid_radio_t *radio, char* command, uint16_t paramCount, ...){
+espat_state_t espAt_sendCommand(espat_radio_t *radio, char *command,
+		uint16_t paramCount, ...) {
 
-
-	if(ATcommand == NULL)
+	//check if command are valid
+	if (command == NULL)
 		return ESPAT_STATE_ERR;
-
-	char buffer[AT_BUFFER_SIZE];
-	memset(buffer, ' ', AT_BUFFER_SIZE);
-
-	uint16_t commandLength = strlen(ATcommand);
-	uint16_t prefixLength = strlen(AT_PREFIX);
-	uint16_t endingLength = strlen(AT_ENDING);
 
 	va_list ap;
 	va_start(ap, paramCount);
 
+	//make parameters array
+	uint32_t parameters[paramCount];
 
+	//fill parameters array
+	for (uint16_t i = 0; i < paramCount; i++) {
+		parameters[i] = va_arg(ap, uint32_t);
+	}
+
+	//make arguments list string
+	uint16_t characterCounter = 0;
+	char argumentsBuffer[AT_BUFFER_SIZE];
+	memset(argumentsBuffer, '\0', AT_BUFFER_SIZE);
+
+	for (uint16_t i = 0; i < paramCount; i++) {
+		itoa(parameters[i], &argumentsBuffer[characterCounter], 10);
+		characterCounter += strlen(&argumentsBuffer[characterCounter]) + 1;
+		if (i < paramCount - 1)
+			argumentsBuffer[characterCounter - 1] = ','; //add comma only if NOT last parameter
+	}
 
 	va_end(ap);
 
+	//count buffer length
+	uint16_t prefixLength = strlen(AT_PREFIX);
+	uint16_t commandLength = strlen(command);
+	uint16_t assignmentLength = strlen(AT_ASSIGNMENT);
+	uint16_t parametersLength = --characterCounter;
+	uint16_t endingLength = strlen(AT_ENDING);
+
+	//create master buffer and clear it
+	uint16_t bufferSize = prefixLength + commandLength + assignmentLength + parametersLength
+			+ endingLength;
+	char buffer[bufferSize];
+	memset(buffer, ' ', bufferSize);
+
+	//build command
+	memcpy(&buffer[0], AT_PREFIX, prefixLength);
+	memcpy(&buffer[prefixLength], command, commandLength);
+	memcpy(&buffer[prefixLength + commandLength], AT_ASSIGNMENT,
+			assignmentLength);
+	memcpy(&buffer[prefixLength + commandLength + assignmentLength],
+			argumentsBuffer, parametersLength);
+	memcpy(
+			&buffer[prefixLength + commandLength + assignmentLength
+					+ parametersLength], AT_ENDING, endingLength);
+
+	uartSend(radio->uart, buffer, bufferSize);
+
+	return ESPAT_STATE_OK;
 
 }

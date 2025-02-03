@@ -1,3 +1,0 @@
-../Src/espathid.c:16:18:uartSend	2
-../Src/espathid.c:24:18:uartReceive	2
-../Src/espathid.c:39:18:espAtHidInit	1

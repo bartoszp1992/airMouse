@@ -1,5 +1,5 @@
-Src/espathid.o: ../Src/espathid.c ../Inc/espathid.h ../Inc/usart.h \
- ../Inc/main.h ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
+Src/dma.o: ../Src/dma.c ../Inc/dma.h ../Inc/main.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
@@ -28,8 +28,7 @@ Src/espathid.o: ../Src/espathid.c ../Inc/espathid.h ../Inc/usart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h
-../Inc/espathid.h:
-../Inc/usart.h:
+../Inc/dma.h:
 ../Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Inc/stm32g0xx_hal_conf.h:
