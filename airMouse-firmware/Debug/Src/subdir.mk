@@ -7,6 +7,8 @@
 C_SRCS += \
 ../Src/espat.c \
 ../Src/gpio.c \
+../Src/i2c.c \
+../Src/lsm6ds.c \
 ../Src/main.c \
 ../Src/stm32g0xx_hal_msp.c \
 ../Src/stm32g0xx_it.c \
@@ -18,6 +20,8 @@ C_SRCS += \
 OBJS += \
 ./Src/espat.o \
 ./Src/gpio.o \
+./Src/i2c.o \
+./Src/lsm6ds.o \
 ./Src/main.o \
 ./Src/stm32g0xx_hal_msp.o \
 ./Src/stm32g0xx_it.o \
@@ -29,6 +33,8 @@ OBJS += \
 C_DEPS += \
 ./Src/espat.d \
 ./Src/gpio.d \
+./Src/i2c.d \
+./Src/lsm6ds.d \
 ./Src/main.d \
 ./Src/stm32g0xx_hal_msp.d \
 ./Src/stm32g0xx_it.d \
@@ -45,7 +51,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/espat.cyclo ./Src/espat.d ./Src/espat.o ./Src/espat.su ./Src/gpio.cyclo ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/stm32g0xx_hal_msp.cyclo ./Src/stm32g0xx_hal_msp.d ./Src/stm32g0xx_hal_msp.o ./Src/stm32g0xx_hal_msp.su ./Src/stm32g0xx_it.cyclo ./Src/stm32g0xx_it.d ./Src/stm32g0xx_it.o ./Src/stm32g0xx_it.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g0xx.cyclo ./Src/system_stm32g0xx.d ./Src/system_stm32g0xx.o ./Src/system_stm32g0xx.su ./Src/usart.cyclo ./Src/usart.d ./Src/usart.o ./Src/usart.su
+	-$(RM) ./Src/espat.cyclo ./Src/espat.d ./Src/espat.o ./Src/espat.su ./Src/gpio.cyclo ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/i2c.cyclo ./Src/i2c.d ./Src/i2c.o ./Src/i2c.su ./Src/lsm6ds.cyclo ./Src/lsm6ds.d ./Src/lsm6ds.o ./Src/lsm6ds.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/stm32g0xx_hal_msp.cyclo ./Src/stm32g0xx_hal_msp.d ./Src/stm32g0xx_hal_msp.o ./Src/stm32g0xx_hal_msp.su ./Src/stm32g0xx_it.cyclo ./Src/stm32g0xx_it.d ./Src/stm32g0xx_it.o ./Src/stm32g0xx_it.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g0xx.cyclo ./Src/system_stm32g0xx.d ./Src/system_stm32g0xx.o ./Src/system_stm32g0xx.su ./Src/usart.cyclo ./Src/usart.d ./Src/usart.o ./Src/usart.su
 
 .PHONY: clean-Src
 

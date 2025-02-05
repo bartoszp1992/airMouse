@@ -1,0 +1,3 @@
+../Src/lsm6ds.c:15:16:i2cSend	64	static
+../Src/lsm6ds.c:30:16:i2cReceive	64	static
+../Src/lsm6ds.c:56:16:lsm6ds_init	56	static

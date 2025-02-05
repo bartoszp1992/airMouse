@@ -18,12 +18,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "espat.h"
+#include "lsm6ds.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,6 +47,7 @@
 
 /* USER CODE BEGIN PV */
 espat_radio_t bleRadio;
+lsm6ds_sensor_t mems;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,23 +92,29 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+	lsm6ds_state_t sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1, 100, 100);
+
 	espAt_init(&bleRadio, &huart1, 50, 2000);
 
-	espAt_sendCommand(&bleRadio, G_RST);
-
-	HAL_Delay(2000);
-
+//	espAt_sendCommand(&bleRadio, G_RST);
+//	HAL_Delay(2000);
 
 	espAt_sendString(&bleRadio, S_BHN, "bartsHID");
 	HAL_Delay(200);
 	espAt_sendParams(&bleRadio, P_BHI, 1, 1);
 	HAL_Delay(200);
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
+
+		lsm6ds_state_t sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1, 100, 100);
+		HAL_Delay(100);
 
 		if (HAL_GPIO_ReadPin(BUTTON_BLUE_GPIO_Port, BUTTON_BLUE_Pin)
 				== GPIO_PIN_RESET) {

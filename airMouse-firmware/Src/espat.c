@@ -20,6 +20,7 @@
 //---------------------------IMPLICIT FUNCTIONS---------------------------
 /*
  * uart send/receive functions. fill it by hardware-specific uart send/receive functions
+ * port
  */
 espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
@@ -35,6 +36,7 @@ espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 		return ESPAT_STATE_ERR;
 }
 
+//port
 espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
 //	uint16_t receivedBytes = 0;
@@ -67,7 +69,7 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
  * @retval: always ESPATHID_OK
  */
 espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
-		uint32_t txTimeout, uint32_t rxTimeout) {
+		uint32_t txTimeout, uint32_t rxTimeout) { //port
 
 	radio->espUart.uart = uart;
 	radio->espUart.sendTimeout = txTimeout;

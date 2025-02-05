@@ -8,13 +8,14 @@
 #ifndef ESPAT_H_
 #define ESPAT_H_
 
-//hardware specific
+//port- hardware specific
 #include "usart.h"
 
 //others
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #define AT_PREFIX "AT+"
 #define AT_ENDING "\r\n"
@@ -45,7 +46,7 @@ typedef enum {
 
 //hardware specific uart structure
 typedef struct {
-	UART_HandleTypeDef *uart;
+	UART_HandleTypeDef *uart; //port
 	uint32_t sendTimeout;
 	uint32_t receiveTimeout;
 } espat_uartInstance_t;
@@ -58,7 +59,7 @@ typedef struct {
 } espat_radio_t;
 
 espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
-		uint32_t txTimeout, uint32_t rxTimeout);
+		uint32_t txTimeout, uint32_t rxTimeout);//port
 espat_state_t espAt_sendCommand(espat_radio_t *radio, char *command);
 espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
 		uint16_t paramCount, ...);
