@@ -1,3 +1,6 @@
 ../Src/lsm6ds.c:15:16:i2cSend	3
 ../Src/lsm6ds.c:30:16:i2cReceive	3
-../Src/lsm6ds.c:56:16:lsm6ds_init	4
+../Src/lsm6ds.c:51:16:modifyReg	2
+../Src/lsm6ds.c:88:16:lsm6ds_init	4
+../Src/lsm6ds.c:121:16:lsm6ds_setAccOutputDataRate	1
+../Src/lsm6ds.c:134:16:lsm6ds_setAccFullScale	1

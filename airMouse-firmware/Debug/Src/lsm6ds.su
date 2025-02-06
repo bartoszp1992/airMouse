@@ -1,3 +1,6 @@
 ../Src/lsm6ds.c:15:16:i2cSend	64	static
 ../Src/lsm6ds.c:30:16:i2cReceive	64	static
-../Src/lsm6ds.c:56:16:lsm6ds_init	56	static
+../Src/lsm6ds.c:51:16:modifyReg	56	static
+../Src/lsm6ds.c:88:16:lsm6ds_init	56	static
+../Src/lsm6ds.c:121:16:lsm6ds_setAccOutputDataRate	16	static
+../Src/lsm6ds.c:134:16:lsm6ds_setAccFullScale	16	static

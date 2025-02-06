@@ -104,11 +104,25 @@
 #define LSM6DS_REG_Y_OFS_USR 0x74
 #define LSM6DS_REG_Z_OFS_USR 0x75
 
-//bits
-#define LSM6DS_SHIFT_FUNC_CFG_ACCESS__FUNC_CFG_EN 1<<8 //Enable access to the embedded functions configuration registers bank A and B(1). Default value: 0
-#define LSM6DS_SHIFT_FUNC_CFG_ACCESS__FUNC_CFG_EN_B 1<<6 //Enable access to the embedded functions configuration register bank B (1). Default value: 0
+#define LSM6DS_MASK_ODX_XL 0xf<<4
+#define LSM6DS_ODR_XL_PWR_DN 0x0<<4
+#define LSM6DS_ODR_XL_1_6_HZ 0xb<<4
+#define LSM6DS_ODR_XL_12_5_HZ 0x1<<4
+#define LSM6DS_ODR_XL_26_HZ 0x2<<4
+#define LSM6DS_ODR_XL_52_HZ 0x3<<4
+#define LSM6DS_ODR_XL_104_HZ 0x4<<4
+#define LSM6DS_ODR_XL_208_HZ 0x5<<4
+#define LSM6DS_ODR_XL_416_HZ 0x6<<4
+#define LSM6DS_ODR_XL_833_HZ 0x7<<4
+#define LSM6DS_ODR_XL_1660_HZ 0x8<<4
+#define LSM6DS_ODR_XL_3300_HZ 0x9<<4
 
-#define LSM6DS_SHIFT_SENSOR_SYNC_TIME_FRAME 1<<3 // 4 bit value
+#define LSM6DS_MASK_FS_XL 0xc<<2
+#define LSM6DS_FS_XL_2G 0x00<<2
+#define LSM6DS_FS_XL_16G 0x01<<2
+#define LSM6DS_FS_XL_4G 0x02<<2
+#define LSM6DS_FS_XL_8G 0x03<<2
+
 
 
 

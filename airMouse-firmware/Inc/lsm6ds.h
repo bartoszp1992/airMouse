@@ -45,5 +45,7 @@ typedef struct {
 
 lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 		I2C_HandleTypeDef *i2c, uint32_t txTimeout, uint32_t rxTimeout);
+lsm6ds_state_t lsm6ds_setAccOutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr);
+lsm6ds_state_t lsm6ds_setAccFullScale(lsm6ds_sensor_t *sensor, uint8_t fs);
 
 #endif /* LSM6DS_H_ */
