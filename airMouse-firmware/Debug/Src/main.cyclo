@@ -1,3 +1,5 @@
-../Src/main.c:70:5:main	5
-../Src/main.c:187:6:SystemClock_Config	3
-../Src/main.c:234:6:Error_Handler	1
+../Src/main.c:71:5:main	5
+../Src/main.c:200:6:SystemClock_Config	3
+../Src/main.c:244:6:ledOn	1
+../Src/main.c:248:6:ledOff	1
+../Src/main.c:258:6:Error_Handler	1

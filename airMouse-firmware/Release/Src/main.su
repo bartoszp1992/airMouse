@@ -1,3 +1,5 @@
-../Src/main.c:187:6:SystemClock_Config	80	static,ignoring_inline_asm
-../Src/main.c:70:5:main	72	static
-../Src/main.c:234:6:Error_Handler	0	static,ignoring_inline_asm
+../Src/main.c:192:6:SystemClock_Config	80	static,ignoring_inline_asm
+../Src/main.c:236:6:ledOn	8	static
+../Src/main.c:240:6:ledOff	8	static
+../Src/main.c:71:5:main	80	static
+../Src/main.c:250:6:Error_Handler	0	static,ignoring_inline_asm
