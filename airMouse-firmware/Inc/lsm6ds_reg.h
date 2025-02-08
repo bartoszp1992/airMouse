@@ -104,7 +104,7 @@
 #define LSM6DS_REG_Y_OFS_USR 0x74
 #define LSM6DS_REG_Z_OFS_USR 0x75
 
-#define LSM6DS_MASK_ODX_XL 0xf<<4
+#define LSM6DS_MASK_ODR_XL 0xf<<4
 #define LSM6DS_ODR_XL_PWR_DN 0x0<<4
 #define LSM6DS_ODR_XL_1_6_HZ 0xb<<4
 #define LSM6DS_ODR_XL_12_5_HZ 0x1<<4
@@ -117,11 +117,44 @@
 #define LSM6DS_ODR_XL_1660_HZ 0x8<<4
 #define LSM6DS_ODR_XL_3300_HZ 0x9<<4
 
-#define LSM6DS_MASK_FS_XL 0xc<<2
+#define LSM6DS_MASK_FS_XL 0x3<<2
 #define LSM6DS_FS_XL_2G 0x00<<2
 #define LSM6DS_FS_XL_16G 0x01<<2
 #define LSM6DS_FS_XL_4G 0x02<<2
 #define LSM6DS_FS_XL_8G 0x03<<2
+
+#define LSM6DS_MASK_ODR_G 0x0f<<4
+#define LSM6DS_ODR_G_PWR_DN 0x0<<4
+#define LSM6DS_ODR_G_12_5_HZ 0x01<<4
+#define LSM6DS_ODR_G_26_HZ 0x02<<4
+#define LSM6DS_ODR_G_52_HZ 0x03<<4
+#define LSM6DS_ODR_G_104_HZ 0x04<<4
+#define LSM6DS_ODR_G_208_HZ 0x05<<4
+#define LSM6DS_ODR_G_416_HZ 0x06<<4
+#define LSM6DS_ODR_G_833_HZ 0x07<<4
+#define LSM6DS_ODR_G_1660_HZ 0x08<<4
+#define LSM6DS_ODR_G_3330_HZ 0x09<<4
+
+#define LSM6DS_MASK_FS_G 0x3<<2
+#define LSM6DS_FS_G_245DPS 0x00<<2
+#define LSM6DS_FS_G_500DPS 0x01<<2
+#define LSM6DS_FS_G_1000DPS 0x02<<2
+#define LSM6DS_FS_G_2000DPS 0x03<<2
+
+#define LSM6DS_MASK_FS_125 0x1<<1
+#define LSM6DS_FS_G_125DPS 0x01<<1
+
+#define LSM6DS_MASK_SW_RESET 0x1<<0
+#define LSM6DS_SW_RESET 0x1<<0
+
+#define LSM6DS_MASK_SLEEP 0x1<<6
+#define LSM6DS_WKUP 0x0<<6
+#define LSM6DS_SLEEP 0x1<<6
+
+#define LSM6DS_MASK_TDA_GDA_XLDA 0x7<<0
+#define LSM6DS_TDA 1<<2
+#define LSM6DS_GDA 1<<1
+#define LSM6DS_XLDA 1<<0
 
 
 

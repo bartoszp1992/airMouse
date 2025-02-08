@@ -134,11 +134,11 @@ espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
 	va_start(ap, paramCount);
 
 	//make parameters array
-	uint32_t parameters[paramCount];
+	int32_t parameters[paramCount];
 
 	//fill parameters array
 	for (uint16_t i = 0; i < paramCount; i++) {
-		parameters[i] = va_arg(ap, uint32_t);
+		parameters[i] = va_arg(ap, int32_t);
 	}
 
 	//make arguments list string

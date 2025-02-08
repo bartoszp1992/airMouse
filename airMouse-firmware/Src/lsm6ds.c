@@ -93,6 +93,10 @@ lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 	sensor->lsm6dsI2c.receiveTimeout = rxTimeout;
 	sensor->lsm6dsI2c.sendTimeout = txTimeout;
 
+	memset(&sensor->outGR, 0, sizeof(sensor->outGR));
+	memset(&sensor->outXL, 0, sizeof(sensor->outXL));
+	sensor->outTemperature = 0;
+
 	//check communication
 	lsm6ds_state_t state = LSM6DS_STATE_ERR;
 	uint8_t receivedWhoIAm = 0;
@@ -118,9 +122,9 @@ lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
  *
  * @retval: status
  */
-lsm6ds_state_t lsm6ds_setAccOutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr) {
+lsm6ds_state_t lsm6ds_setXLOutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr) {
 
-	return modifyReg(sensor, LSM6DS_REG_CTRL1_XL, LSM6DS_MASK_ODX_XL, odr);
+	return modifyReg(sensor, LSM6DS_REG_CTRL1_XL, LSM6DS_MASK_ODR_XL, odr);
 
 }
 
@@ -131,8 +135,184 @@ lsm6ds_state_t lsm6ds_setAccOutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr)
  *
  * @retval: status
  */
-lsm6ds_state_t lsm6ds_setAccFullScale(lsm6ds_sensor_t *sensor, uint8_t fs) {
+lsm6ds_state_t lsm6ds_setXLFullScale(lsm6ds_sensor_t *sensor, uint8_t fs) {
 
 	return modifyReg(sensor, LSM6DS_REG_CTRL1_XL, LSM6DS_MASK_FS_XL, fs);
+
+}
+
+/*
+ * set gyroscope output data rate
+ * @param: sensor
+ * @param: LSM6DS_ODR_G_*
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setGROutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr) {
+	return modifyReg(sensor, LSM6DS_REG_CTRL2_G, LSM6DS_MASK_ODR_G, odr);
+
+}
+
+/*
+ * set gyroscope full scale
+ * @param: sensor
+ * @param: LSM6DS_FS_G_*
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setGRFullScale(lsm6ds_sensor_t *sensor, uint8_t fs) {
+
+	lsm6ds_state_t stat = LSM6DS_STATE_ERR;
+
+	if (fs == LSM6DS_FS_G_125DPS) {
+		stat = modifyReg(sensor, LSM6DS_REG_CTRL2_G, LSM6DS_MASK_FS_G,
+		LSM6DS_FS_G_245DPS);
+		if (stat != LSM6DS_STATE_OK)
+			return stat;
+		stat = modifyReg(sensor, LSM6DS_REG_CTRL2_G, LSM6DS_MASK_FS_125,
+		LSM6DS_FS_G_125DPS);
+		if (stat != LSM6DS_STATE_OK)
+			return stat;
+
+	} else {
+
+		stat = modifyReg(sensor, LSM6DS_REG_CTRL2_G, LSM6DS_MASK_FS_125, 0);
+		if (stat != LSM6DS_STATE_OK)
+			return stat;
+		stat = modifyReg(sensor, LSM6DS_REG_CTRL2_G, LSM6DS_MASK_FS_G, fs);
+		if (stat != LSM6DS_STATE_OK)
+			return stat;
+
+	}
+
+	return stat;
+
+}
+
+/*
+ * software reset
+ * @param: sensor
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_reset(lsm6ds_sensor_t *sensor) {
+	return modifyReg(sensor, LSM6DS_REG_CTRL3_C, LSM6DS_MASK_SW_RESET,
+	LSM6DS_SW_RESET);
+}
+
+/*
+ * set gyroscope sleep
+ * @param: sensor
+ * @param: LSM6DS_WKUP/SLEEP
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_sleepGR(lsm6ds_sensor_t *sensor, uint8_t sleep) {
+	return modifyReg(sensor, LSM6DS_REG_CTRL4_C, LSM6DS_MASK_SLEEP, sleep);
+}
+
+/*
+ * check new data available
+ * @param: sensor
+ * @output: check output with LSM6DS_TDA/GDA/XLDA
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_newDataAvailableCheck(lsm6ds_sensor_t *sensor,
+		uint8_t *newData) {
+
+	return i2cReceive(&sensor->lsm6dsI2c, sensor->deviceAddr,
+			LSM6DS_REG_STATUS_REG, newData, 1);
+
+}
+
+/*
+ * updates temperature in sensor struct
+ * @param: sensor
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_updateTemp(lsm6ds_sensor_t *sensor){
+
+	lsm6ds_state_t status = LSM6DS_STATE_ERR;
+
+	//array to value converter
+	union {
+		uint8_t array[2];
+		int16_t value;
+	}outputData;
+
+	status = i2cReceive(&sensor->lsm6dsI2c, sensor->deviceAddr, LSM6DS_REG_OUT_TEMP_L, outputData.array, 2);
+
+	if(status != LSM6DS_STATE_OK)
+		return status;
+
+	sensor->outTemperature = 2500+(((int32_t)outputData.value*100)/256);
+
+	return status;
+
+}
+
+/*
+ * updates accelerometer data in sensor struct
+ * @param: sensor
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_updateXL(lsm6ds_sensor_t *sensor){
+
+	lsm6ds_state_t status = LSM6DS_STATE_ERR;
+
+	//array to value converter
+	union{
+		uint8_t raw[6];
+		int16_t separated[3];
+	}outputData;
+
+	memset(&outputData, 0, sizeof(outputData));
+
+	status = i2cReceive(&sensor->lsm6dsI2c, sensor->deviceAddr, LSM6DS_REG_OUTX_L_XL, outputData.raw, 6);
+
+	if(status != LSM6DS_STATE_OK)
+		return status;
+
+	sensor->outXL.x = outputData.separated[0];
+	sensor->outXL.y = outputData.separated[1];
+	sensor->outXL.z = outputData.separated[2];
+
+
+	return status;
+
+}
+
+/*
+ * updates gyro data in sensor struct
+ * @param: sensor
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_updateGR(lsm6ds_sensor_t *sensor){
+
+	lsm6ds_state_t status = LSM6DS_STATE_ERR;
+
+	//array to value converter
+	union{
+		uint8_t raw[6];
+		int16_t separated[3];
+	}outputData;
+
+	memset(&outputData, 0, sizeof(outputData));
+
+	status = i2cReceive(&sensor->lsm6dsI2c, sensor->deviceAddr, LSM6DS_REG_OUTX_L_G, outputData.raw, 6);
+
+	if(status != LSM6DS_STATE_OK)
+		return status;
+
+	sensor->outGR.x = outputData.separated[0];
+	sensor->outGR.y = outputData.separated[1];
+	sensor->outGR.z = outputData.separated[2];
+
+
+	return status;
 
 }

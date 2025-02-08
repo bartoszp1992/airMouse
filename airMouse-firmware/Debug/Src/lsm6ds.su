@@ -2,5 +2,13 @@
 ../Src/lsm6ds.c:30:16:i2cReceive	64	static
 ../Src/lsm6ds.c:51:16:modifyReg	56	static
 ../Src/lsm6ds.c:88:16:lsm6ds_init	56	static
-../Src/lsm6ds.c:121:16:lsm6ds_setAccOutputDataRate	16	static
-../Src/lsm6ds.c:134:16:lsm6ds_setAccFullScale	16	static
+../Src/lsm6ds.c:125:16:lsm6ds_setXLOutputDataRate	16	static
+../Src/lsm6ds.c:138:16:lsm6ds_setXLFullScale	16	static
+../Src/lsm6ds.c:151:16:lsm6ds_setGROutputDataRate	16	static
+../Src/lsm6ds.c:163:16:lsm6ds_setGRFullScale	32	static
+../Src/lsm6ds.c:198:16:lsm6ds_reset	16	static
+../Src/lsm6ds.c:210:16:lsm6ds_sleepGR	16	static
+../Src/lsm6ds.c:221:16:lsm6ds_newDataAvailableCheck	24	static
+../Src/lsm6ds.c:235:16:lsm6ds_updateTemp	40	static
+../Src/lsm6ds.c:262:16:lsm6ds_updateXL	48	static
+../Src/lsm6ds.c:294:16:lsm6ds_updateGR	48	static
