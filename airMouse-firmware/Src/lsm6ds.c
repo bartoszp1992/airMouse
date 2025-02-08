@@ -103,7 +103,7 @@ lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 	state = i2cReceive(&sensor->lsm6dsI2c, sensor->deviceAddr,
 	LSM6DS_REG_WHO_AM_I, &receivedWhoIAm, 1);
 	if (state == LSM6DS_STATE_ERR)
-		return LSM6DS_STATE_ERR_I2C;
+		return LSM6DS_STATE_ERR_SERIAL;
 	else if (state == LSM6DS_STATE_TIMEOUT)
 		return state;
 	else {

@@ -16,6 +16,9 @@
 #include <string.h>
 #include "lsm6ds_reg.h"
 
+//select SPI mode
+#define SPI = 1
+
 //dev addreses
 #define LSM6DS_ADDR_SA0_H 0x6b<<1
 #define LSM6DS_ADDR_SA0_L 0x6a<<1
@@ -27,7 +30,7 @@ typedef enum {
 	LSM6DS_STATE_OK = 0,
 	LSM6DS_STATE_ERR = 1,
 	LSM6DS_STATE_TIMEOUT = 2,
-	LSM6DS_STATE_ERR_I2C = 3,
+	LSM6DS_STATE_ERR_SERIAL = 3,
 	LSM6DS_STATE_WRONG_WHOAMI = 4
 } lsm6ds_state_t;
 
