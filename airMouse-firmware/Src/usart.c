@@ -234,4 +234,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 /* USER CODE BEGIN 1 */
 
+void HAL_UART_ChangeSpeed(UART_HandleTypeDef *huart, uint32_t baudrate){
+
+	HAL_UART_DeInit(huart);
+
+	huart->Init.BaudRate = baudrate;
+
+	if(HAL_UART_Init(huart)!=HAL_OK)
+		Error_Handler();
+
+}
+
 /* USER CODE END 1 */
