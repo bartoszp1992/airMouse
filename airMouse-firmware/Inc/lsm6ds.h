@@ -8,16 +8,26 @@
 #ifndef LSM6DS_H_
 #define LSM6DS_H_
 
+//select SPI mode
+#define SPI 0
+
 //port- hardware specific
+#if SPI
+
+#include "spi.h"
+
+#else
+
 #include "i2c.h"
+
+#endif
 
 //others
 #include <stdint.h>
 #include <string.h>
 #include "lsm6ds_reg.h"
 
-//select SPI mode
-#define SPI = 1
+
 
 //dev addreses
 #define LSM6DS_ADDR_SA0_H 0x6b<<1
@@ -36,10 +46,19 @@ typedef enum {
 
 //hardware specific i2c structure
 typedef struct {
+
+#if SPI
+
+	SPI_HandleTypeDef *spi; //port
+
+#else
+
 	I2C_HandleTypeDef *i2c; //port
+
+#endif
 	uint32_t sendTimeout;
 	uint32_t receiveTimeout;
-} lsm6ds_i2cInstance_t;
+} lsm6ds_serialInstance_t;
 
 //sensor output struct
 typedef struct{
@@ -50,7 +69,7 @@ typedef struct{
 
 //sensor struct
 typedef struct {
-	lsm6ds_i2cInstance_t lsm6dsI2c;
+	lsm6ds_serialInstance_t lsm6dsI2c;
 	uint16_t deviceAddr;
 	lsm6ds_output_t outXL;
 	lsm6ds_output_t outGR;

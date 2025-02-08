@@ -12,7 +12,7 @@
  * uart send/receive functions. fill it by hardware-specific uart send/receive functions
  * port
  */
-lsm6ds_state_t i2cSend(lsm6ds_i2cInstance_t *i2c, uint16_t devAddr,
+lsm6ds_state_t i2cSend(lsm6ds_serialInstance_t *i2c, uint16_t devAddr,
 		uint16_t memAddr, uint8_t *data, uint32_t size) {
 
 	HAL_StatusTypeDef state = HAL_I2C_Mem_Write(i2c->i2c, devAddr, memAddr,
@@ -27,7 +27,7 @@ lsm6ds_state_t i2cSend(lsm6ds_i2cInstance_t *i2c, uint16_t devAddr,
 }
 
 //port
-lsm6ds_state_t i2cReceive(lsm6ds_i2cInstance_t *i2c, uint16_t devAddr,
+lsm6ds_state_t i2cReceive(lsm6ds_serialInstance_t *i2c, uint16_t devAddr,
 		uint16_t memAddr, uint8_t *data, uint32_t size) {
 
 	HAL_StatusTypeDef state = HAL_I2C_Mem_Read(i2c->i2c, devAddr, memAddr,
