@@ -128,20 +128,18 @@ int main(void) {
 //	sensorStat = lsm6ds_setXLOutputDataRate(&mems, LSM6DS_ODR_XL_12_5_HZ);
 	//	sensorStat = lsm6ds_setXLFullScale(&mems, LSM6DS_FS_XL_16G);
 
-//	sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_LOW);
-	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_52_HZ);
+	sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_VHIGH);
+	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_208_HZ);
 	sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_2000DPS);
 	sensorStat = lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
 
-	int32_t sensitivity = 250; //10000 are 1
-	int32_t acceleration = 100; //1 - no acceleration, 0- no movement
+	int32_t sensitivity = 100; //10000 are 1
+	int32_t acceleration = 140; //100- no acceleration
 
 	uint8_t newDataAvailable = 0;
 	uint8_t blueButtonState = 0;
 
 	int32_t maxVal = 100;
-
-//	uint32_t accelerationSteps[5] = {3, 4, 5, 6, 7};
 
 	/* USER CODE END 2 */
 
@@ -149,9 +147,7 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 
-//		sensorStat = lsm6ds_newDataAvailableCheck(&mems, &newDataAvailable);
 
-//		if (newDataAvailable & LSM6DS_GDA) {
 
 		if (flagDrdyG) {
 			flagDrdyG = 0;
@@ -164,15 +160,25 @@ int main(void) {
 
 			//acceleration
 
-			//counting
-			amx = (abs(amx) * amx * acceleration) / 1000;
-			amz = (abs(amz) * amz * acceleration) / 1000;
+			uint8_t isNegative;
 
-			//table
-//			uint32_t accX = amx/40;
-//			uint32_t accZ = amz/40;
-//			amx *= accelerationSteps[accX];
-//			amz *= accelerationSteps[accZ];
+			if (amx < 0)
+				isNegative = 1;
+			else
+				isNegative = 0;
+
+			amx = pow((double) abs(amx), ((double) acceleration) / 100);
+			if (isNegative)
+				amx = -amx;
+
+			if (amz < 0)
+				isNegative = 1;
+			else
+				isNegative = 0;
+			amz = pow((double) abs(amz), ((double) acceleration) / 100);
+			if (isNegative)
+				amz = -amz;
+
 
 			//to high value secure
 			if (amx > maxVal)

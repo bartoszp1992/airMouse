@@ -1,6 +1,6 @@
-../Src/main.c:207:6:SystemClock_Config	80	static,ignoring_inline_asm
+../Src/main.c:236:6:SystemClock_Config	80	static,ignoring_inline_asm
 ../Src/main.c:78:5:main	40	static
-../Src/main.c:248:6:HAL_GPIO_EXTI_Rising_Callback	0	static
-../Src/main.c:254:6:ledOn	8	static
-../Src/main.c:258:6:ledOff	8	static
-../Src/main.c:268:6:Error_Handler	0	static,ignoring_inline_asm
+../Src/main.c:277:6:HAL_GPIO_EXTI_Rising_Callback	0	static
+../Src/main.c:283:6:ledOn	8	static
+../Src/main.c:287:6:ledOff	8	static
+../Src/main.c:297:6:Error_Handler	0	static,ignoring_inline_asm
