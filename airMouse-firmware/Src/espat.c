@@ -24,14 +24,21 @@
  */
 espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
+	HAL_StatusTypeDef state = HAL_OK;
 
-	HAL_StatusTypeDef state = HAL_UART_Transmit(uart->uart, (uint8_t*) data,
+#if DMA_MODE
+		state = HAL_UART_Transmit_DMA(uart->uart, (uint8_t*) data, size);
+#else
+	state = HAL_UART_Transmit(uart->uart, (uint8_t*) data,
 			size, uart->sendTimeout);
+#endif
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;
 	else if (state == HAL_TIMEOUT)
 		return ESPAT_STATE_TIMEOUT;
+	else if(state == HAL_BUSY)
+		return ESPAT_STATE_BUSY;
 	else
 		return ESPAT_STATE_ERR;
 }
@@ -51,7 +58,7 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;
-	else if(state == HAL_TIMEOUT)
+	else if (state == HAL_TIMEOUT)
 		return ESPAT_STATE_TIMEOUT;
 	else
 		return ESPAT_STATE_ERR;

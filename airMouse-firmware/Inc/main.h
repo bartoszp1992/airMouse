@@ -61,6 +61,7 @@ void Error_Handler(void);
 #define BUTTON_BLUE_GPIO_Port GPIOC
 #define INT1_Pin GPIO_PIN_0
 #define INT1_GPIO_Port GPIOA
+#define INT1_EXTI_IRQn EXTI0_1_IRQn
 #define LED_GREEN_Pin GPIO_PIN_5
 #define LED_GREEN_GPIO_Port GPIOA
 #define ESP_TX_Pin GPIO_PIN_4

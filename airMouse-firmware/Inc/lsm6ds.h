@@ -80,9 +80,11 @@ typedef struct {
 
 lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 		I2C_HandleTypeDef *i2c, uint32_t txTimeout, uint32_t rxTimeout);
+lsm6ds_state_t lsm6ds_setInt1Drdy(lsm6ds_sensor_t *sensor, uint8_t interrupt);
 lsm6ds_state_t lsm6ds_setXLOutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr);
 lsm6ds_state_t lsm6ds_setXLFullScale(lsm6ds_sensor_t *sensor, uint8_t fs);
 lsm6ds_state_t lsm6ds_setGROutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr);
+lsm6ds_state_t lsm6ds_setGRLowPass(lsm6ds_sensor_t *sensor, uint8_t filter);
 lsm6ds_state_t lsm6ds_setGRFullScale(lsm6ds_sensor_t *sensor, uint8_t fs);
 lsm6ds_state_t lsm6ds_reset(lsm6ds_sensor_t *sensor);
 lsm6ds_state_t lsm6ds_sleepGR(lsm6ds_sensor_t *sensor, uint8_t sleep);

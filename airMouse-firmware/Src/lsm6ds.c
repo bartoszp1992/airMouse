@@ -115,6 +115,20 @@ lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 
 }
 
+
+/*
+ * set DRDY of gyro/accelerometer on INT1 pin
+ * @param: sensor
+ * @param: LSM6DS_INT1_DRDY_G/XL/DIS
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setInt1Drdy(lsm6ds_sensor_t *sensor, uint8_t interrupt){
+
+	return modifyReg(sensor, LSM6DS_REG_INT1_CTRL, LSM6DS_MASK_INT1_DRDY_G_XL, interrupt);
+
+}
+
 /*
  * set accelerometer output data rate
  * @param: sensor
@@ -150,6 +164,26 @@ lsm6ds_state_t lsm6ds_setXLFullScale(lsm6ds_sensor_t *sensor, uint8_t fs) {
  */
 lsm6ds_state_t lsm6ds_setGROutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr) {
 	return modifyReg(sensor, LSM6DS_REG_CTRL2_G, LSM6DS_MASK_ODR_G, odr);
+
+}
+
+/*
+ * set low pass filter for gyroscope
+ * @param: sensor
+ * @param: LSM6DS_FTYPE_
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setGRLowPass(lsm6ds_sensor_t *sensor, uint8_t filter){
+
+	lsm6ds_state_t status = LSM6DS_STATE_ERR;
+
+	status = modifyReg(sensor, LSM6DS_REG_CTRL4_C, LSM6DS_MASK_LPF1_SEL_G, LSM6DS_LPF_SEL_G_EN);
+	if(status != LSM6DS_STATE_OK)
+		return status;
+
+	status =  modifyReg(sensor, LSM6DS_REG_CTRL6_C, LSM6DS_MASK_FTYPE, filter);
+	return status;
 
 }
 
@@ -225,6 +259,7 @@ lsm6ds_state_t lsm6ds_newDataAvailableCheck(lsm6ds_sensor_t *sensor,
 			LSM6DS_REG_STATUS_REG, newData, 1);
 
 }
+
 
 /*
  * updates temperature in sensor struct

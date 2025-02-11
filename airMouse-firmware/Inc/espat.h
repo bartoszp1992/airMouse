@@ -8,6 +8,8 @@
 #ifndef ESPAT_H_
 #define ESPAT_H_
 
+#define DMA_MODE 0
+
 //port- hardware specific
 #include "usart.h"
 
@@ -36,12 +38,11 @@
 #define P_BHM "BLEHIDMUS"	//send mouse data (keys, x, y, wheel)
 #define S_BHN "BLEHIDNAME"
 
-
-
-
-
 typedef enum {
-	ESPAT_STATE_OK = 0, ESPAT_STATE_ERR = 1, ESPAT_STATE_TIMEOUT = 2
+	ESPAT_STATE_OK = 0,
+	ESPAT_STATE_ERR = 1,
+	ESPAT_STATE_TIMEOUT = 2,
+	ESPAT_STATE_BUSY = 3
 } espat_state_t;
 
 //hardware specific uart structure
@@ -51,7 +52,6 @@ typedef struct {
 	uint32_t receiveTimeout;
 } espat_uartInstance_t;
 
-
 //radio structure
 typedef struct {
 	espat_uartInstance_t espUart;
@@ -59,7 +59,7 @@ typedef struct {
 } espat_radio_t;
 
 espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
-		uint32_t txTimeout, uint32_t rxTimeout);//port
+		uint32_t txTimeout, uint32_t rxTimeout); //port
 espat_state_t espAt_sendCommand(espat_radio_t *radio, char *command);
 espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
 		uint16_t paramCount, ...);
