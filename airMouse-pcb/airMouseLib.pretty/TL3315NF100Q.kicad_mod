@@ -89,15 +89,15 @@
 		(layer "F.CrtYd")
 		(uuid "1ab96273-dc09-4557-b977-c150592de37b")
 	)
-	(fp_text user "KEY"
+	(fp_text user "${KEY}"
 		(at 0 -3.25 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "64eb744c-766b-456a-8586-29bea6cf647b")
+		(uuid "392aeab8-27ee-43c8-9c90-32353eb6eec6")
 		(effects
 			(font
-				(size 0.8 0.8)
-				(thickness 0.1)
+				(size 0.5 0.5)
+				(thickness 0.08)
 			)
 			(justify left bottom)
 		)
@@ -141,5 +141,16 @@
 		(layers "F.Cu" "F.Paste" "F.Mask")
 		(thermal_bridge_angle 45)
 		(uuid "b8c96527-3410-4599-a55c-ee9b65486833")
+	)
+	(model "${KIPRJMOD}/airMouseLib3D/TL3315NF100Q.step"
+		(offset
+			(xyz 0 0 0.05)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 90)
+		)
 	)
 )
