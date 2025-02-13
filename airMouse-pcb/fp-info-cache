@@ -1,4 +1,4 @@
-24079450779201071
+24081190258418464
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -97487,6 +97487,13 @@ Panasonic VF series varistor, 6x8mm body, 3.2mm height, https://mediap.industry.
 Varistor VF
 0
 2
+2
+airMouseLib
+BC-0401
+
+
+0
+4
 2
 airMouseLib
 TL3315NF100Q
