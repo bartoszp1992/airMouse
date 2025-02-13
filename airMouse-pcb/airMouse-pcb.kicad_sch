@@ -4,6 +4,13 @@
 	(generator_version "8.0")
 	(uuid "7db98094-2aea-4dd7-9887-4079cb1655e3")
 	(paper "A4")
+	(title_block
+		(title "EtherPointer")
+		(date "2025-02-13")
+		(rev "RC1")
+		(company "Bart's Design")
+		(comment 1 "Bartosz Pracz")
+	)
 	(lib_symbols
 		(symbol "Connector:TestPoint"
 			(pin_numbers hide)
@@ -7561,7 +7568,7 @@
 	)
 	(text "additional parts:\n1x ZH plug ZHR-3\n1x ZH plug ZHR-5\n8x ZH pin w/ cable SZH-200BK26"
 		(exclude_from_sim no)
-		(at 184.15 172.72 0)
+		(at 179.07 171.45 0)
 		(effects
 			(font
 				(size 1.27 1.27)
