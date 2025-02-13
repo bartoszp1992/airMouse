@@ -76,6 +76,8 @@ void Error_Handler(void);
 #define ESP_TX_GPIO_Port GPIOC
 #define ESP_RX_Pin GPIO_PIN_5
 #define ESP_RX_GPIO_Port GPIOC
+#define BAT__Pin GPIO_PIN_0
+#define BAT__GPIO_Port GPIOB
 #define KBD_COL1_Pin GPIO_PIN_1
 #define KBD_COL1_GPIO_Port GPIOB
 #define KBD_COL2_Pin GPIO_PIN_2
