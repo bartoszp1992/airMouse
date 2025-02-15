@@ -1,4 +1,4 @@
-24086409519784551
+24089888797586870
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -97503,12 +97503,26 @@ Bart's Design 30mm
 0
 0
 airMouseLib
+DS1020-07-4VBT1A-R
+
+
+0
+6
+5
+airMouseLib
 DS1020-07-10VBT1A-R
 
 
 0
 12
 11
+airMouseLib
+DS1020-07-12VBT1A-R
+
+
+0
+14
+13
 airMouseLib
 DS1020-07-16VBT1A-R
 

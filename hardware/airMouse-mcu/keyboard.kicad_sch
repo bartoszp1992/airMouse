@@ -5,8 +5,8 @@
 	(uuid "e5ddd21e-9a34-4520-a66b-ee8f90a4fbda")
 	(paper "A4")
 	(title_block
-		(title "EtherPointer")
-		(date "2025-02-13")
+		(title "EtherPointer mcu")
+		(date "2025-02-15")
 		(rev "RC1")
 		(company "Bart's Design")
 		(comment 1 "Bartosz Pracz")
