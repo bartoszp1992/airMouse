@@ -1,0 +1,57 @@
+### Footprint positions - created on 2025-02-15T15:49:38+0100 ###
+### Printed by KiCad version 8.0.6-1.fc40
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val                  Package                   PosX       PosY       Rot  Side
+J1        DS1020-07-16VBT1A-R  DS1020-07-16VBT1A-R   113.7500   -80.4000  180.0000  top
+Logo1     ~                    Bart's_Design_30mm    113.0500  -121.6000    0.0000  top
+SW1       KEY                  TL3315NF100Q           88.2500   -87.4000    0.0000  top
+SW2       KEY                  TL3315NF100Q           93.7500   -87.4000    0.0000  top
+SW3       KEY                  TL3315NF100Q           99.2500   -87.4000    0.0000  top
+SW4       KEY                  TL3315NF100Q          104.7500   -87.4000    0.0000  top
+SW5       KEY                  TL3315NF100Q          110.2500   -87.4000    0.0000  top
+SW6       KEY                  TL3315NF100Q          115.7500   -87.4000    0.0000  top
+SW7       KEY                  TL3315NF100Q          121.2500   -87.4000    0.0000  top
+SW8       KEY                  TL3315NF100Q          126.7500   -87.4000    0.0000  top
+SW9       KEY                  TL3315NF100Q          132.2500   -87.4000    0.0000  top
+SW10      KEY                  TL3315NF100Q          137.7500   -87.4000    0.0000  top
+SW11      KEY                  TL3315NF100Q           88.2500   -94.4000    0.0000  top
+SW12      KEY                  TL3315NF100Q           93.7500   -94.4000    0.0000  top
+SW13      KEY                  TL3315NF100Q           99.2500   -94.4000    0.0000  top
+SW14      KEY                  TL3315NF100Q          104.7500   -94.4000    0.0000  top
+SW15      KEY                  TL3315NF100Q          110.2500   -94.4000    0.0000  top
+SW16      KEY                  TL3315NF100Q          115.7500   -94.4000    0.0000  top
+SW17      KEY                  TL3315NF100Q          121.2500   -94.4000    0.0000  top
+SW18      KEY                  TL3315NF100Q          126.7500   -94.4000    0.0000  top
+SW19      KEY                  TL3315NF100Q          132.2500   -94.4000    0.0000  top
+SW20      KEY                  TL3315NF100Q          137.7500   -94.4000    0.0000  top
+SW21      KEY                  TL3315NF100Q           88.2500  -101.4000    0.0000  top
+SW22      KEY                  TL3315NF100Q           93.7500  -101.4000    0.0000  top
+SW23      KEY                  TL3315NF100Q           99.2500  -101.4000    0.0000  top
+SW24      KEY                  TL3315NF100Q          104.7500  -101.4000    0.0000  top
+SW25      KEY                  TL3315NF100Q          110.2500  -101.4000    0.0000  top
+SW26      KEY                  TL3315NF100Q          115.7500  -101.4000    0.0000  top
+SW27      KEY                  TL3315NF100Q          121.2500  -101.4000    0.0000  top
+SW28      KEY                  TL3315NF100Q          126.7500  -101.4000    0.0000  top
+SW29      KEY                  TL3315NF100Q          132.2500  -101.4000    0.0000  top
+SW30      KEY                  TL3315NF100Q          137.7500  -101.4000    0.0000  top
+SW31      KEY                  TL3315NF100Q           88.2500  -108.4000    0.0000  top
+SW32      KEY                  TL3315NF100Q           93.7500  -108.4000    0.0000  top
+SW33      KEY                  TL3315NF100Q           99.2500  -108.4000    0.0000  top
+SW34      KEY                  TL3315NF100Q          104.7500  -108.4000    0.0000  top
+SW35      KEY                  TL3315NF100Q          110.2500  -108.4000    0.0000  top
+SW36      KEY                  TL3315NF100Q          115.7500  -108.4000    0.0000  top
+SW37      KEY                  TL3315NF100Q          121.2500  -108.4000    0.0000  top
+SW38      KEY                  TL3315NF100Q          126.7500  -108.4000    0.0000  top
+SW39      KEY                  TL3315NF100Q          132.2500  -108.4000    0.0000  top
+SW40      KEY                  TL3315NF100Q          137.7500  -108.4000    0.0000  top
+SW41      KEY                  TL3315NF100Q           88.2500  -115.4000    0.0000  top
+SW42      KEY                  TL3315NF100Q           93.7500  -115.4000    0.0000  top
+SW43      KEY                  TL3315NF100Q           99.2500  -115.4000    0.0000  top
+SW44      KEY                  TL3315NF100Q          104.7500  -115.4000    0.0000  top
+SW45      KEY                  TL3315NF100Q          113.0000  -115.4000    0.0000  top
+SW46      KEY                  TL3315NF100Q          121.2500  -115.4000    0.0000  top
+SW47      KEY                  TL3315NF100Q          126.7500  -115.4000    0.0000  top
+SW48      KEY                  TL3315NF100Q          132.2500  -115.4000    0.0000  top
+SW49      KEY                  TL3315NF100Q          137.7500  -115.4000    0.0000  top
+## End

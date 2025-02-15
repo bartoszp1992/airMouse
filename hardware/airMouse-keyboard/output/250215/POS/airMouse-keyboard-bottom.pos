@@ -1,0 +1,55 @@
+### Footprint positions - created on 2025-02-15T15:49:38+0100 ###
+### Printed by KiCad version 8.0.6-1.fc40
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val        Package                PosX       PosY       Rot  Side
+D1        BAS70X-TP  D_SOD-523           87.7500   -87.4000   90.0000  bottom
+D2        BAS70X-TP  D_SOD-523           93.2500   -87.4000   90.0000  bottom
+D3        BAS70X-TP  D_SOD-523           98.7500   -87.4000   90.0000  bottom
+D4        BAS70X-TP  D_SOD-523          104.2500   -87.4000   90.0000  bottom
+D5        BAS70X-TP  D_SOD-523          109.7500   -87.4000   90.0000  bottom
+D6        BAS70X-TP  D_SOD-523          115.2500   -87.4000   90.0000  bottom
+D7        BAS70X-TP  D_SOD-523          120.7500   -87.4000   90.0000  bottom
+D8        BAS70X-TP  D_SOD-523          126.2500   -87.4000   90.0000  bottom
+D9        BAS70X-TP  D_SOD-523          131.7500   -87.4000   90.0000  bottom
+D10       BAS70X-TP  D_SOD-523          137.2500   -87.4000   90.0000  bottom
+D11       BAS70X-TP  D_SOD-523           87.7500   -94.4000   90.0000  bottom
+D12       BAS70X-TP  D_SOD-523           93.2500   -94.4000   90.0000  bottom
+D13       BAS70X-TP  D_SOD-523           98.7500   -94.4000   90.0000  bottom
+D14       BAS70X-TP  D_SOD-523          104.2500   -94.4000   90.0000  bottom
+D15       BAS70X-TP  D_SOD-523          109.7500   -94.4000   90.0000  bottom
+D16       BAS70X-TP  D_SOD-523          115.2500   -94.4000   90.0000  bottom
+D17       BAS70X-TP  D_SOD-523          120.7500   -94.4000   90.0000  bottom
+D18       BAS70X-TP  D_SOD-523          126.2500   -94.4000   90.0000  bottom
+D19       BAS70X-TP  D_SOD-523          131.5000   -94.4000   90.0000  bottom
+D20       BAS70X-TP  D_SOD-523          137.0000   -94.4000   90.0000  bottom
+D21       BAS70X-TP  D_SOD-523           87.7500  -101.4000   90.0000  bottom
+D22       BAS70X-TP  D_SOD-523           93.2500  -101.4000   90.0000  bottom
+D23       BAS70X-TP  D_SOD-523           98.7500  -101.4000   90.0000  bottom
+D24       BAS70X-TP  D_SOD-523          104.2500  -101.4000   90.0000  bottom
+D25       BAS70X-TP  D_SOD-523          109.7500  -101.4000   90.0000  bottom
+D26       BAS70X-TP  D_SOD-523          115.2500  -101.4000   90.0000  bottom
+D27       BAS70X-TP  D_SOD-523          120.7500  -101.4000   90.0000  bottom
+D28       BAS70X-TP  D_SOD-523          126.2500  -101.4000   90.0000  bottom
+D29       BAS70X-TP  D_SOD-523          131.7500  -101.4000   90.0000  bottom
+D30       BAS70X-TP  D_SOD-523          137.2500  -101.4000   90.0000  bottom
+D31       BAS70X-TP  D_SOD-523           87.7500  -108.4000   90.0000  bottom
+D32       BAS70X-TP  D_SOD-523           93.2500  -108.4000   90.0000  bottom
+D33       BAS70X-TP  D_SOD-523           98.7500  -108.4000   90.0000  bottom
+D34       BAS70X-TP  D_SOD-523          104.2500  -108.4000   90.0000  bottom
+D35       BAS70X-TP  D_SOD-523          109.7500  -108.4000   90.0000  bottom
+D36       BAS70X-TP  D_SOD-523          115.2500  -108.4000   90.0000  bottom
+D37       BAS70X-TP  D_SOD-523          120.7500  -108.4000   90.0000  bottom
+D38       BAS70X-TP  D_SOD-523          126.2500  -108.4000   90.0000  bottom
+D39       BAS70X-TP  D_SOD-523          131.7500  -108.4000   90.0000  bottom
+D40       BAS70X-TP  D_SOD-523          137.2500  -108.4000   90.0000  bottom
+D41       BAS70X-TP  D_SOD-523           87.7500  -115.4000   90.0000  bottom
+D42       BAS70X-TP  D_SOD-523           93.2500  -115.4000   90.0000  bottom
+D43       BAS70X-TP  D_SOD-523           98.7500  -115.4000   90.0000  bottom
+D44       BAS70X-TP  D_SOD-523          104.2500  -115.4000   90.0000  bottom
+D45       BAS70X-TP  D_SOD-523          112.7500  -115.4000   90.0000  bottom
+D46       BAS70X-TP  D_SOD-523          120.7500  -115.4000   90.0000  bottom
+D47       BAS70X-TP  D_SOD-523          126.2500  -115.4000   90.0000  bottom
+D48       BAS70X-TP  D_SOD-523          131.7500  -115.4000   90.0000  bottom
+D49       BAS70X-TP  D_SOD-523          137.2500  -115.4000   90.0000  bottom
+## End

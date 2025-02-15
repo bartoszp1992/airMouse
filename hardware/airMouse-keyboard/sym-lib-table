@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "airMouseLib")(type "KiCad")(uri "/home/bartosz/Documents/projects/arm/airMouse/hardware/libs/airMouseLib.kicad_sym")(options "")(descr ""))
+)
