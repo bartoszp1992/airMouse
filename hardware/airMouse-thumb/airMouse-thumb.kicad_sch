@@ -5,8 +5,8 @@
 	(uuid "7db98094-2aea-4dd7-9887-4079cb1655e3")
 	(paper "A4")
 	(title_block
-		(title "EtherPointer")
-		(date "2025-02-13")
+		(title "EtherPointer thumb")
+		(date "2025-02-15")
 		(rev "RC1")
 		(company "Bart's Design")
 		(comment 1 "Bartosz Pracz")
@@ -364,6 +364,64 @@
 							(font
 								(size 1.27 1.27)
 							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "airMouseLib:Bart's_Design_logo"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Logo"
+				(at 0 1.524 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Bart's_Design_logo_1_1"
+				(text "Bart's Design"
+					(at 0 -0.762 0)
+					(effects
+						(font
+							(size 1.27 1.27)
 						)
 					)
 				)
@@ -1096,7 +1154,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0c4d94bf-b2b5-44e5-94f6-9d00a2244815")
-		(property "Reference" "#FLG04"
+		(property "Reference" "#FLG01"
 			(at 151.13 93.345 0)
 			(effects
 				(font
@@ -1146,7 +1204,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#FLG04")
+					(reference "#FLG01")
 					(unit 1)
 				)
 			)
@@ -1162,7 +1220,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "45561b31-94a6-4a26-bb86-06dd529d3228")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR01"
 			(at 129.54 93.98 0)
 			(effects
 				(font
@@ -1212,7 +1270,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR08")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -1227,7 +1285,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4bf3b8d6-bbda-4b69-8b20-320d7025124f")
-		(property "Reference" "R7"
+		(property "Reference" "R2"
 			(at 135.89 90.17 0)
 			(effects
 				(font
@@ -1281,7 +1339,69 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "R7")
+					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "airMouseLib:Bart's_Design_logo")
+		(at 208.28 173.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8f4835ae-d1cc-4e51-a15c-d4cfa32a7c8e")
+		(property "Reference" "Logo1"
+			(at 208.28 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 208.28 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "airMouseLib:Bart's Design 30mm"
+			(at 208.28 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 208.28 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 208.28 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "Logo1")
 					(unit 1)
 				)
 			)
@@ -1297,7 +1417,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9b6ed9d8-d072-4ccc-bb8b-ee02e3b91814")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR02"
 			(at 135.89 93.98 0)
 			(effects
 				(font
@@ -1347,7 +1467,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR09")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -1363,7 +1483,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "adb85f40-a02c-4a23-9346-5983b82ff185")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR03"
 			(at 143.51 93.98 0)
 			(effects
 				(font
@@ -1413,7 +1533,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR017")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -1428,7 +1548,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "af577033-4b0f-4837-88e7-c8f8b521380a")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR04"
 			(at 95.25 118.11 0)
 			(effects
 				(font
@@ -1478,7 +1598,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR015")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -1494,7 +1614,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b6be59a9-bc31-472e-965b-4f928bff1d6b")
-		(property "Reference" "#FLG03"
+		(property "Reference" "#FLG02"
 			(at 168.91 109.855 0)
 			(effects
 				(font
@@ -1544,7 +1664,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#FLG03")
+					(reference "#FLG02")
 					(unit 1)
 				)
 			)
@@ -1559,7 +1679,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c47971ca-7428-4d2e-94a0-00a4508da62c")
-		(property "Reference" "SW7"
+		(property "Reference" "SW2"
 			(at 111.76 104.14 0)
 			(effects
 				(font
@@ -1620,7 +1740,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "SW7")
+					(reference "SW2")
 					(unit 1)
 				)
 			)
@@ -1635,7 +1755,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d01aa490-1216-425b-baa5-99420dc29ead")
-		(property "Reference" "SW6"
+		(property "Reference" "SW1"
 			(at 111.76 100.33 0)
 			(effects
 				(font
@@ -1696,7 +1816,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "SW6")
+					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -1712,7 +1832,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dcdfcabf-650d-40c5-9987-682fc93f15a2")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR05"
 			(at 156.21 120.65 0)
 			(effects
 				(font
@@ -1762,7 +1882,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR016")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -1777,7 +1897,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "de7ca79c-0d50-48f8-8890-1c5c42268cf4")
-		(property "Reference" "R6"
+		(property "Reference" "R1"
 			(at 129.54 90.17 0)
 			(effects
 				(font
@@ -1831,7 +1951,7 @@
 		(instances
 			(project "airMouse-mouse"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "R6")
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -1846,7 +1966,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "df05ecd5-8f93-459f-9176-79c781c8b96e")
-		(property "Reference" "J2"
+		(property "Reference" "J1"
 			(at 158.75 103.2255 0)
 			(effects
 				(font
@@ -1864,7 +1984,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "airMouseLib:DS1020-07-4VBT1A-R"
 			(at 156.21 102.87 0)
 			(effects
 				(font
@@ -1909,7 +2029,7 @@
 		(instances
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "J2")
+					(reference "J1")
 					(unit 1)
 				)
 			)

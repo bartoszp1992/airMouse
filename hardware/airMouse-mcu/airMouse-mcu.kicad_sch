@@ -7624,16 +7624,6 @@
 		)
 		(uuid "fefcb1c1-7d30-4723-b1a6-5919701c8c13")
 	)
-	(text "DS1020-07-10VBT1A-R"
-		(exclude_from_sim no)
-		(at 77.47 128.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "1ab2d59d-232e-41d9-aa26-60ecf1174806")
-	)
 	(text "additional parts:\n1x ZH plug ZHR-3\n1x ZH plug ZHR-5\n8x ZH pin w/ cable SZH-200BK26\n1x FPC 4p 10-04-A-0050-C-4-08-4-T\n1x FPC 10p 10-10-A-0050-C-4-08-4-T\n1x FPC 16p 10-16-A-0050-C-4-08-4-T"
 		(exclude_from_sim no)
 		(at 201.93 173.99 0)

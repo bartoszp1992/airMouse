@@ -1,0 +1,11 @@
+### Footprint positions - created on 2025-02-15T18:40:00+0100 ###
+### Printed by KiCad version 8.0.6-1.fc40
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val                 Package                  PosX       PosY       Rot  Side
+J1        DS1020-07-4VBT1A-R  DS1020-07-4VBT1A-R   153.2875   -60.0000  -90.0000  top
+R1        10k                 R_0603_1608Metric    156.0000   -64.0000   90.0000  top
+R2        10k                 R_0603_1608Metric    156.0000   -56.0000  -90.0000  top
+SW1       KEY                 TL3315NF100Q         178.0000   -60.0000    0.0000  top
+SW2       KEY                 TL3315NF100Q         160.0000   -60.0000    0.0000  top
+## End

@@ -26491,8 +26491,8 @@
 			)
 		)
 	)
-	(gr_text "airMouse-mouse RC1"
-		(at 134.1 114.1 -0)
+	(gr_text "airMouse-mcu"
+		(at 134.1 114.1 0)
 		(layer "B.SilkS")
 		(uuid "c159666e-a556-472e-9913-6d160c5247e4")
 		(effects

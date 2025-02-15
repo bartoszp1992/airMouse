@@ -1,0 +1,7 @@
+### Footprint positions - created on 2025-02-15T18:40:00+0100 ###
+### Printed by KiCad version 8.0.6-1.fc40
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val       Package                  PosX       PosY       Rot  Side
+Logo1     ~         Bart's_Design_30mm   163.8000   -60.4000  180.0000  bottom
+## End
