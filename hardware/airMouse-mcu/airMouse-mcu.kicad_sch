@@ -11426,7 +11426,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "105"
+		(property "Value" "1u"
 			(at 38.1 30.48 0)
 			(effects
 				(font
@@ -12919,7 +12919,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LSM6DS3"
+		(property "Value" "LSM6DS3TR-C"
 			(at 61.8841 190.5 0)
 			(effects
 				(font

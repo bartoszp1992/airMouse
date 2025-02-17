@@ -33,9 +33,9 @@ Id;Designator;Footprint;Quantity;Designation;Supplier and ref
 32;D3;LED_0603_1608Metric;1;LOW_BAT;
 33;D2;LED_0603_1608Metric;1;BT;
 34;D1;D_SOD-123;1;MBR0530;
-35;C14,C10;C_0603_1608Metric;2;1u;
-36;C1;C_0603_1608Metric;1;105;
-37;BT1;BC-0401;1;BC-0401;
+35;C1,C14,C10;C_0603_1608Metric;3;1u;
+36;BT1;BC-0401;1;BC-0401;
+37;;;;;
 ;;;;;
 ;;;;;
 ;;;;;
