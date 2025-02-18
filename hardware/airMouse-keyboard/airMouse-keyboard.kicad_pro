@@ -482,7 +482,7 @@
       "plot": "output/250215/GBR/",
       "pos_files": "output/250215/POS/",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../../housing/pcb_model/airMouse-keyboard.step",
       "svg": "",
       "vrml": ""
     },
