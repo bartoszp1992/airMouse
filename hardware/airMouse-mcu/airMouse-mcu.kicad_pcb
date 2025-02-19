@@ -27369,6 +27369,26 @@
 		(layer "Edge.Cuts")
 		(uuid "4b291263-93c6-46b2-b43b-e4b0d4bd3c3d")
 	)
+	(gr_line
+		(start 128.25 79.65)
+		(end 128.25 156.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.1")
+		(uuid "6bd21371-3d71-4691-ab42-1d2733c68ef9")
+	)
+	(gr_line
+		(start 141 119)
+		(end 110 119)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.1")
+		(uuid "defe30cd-fc6f-4d22-a200-51b6b5f3fcc5")
+	)
 	(gr_text "airMouse-mcu"
 		(at 133 116.918599 0)
 		(layer "B.SilkS")
@@ -27452,6 +27472,204 @@
 			)
 			(justify left bottom)
 		)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
+		(uuid "024c88dd-f216-4b0d-8511-383dafa7666a")
+		(pts
+			(xy 110 124) (xy 128.25 124)
+		)
+		(height 27.2)
+		(gr_text "18.2500 mm"
+			(at 119.125 150.05 0)
+			(layer "User.1")
+			(uuid "024c88dd-f216-4b0d-8511-383dafa7666a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(extension_height 0.58642)
+			(extension_offset 0.5) keep_text_aligned)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
+		(uuid "098f45e8-2934-4028-b7d0-9e68e24af77f")
+		(pts
+			(xy 110 119) (xy 110 124)
+		)
+		(height 15.6)
+		(gr_text "5.0000 mm"
+			(at 93.25 121.5 90)
+			(layer "User.1")
+			(uuid "098f45e8-2934-4028-b7d0-9e68e24af77f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(extension_height 0.58642)
+			(extension_offset 0.5) keep_text_aligned)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
+		(uuid "5a317f97-a717-4079-b0d5-89e1f2cbddb6")
+		(pts
+			(xy 100 79.85) (xy 128.25 79.85)
+		)
+		(height -8)
+		(gr_text "28.2500 mm"
+			(at 114.125 70.7 0)
+			(layer "User.1")
+			(uuid "5a317f97-a717-4079-b0d5-89e1f2cbddb6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(extension_height 0.58642)
+			(extension_offset 0.5) keep_text_aligned)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
+		(uuid "67a93914-262a-4976-b7d5-36fb192044bd")
+		(pts
+			(xy 141 119) (xy 128.25 119)
+		)
+		(height -38.8)
+		(gr_text "12.7500 mm"
+			(at 134.625 156.65 0)
+			(layer "User.1")
+			(uuid "67a93914-262a-4976-b7d5-36fb192044bd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(extension_height 0.58642)
+			(extension_offset 0.5) keep_text_aligned)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
+		(uuid "81f17c53-1d28-495f-a572-736bd0d4273e")
+		(pts
+			(xy 146.5 95.497279) (xy 146.5 119)
+		)
+		(height -19.9)
+		(gr_text "23.5027 mm"
+			(at 165.25 107.24864 90)
+			(layer "User.1")
+			(uuid "81f17c53-1d28-495f-a572-736bd0d4273e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(extension_height 0.58642)
+			(extension_offset 0.5) keep_text_aligned)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
+		(uuid "82e44902-0373-48bc-ae17-5885bc3076c3")
+		(pts
+			(xy 146.5 95.497279) (xy 128.25 95.497279)
+		)
+		(height 30.697279)
+		(gr_text "18.2500 mm"
+			(at 137.375 63.65 0)
+			(layer "User.1")
+			(uuid "82e44902-0373-48bc-ae17-5885bc3076c3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(extension_height 0.58642)
+			(extension_offset 0.5) keep_text_aligned)
 	)
 	(segment
 		(start 148.7875 119.193599)
