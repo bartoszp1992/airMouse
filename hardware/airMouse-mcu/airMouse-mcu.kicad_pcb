@@ -1721,6 +1721,17 @@
 				(xyz 0 0 0)
 			)
 		)
+		(model "/home/bartosz/Documents/projects/arm/airMouse/hardware/libs/airMouseLib3D/DLG-0403-4R7.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 90)
+			)
+		)
 	)
 	(footprint "Resistor_SMD:R_0603_1608Metric"
 		(layer "F.Cu")
