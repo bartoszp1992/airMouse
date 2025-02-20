@@ -1,7 +1,7 @@
 (footprint "DS1020-07-4VBT1A-R"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -6.5 0)
@@ -20,19 +20,6 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "d38737a4-1e83-45db-bb93-38979466fe8c")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 3 -6 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "1bd1bcb5-c783-4e76-a97c-4e7900e58ef8")
 		(effects
 			(font
 				(size 1 1)
@@ -125,7 +112,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "4f9c185d-e7f7-4f27-92be-bd6736352437")
 	)
@@ -136,7 +123,7 @@
 			(width 0.05)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "a910c453-8222-4234-ba31-e657181d39f1")
 	)
@@ -155,43 +142,55 @@
 	(pad "1" smd rect
 		(at -1.5 0)
 		(size 0.6 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
 		(uuid "b982270c-12a4-484d-9e20-3ff29d9dacba")
 	)
 	(pad "2" smd rect
 		(at -0.5 0)
 		(size 0.6 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
 		(uuid "7f858335-55e6-4902-b358-5214803b0848")
 	)
 	(pad "3" smd rect
 		(at 0.5 0)
 		(size 0.6 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
 		(uuid "745b25b4-771f-4e8b-8400-b525a63b15e5")
 	)
 	(pad "4" smd rect
 		(at 1.5 0)
 		(size 0.6 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
 		(uuid "2e4f2be6-1b53-4839-8588-ce361f08a159")
 	)
 	(pad "MP" smd rect
 		(at -4 2.6)
 		(size 2.5 3)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
 		(uuid "5ade2bc6-eae5-4c82-823b-c6040a1b5a45")
 	)
 	(pad "MP" smd rect
 		(at 4 2.6)
 		(size 2.5 3)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(thermal_bridge_angle 45)
 		(uuid "05b868e7-69c3-4b7c-91f2-cb03f5640f63")
+	)
+	(embedded_fonts no)
+	(model "/home/bartosz/Documents/projects/arm/airMouse/hardware/libs/airMouseLib3D/DS1020-07-4VBT1A-R.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
 	)
 )

@@ -1,0 +1,293 @@
+(footprint "JST_ZH_S3B-ZR-SM4A-TF_1x03-1MP_P1.50mm_Horizontal"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "JST ZH series connector, S3B-ZR-SM4A-TF (http://www.jst-mfg.com/product/pdf/eng/eZH.pdf), generated with kicad-footprint-generator")
+	(tags "connector JST ZH horizontal")
+	(property "Reference" "REF**"
+		(at 0 -4.2 0)
+		(layer "F.SilkS")
+		(uuid "0a755e7b-5bb1-4f59-b15c-756a177f66a0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "JST_ZH_S3B-ZR-SM4A-TF_1x03-1MP_P1.50mm_Horizontal"
+		(at 0 5.2 0)
+		(layer "F.Fab")
+		(uuid "546ec9ff-f730-4b40-8be6-6146832f26ba")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b1041d11-6864-4065-b297-73fa49dc5b27")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4d2a1f60-1e60-485e-903f-00986233c2b5")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -3.86 -2.11)
+		(end -2.11 -2.11)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "731feec3-31ec-40f0-bca9-0bcf927c1ae7")
+	)
+	(fp_line
+		(start -3.86 0.84)
+		(end -3.86 -2.11)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "63e9d25b-455e-47a7-92d0-b8ec7fa43588")
+	)
+	(fp_line
+		(start -3.86 3.26)
+		(end -3.86 4.11)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "7afdb4c8-beba-429c-b22d-bbaaccb29020")
+	)
+	(fp_line
+		(start -3.86 4.11)
+		(end 3.86 4.11)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "20881937-4aac-47b5-9297-2c19c57178c3")
+	)
+	(fp_line
+		(start -2.11 -2.11)
+		(end -2.11 -3)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "76bbfd39-cdd6-4b32-b7b3-1385dc7965e5")
+	)
+	(fp_line
+		(start 3.86 -2.11)
+		(end 2.11 -2.11)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "28bc069c-f463-47bc-9669-3841732ebe76")
+	)
+	(fp_line
+		(start 3.86 0.84)
+		(end 3.86 -2.11)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ec5378d2-a68f-44f7-b52d-e33513ec6124")
+	)
+	(fp_line
+		(start 3.86 4.11)
+		(end 3.86 3.26)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1c6b1531-aede-47d3-9fe6-ffe045ac63af")
+	)
+	(fp_line
+		(start -4.5 -3.5)
+		(end -4.5 4.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "56f0275b-9977-44f9-80a4-6083de7dc9f3")
+	)
+	(fp_line
+		(start -4.5 4.5)
+		(end 4.5 4.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "7f95a4a0-8536-49e3-b698-bbc063c69cb9")
+	)
+	(fp_line
+		(start 4.5 -3.5)
+		(end -4.5 -3.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "4e3865fb-62f2-4b31-b5a3-1c2ef330998d")
+	)
+	(fp_line
+		(start 4.5 4.5)
+		(end 4.5 -3.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b442f2f1-225a-4b7e-b90d-e6fe7ba01ce9")
+	)
+	(fp_line
+		(start -3.75 -2)
+		(end -3.75 4)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5f773962-b8b6-4d8c-9917-ee87ef174da0")
+	)
+	(fp_line
+		(start -3.75 -2)
+		(end 3.75 -2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d2d8ea4d-f81a-453c-802b-572cd24a15a7")
+	)
+	(fp_line
+		(start -3.75 4)
+		(end 3.75 4)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "aafafdd3-e250-4822-a16c-bafec70d4b4b")
+	)
+	(fp_line
+		(start -2 -2)
+		(end -1.5 -1.292893)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "19862984-2f72-4014-b700-8144c728a3e1")
+	)
+	(fp_line
+		(start -1.5 -1.292893)
+		(end -1 -2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c22356c8-48cd-4104-9c68-4bc17fc53ae7")
+	)
+	(fp_line
+		(start 3.75 -2)
+		(end 3.75 4)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c3339076-3a9f-409d-8b35-23c8aefb4df3")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "c36a8b0d-e878-4e6f-942c-e8e19a982726")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -1.5 -1.65)
+		(size 0.7 2.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "8302c9ea-1a75-418e-884e-65e0213c5def")
+	)
+	(pad "2" smd roundrect
+		(at 0 -1.65)
+		(size 0.7 2.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "68bdd840-d198-443d-94be-c5152afcee7b")
+	)
+	(pad "3" smd roundrect
+		(at 1.5 -1.65)
+		(size 0.7 2.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "dedc2211-bfdf-4b10-8fc2-c9d844e49662")
+	)
+	(pad "MP" smd roundrect
+		(at -3.45 2.05)
+		(size 1.1 1.9)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.227273)
+		(uuid "a700f87a-4574-4ccb-bf04-22db12669866")
+	)
+	(pad "MP" smd roundrect
+		(at 3.45 2.05)
+		(size 1.1 1.9)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.227273)
+		(uuid "3e6e461e-1675-4caf-9b83-d94ff0988995")
+	)
+	(embedded_fonts no)
+	(model "/home/bartosz/Documents/projects/arm/airMouse/hardware/libs/airMouseLib3D/ZH-S3B-SM4A.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
