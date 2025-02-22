@@ -26233,6 +26233,42 @@
 	(dimension
 		(type aligned)
 		(layer "User.1")
+		(uuid "81f17c53-1d28-495f-a572-736bd0d4273e")
+		(pts
+			(xy 146.5 95.497279) (xy 146.5 119)
+		)
+		(height -19.9)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "23.5027 mm"
+			(at 165.25 107.24864 90)
+			(layer "User.1")
+			(uuid "81f17c53-1d28-495f-a572-736bd0d4273e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(dimension
+		(type aligned)
+		(layer "User.1")
 		(uuid "82e44902-0373-48bc-ae17-5885bc3076c3")
 		(pts
 			(xy 146.5 95.497279) (xy 128.25 95.497279)
@@ -26269,12 +26305,12 @@
 	(dimension
 		(type orthogonal)
 		(layer "User.1")
-		(uuid "43b3eaff-dd3f-465b-a408-388f65578284")
+		(uuid "1baa5740-7526-4964-a176-dbcc9ba64b20")
 		(pts
-			(xy 146.5 95.497279) (xy 110 124)
+			(xy 110 124) (xy 156.5 124)
 		)
-		(height -60.45)
-		(orientation 1)
+		(height 43.65)
+		(orientation 0)
 		(format
 			(prefix "")
 			(suffix "")
@@ -26291,10 +26327,10 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "28.5027 mm"
-			(at 84.9 109.74864 90)
+		(gr_text "46.5000 mm"
+			(at 133.25 166.5 0)
 			(layer "User.1")
-			(uuid "43b3eaff-dd3f-465b-a408-388f65578284")
+			(uuid "1baa5740-7526-4964-a176-dbcc9ba64b20")
 			(effects
 				(font
 					(size 1 1)
@@ -26306,11 +26342,48 @@
 	(dimension
 		(type orthogonal)
 		(layer "User.1")
-		(uuid "d641ad18-9b51-405a-92cd-81a8ce26d6f5")
+		(uuid "3a83c2c3-cfbf-40fe-8ab2-3de14e1f6c24")
 		(pts
-			(xy 146.5 95.497279) (xy 146.5 119)
+			(xy 110 124) (xy 100 124)
 		)
-		(height 16.47)
+		(height 27.84)
+		(orientation 0)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "10.0000 mm"
+			(at 105 150.69 0)
+			(layer "User.1")
+			(uuid "3a83c2c3-cfbf-40fe-8ab2-3de14e1f6c24")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "User.1")
+		(uuid "3f4ebef5-ad62-461f-84b8-613fe42ecfe6")
+		(pts
+			(xy 110 124) (xy 110 144.52)
+		)
+		(height -20.41)
 		(orientation 1)
 		(format
 			(prefix "")
@@ -26328,10 +26401,47 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "23.5027 mm"
-			(at 161.82 107.24864 90)
+		(gr_text "20.5200 mm"
+			(at 88.44 134.26 90)
 			(layer "User.1")
-			(uuid "d641ad18-9b51-405a-92cd-81a8ce26d6f5")
+			(uuid "3f4ebef5-ad62-461f-84b8-613fe42ecfe6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "User.1")
+		(uuid "8792c02a-b1d0-4660-a69d-41b1773f1949")
+		(pts
+			(xy 110 124) (xy 110 80)
+		)
+		(height -20.43)
+		(orientation 1)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "44.0000 mm"
+			(at 88.42 102 90)
+			(layer "User.1")
+			(uuid "8792c02a-b1d0-4660-a69d-41b1773f1949")
 			(effects
 				(font
 					(size 1 1)
@@ -26369,43 +26479,6 @@
 			(at 125.5 158.74 0)
 			(layer "User.1")
 			(uuid "eb24ad3f-582a-4a93-8393-16ee2183140c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-	)
-	(dimension
-		(type orthogonal)
-		(layer "User.1")
-		(uuid "f554f1b5-b650-40a0-a358-b804ad979a96")
-		(pts
-			(xy 110 124) (xy 146.5 87.5)
-		)
-		(height -64.83)
-		(orientation 0)
-		(format
-			(prefix "")
-			(suffix "")
-			(units 3)
-			(units_format 1)
-			(precision 4)
-		)
-		(style
-			(thickness 0.1)
-			(arrow_length 1.27)
-			(text_position_mode 0)
-			(arrow_direction outward)
-			(extension_height 0.58642)
-			(extension_offset 0.5)
-			(keep_text_aligned yes)
-		)
-		(gr_text "36.5000 mm"
-			(at 128.25 58.02 0)
-			(layer "User.1")
-			(uuid "f554f1b5-b650-40a0-a358-b804ad979a96")
 			(effects
 				(font
 					(size 1 1)
