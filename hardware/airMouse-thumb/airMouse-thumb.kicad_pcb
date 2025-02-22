@@ -1622,6 +1622,43 @@
 			(justify left bottom mirror)
 		)
 	)
+	(dimension
+		(type orthogonal)
+		(layer "User.1")
+		(uuid "9a9e979f-691b-4e53-9cd2-e73aab15ffb7")
+		(pts
+			(xy 146 54) (xy 146 66)
+		)
+		(height -5.03)
+		(orientation 1)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "12.0000 mm"
+			(at 139.82 60 90)
+			(layer "User.1")
+			(uuid "9a9e979f-691b-4e53-9cd2-e73aab15ffb7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
 	(segment
 		(start 159.475 61)
 		(end 158.25 62.225)
