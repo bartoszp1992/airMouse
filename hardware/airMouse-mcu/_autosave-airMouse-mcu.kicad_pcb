@@ -26065,6 +26065,26 @@
 		(uuid "6bd21371-3d71-4691-ab42-1d2733c68ef9")
 	)
 	(gr_line
+		(start 110 124)
+		(end 168.12 124)
+		(stroke
+			(width 0.1)
+			(type dash)
+		)
+		(layer "User.1")
+		(uuid "a4518850-eb60-46f4-9e9a-5ac6c993a782")
+	)
+	(gr_line
+		(start 110 124)
+		(end 110 61.94)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.1")
+		(uuid "c821111d-9fa3-48b0-886f-30a808fdb849")
+	)
+	(gr_line
 		(start 141 119)
 		(end 110 119)
 		(stroke
@@ -26267,13 +26287,14 @@
 		)
 	)
 	(dimension
-		(type aligned)
+		(type orthogonal)
 		(layer "User.1")
-		(uuid "82e44902-0373-48bc-ae17-5885bc3076c3")
+		(uuid "039d9780-1ca3-4ccd-8543-bf9267618ae0")
 		(pts
-			(xy 146.5 95.497279) (xy 128.25 95.497279)
+			(xy 152.2 96.018599) (xy 110 96.018599)
 		)
-		(height 30.697279)
+		(height -29.168599)
+		(orientation 0)
 		(format
 			(prefix "")
 			(suffix "")
@@ -26290,10 +26311,10 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "18.2500 mm"
-			(at 137.375 63.65 0)
+		(gr_text "42.2000 mm"
+			(at 131.1 65.7 0)
 			(layer "User.1")
-			(uuid "82e44902-0373-48bc-ae17-5885bc3076c3")
+			(uuid "039d9780-1ca3-4ccd-8543-bf9267618ae0")
 			(effects
 				(font
 					(size 1 1)
@@ -26405,6 +26426,43 @@
 			(at 88.44 134.26 90)
 			(layer "User.1")
 			(uuid "3f4ebef5-ad62-461f-84b8-613fe42ecfe6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "User.1")
+		(uuid "85814bab-0ad7-469d-85b9-9978da236fa4")
+		(pts
+			(xy 152.2 96.018599) (xy 152.2 124)
+		)
+		(height 27.41)
+		(orientation 1)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "27.9814 mm"
+			(at 178.46 110.0093 90)
+			(layer "User.1")
+			(uuid "85814bab-0ad7-469d-85b9-9978da236fa4")
 			(effects
 				(font
 					(size 1 1)
