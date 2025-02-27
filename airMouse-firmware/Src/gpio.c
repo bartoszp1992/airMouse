@@ -54,9 +54,6 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ESP_BOOT_Pin|ESP_RST_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, KBD_ROW1_Pin|KBD_ROW2_Pin|KBD_ROW3_Pin|KBD_ROW4_Pin
                           |KBD_ROW5_Pin, GPIO_PIN_RESET);
 
@@ -83,21 +80,14 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_GREEN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : KBD_COL1_Pin KBD_COL2_Pin KBD_COL10_Pin KBD_COL3_Pin
-                           KBD_COL4_Pin KBD_COL5_Pin KBD_COL6_Pin KBD_COL7_Pin
-                           KBD_COL8_Pin KBD_COL9_Pin */
-  GPIO_InitStruct.Pin = KBD_COL1_Pin|KBD_COL2_Pin|KBD_COL10_Pin|KBD_COL3_Pin
-                          |KBD_COL4_Pin|KBD_COL5_Pin|KBD_COL6_Pin|KBD_COL7_Pin
-                          |KBD_COL8_Pin|KBD_COL9_Pin;
+  /*Configure GPIO pins : KBD_COL1_Pin KBD_COL2_Pin KBD_COL10_Pin ESP_BOOT_Pin
+                           ESP_RST_Pin KBD_COL3_Pin KBD_COL4_Pin KBD_COL5_Pin
+                           KBD_COL6_Pin KBD_COL7_Pin KBD_COL8_Pin KBD_COL9_Pin */
+  GPIO_InitStruct.Pin = KBD_COL1_Pin|KBD_COL2_Pin|KBD_COL10_Pin|ESP_BOOT_Pin
+                          |ESP_RST_Pin|KBD_COL3_Pin|KBD_COL4_Pin|KBD_COL5_Pin
+                          |KBD_COL6_Pin|KBD_COL7_Pin|KBD_COL8_Pin|KBD_COL9_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : ESP_BOOT_Pin ESP_RST_Pin */
-  GPIO_InitStruct.Pin = ESP_BOOT_Pin|ESP_RST_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : KBD_ROW1_Pin KBD_ROW2_Pin KBD_ROW3_Pin KBD_ROW4_Pin

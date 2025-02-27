@@ -5453,6 +5453,16 @@
 		)
 		(uuid "7bbdef86-42e4-4718-9327-24d1625c8d56")
 	)
+	(text "usunąć led lasera\nusunąć R3/R4\nC7- zmienić na 0805"
+		(exclude_from_sim no)
+		(at 326.39 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f56feac7-20ce-4b9e-91af-a328a8da65d4")
+	)
 	(junction
 		(at 62.23 148.59)
 		(diameter 0)
@@ -9757,7 +9767,7 @@
 				)
 			)
 		)
-		(property "Value" "2k2"
+		(property "Value" "0R"
 			(at 274.32 68.58 0)
 			(effects
 				(font
