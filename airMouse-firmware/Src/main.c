@@ -106,6 +106,7 @@ int main(void)
   MX_I2C1_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+
 	lsm6ds_state_t sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1,
 			100, 100);
 
@@ -148,7 +149,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1) {
 
+		HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin,
+				HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin));
 
+
+		HAL_GPIO_WritePin(ESP_RST_GPIO_Port, ESP_RST_Pin,
+				HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin));
+
+		HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin,
+						HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin));
+
+		HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin,
+				HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin));
 
 		if (flagDrdyG) {
 			flagDrdyG = 0;
@@ -179,7 +191,6 @@ int main(void)
 			amz = pow((double) abs(amz), ((double) acceleration) / 100);
 			if (isNegative)
 				amz = -amz;
-
 
 			//to high value secure
 			if (amx > maxVal)

@@ -1934,7 +1934,7 @@
 		)
 		(uuid "fd66db07-ece9-4960-8cd5-c1ec6c29f45f")
 	)
-	(hierarchical_label "MOUSE_BACK"
+	(hierarchical_label "MOUSE_HOME"
 		(shape output)
 		(at 203.2 85.09 0)
 		(effects
@@ -1945,7 +1945,7 @@
 		)
 		(uuid "0f076e05-4908-47fe-adc3-db857f3418b3")
 	)
-	(hierarchical_label "MOUSE_PRC"
+	(hierarchical_label "MOUSE_FWD"
 		(shape output)
 		(at 203.2 92.71 0)
 		(effects
@@ -1956,7 +1956,7 @@
 		)
 		(uuid "1c3e9767-d21f-4843-8243-65c10c0fa259")
 	)
-	(hierarchical_label "MOUSE_FWD"
+	(hierarchical_label "MOUSE_PRC"
 		(shape output)
 		(at 203.2 81.28 0)
 		(effects
@@ -1967,7 +1967,7 @@
 		)
 		(uuid "202f9858-6d90-42e8-8ef6-c1cc24a04965")
 	)
-	(hierarchical_label "MOUSE_HOME"
+	(hierarchical_label "MOUSE_BACK"
 		(shape output)
 		(at 203.2 96.52 0)
 		(effects
