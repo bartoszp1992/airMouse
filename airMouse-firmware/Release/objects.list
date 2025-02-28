@@ -19,7 +19,6 @@
 "./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_adc.o"
 "./Drivers/STM32G0xx_HAL_Driver/Src/stm32g0xx_ll_rcc.o"
 "./Src/adc.o"
-"./Src/dma.o"
 "./Src/espat.o"
 "./Src/gpio.o"
 "./Src/i2c.o"

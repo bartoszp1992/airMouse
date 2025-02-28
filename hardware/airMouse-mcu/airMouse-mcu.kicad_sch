@@ -5433,13 +5433,14 @@
 		)
 		(uuid "7bbdef86-42e4-4718-9327-24d1625c8d56")
 	)
-	(text "usunąć led lasera\nusunąć R3/R4\nC7- zmienić na 0805"
+	(text "remove LASER resistor\nremove R3/R4\nC7- change to 0805\nalternative converters:\nTLV61220\nTLV61070A"
 		(exclude_from_sim no)
 		(at 326.39 148.59 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
+			(justify left)
 		)
 		(uuid "f56feac7-20ce-4b9e-91af-a328a8da65d4")
 	)

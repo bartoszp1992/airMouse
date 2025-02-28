@@ -1,7 +1,7 @@
 ../Src/espat.c:25:15:uartSend	8	static
-../Src/espat.c:47:15:uartReceive	24	static
+../Src/espat.c:47:15:uartReceive	8	static
 ../Src/espat.c:77:15:espAt_init	0	static
 ../Src/espat.c:96:15:espAt_sendCommand	32	dynamic
 ../Src/espat.c:132:15:espAt_sendParams	88	dynamic
 ../Src/espat.c:202:15:espAt_sendString	40	dynamic
-../Src/espat.c:254:15:espAt_receive	8	static
+../Src/espat.c:254:15:espAt_receive	16	static

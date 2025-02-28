@@ -69,6 +69,7 @@ void Error_Handler(void);
 #define MUS_BCK_GPIO_Port GPIOC
 #define GYRO_INT_Pin GPIO_PIN_0
 #define GYRO_INT_GPIO_Port GPIOA
+#define GYRO_INT_EXTI_IRQn EXTI0_1_IRQn
 #define LED_BLUE_Pin GPIO_PIN_1
 #define LED_BLUE_GPIO_Port GPIOA
 #define LED_RED_Pin GPIO_PIN_4
