@@ -46,15 +46,14 @@ espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 //port
 espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
-//	uint16_t receivedBytes = 0;
-//	if (HAL_UARTEx_ReceiveToIdle(uart->uart, (uint8_t*) data, size,
-//			&receivedBytes, uart->timeout) == HAL_OK)
-//		return ESPAT_STATE_OK;
-//	else
-//		return ESPAT_STATE_ERR;
+	HAL_StatusTypeDef state;
+	uint16_t receivedBytes = 0;
 
-	HAL_StatusTypeDef state = HAL_UART_Receive(uart->uart, (uint8_t*) data,
-			size, uart->receiveTimeout);
+	state = HAL_UARTEx_ReceiveToIdle(uart->uart, (uint8_t*) data, size,
+			&receivedBytes, uart->receiveTimeout);
+
+//	state = HAL_UART_Receive(uart->uart, (uint8_t*) data,
+//			size, uart->receiveTimeout);
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;

@@ -19,7 +19,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
-#include "dma.h"
 #include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
@@ -51,7 +50,7 @@
 /* USER CODE BEGIN PV */
 espat_radio_t bleRadio;
 lsm6ds_sensor_t mems;
-char buffer[25];
+char rxBuffer[25];
 
 volatile int32_t amx = 0;
 volatile int32_t amy = 0;
@@ -64,6 +63,8 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void ledOn(void);
 void ledOff(void);
+void esp32download(void);
+void esp32rst(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -100,24 +101,40 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_USART1_UART_Init();
-  MX_USART2_UART_Init();
   MX_I2C1_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+  while(1);
+
+
+  //enter download mode or reset ESP
+  HAL_Delay(200);
+  if(HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET)
+	  esp32download();
+  else
+	  esp32rst();
+  HAL_Delay(200);
+
+
 
 	lsm6ds_state_t sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1,
 			100, 100);
 
-	espAt_init(&bleRadio, &huart1, 50, 2000);
+	espat_state_t espStat = espAt_init(&bleRadio, &huart1, 50, 2000);
 
-	espAt_sendCommand(&bleRadio, G_RST);
+	espStat = espAt_sendCommand(&bleRadio, G_RST);
 	HAL_Delay(1000);
 
-	espAt_sendString(&bleRadio, S_BHN, "bartsHID");
-	HAL_Delay(200);
-	espAt_sendParams(&bleRadio, P_BHI, 1, 1);
+	espStat = espAt_sendString(&bleRadio, S_BHN, "bartsHID");
+	ledOn();
+	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
+	ledOff();
+	HAL_Delay(800);
+	espStat = espAt_sendParams(&bleRadio, P_BHI, 1, 1);
+	ledOn();
+	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
+	ledOff();
 	HAL_Delay(200);
 
 	//change baudrate
@@ -149,18 +166,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1) {
 
-		HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin,
-				HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin));
-
-
-		HAL_GPIO_WritePin(ESP_RST_GPIO_Port, ESP_RST_Pin,
-				HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin));
-
-		HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin,
-						HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin));
-
-		HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin,
-				HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin));
 
 		if (flagDrdyG) {
 			flagDrdyG = 0;
@@ -215,6 +220,7 @@ int main(void)
 
 			espAt_sendParams(&bleRadio, P_BHM, 4, blueButtonState, amz, amx, 0);
 
+
 		}
 
     /* USER CODE END WHILE */
@@ -226,6 +232,7 @@ int main(void)
 	sensorStat++;
 	amy++;
 	newDataAvailable++;
+	espStat++;
   /* USER CODE END 3 */
 }
 
@@ -281,6 +288,28 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == GYRO_INT_Pin) {
 		flagDrdyG = 1;
 	}
+}
+
+void esp32download(void){
+	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 0);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(ESP_BOOT_GPIO_Port, ESP_BOOT_Pin, 0);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 1);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(ESP_BOOT_GPIO_Port, ESP_BOOT_Pin, 1);
+	HAL_Delay(100);
+}
+
+void esp32rst(void){
+
+	HAL_GPIO_WritePin(ESP_BOOT_GPIO_Port, ESP_BOOT_Pin, 1);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 0);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 1);
+	HAL_Delay(100);
+
 }
 
 void ledOn(void) {

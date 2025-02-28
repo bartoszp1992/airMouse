@@ -1,6 +1,8 @@
-../Src/main.c:78:5:main	11
-../Src/main.c:236:6:SystemClock_Config	3
-../Src/main.c:280:6:HAL_GPIO_EXTI_Rising_Callback	2
-../Src/main.c:286:6:ledOn	1
-../Src/main.c:290:6:ledOff	1
-../Src/main.c:300:6:Error_Handler	1
+../Src/main.c:79:5:main	1
+../Src/main.c:243:6:SystemClock_Config	3
+../Src/main.c:287:6:HAL_GPIO_EXTI_Rising_Callback	2
+../Src/main.c:293:6:esp32download	1
+../Src/main.c:304:6:esp32rst	1
+../Src/main.c:315:6:ledOn	1
+../Src/main.c:319:6:ledOff	1
+../Src/main.c:329:6:Error_Handler	1

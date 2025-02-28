@@ -8107,7 +8107,7 @@
 		)
 		(uuid "7962973d-6ad1-4a80-ba3e-69e10080a1db")
 	)
-	(label "ESP_RST"
+	(label "ESP_EN"
 		(at 176.53 140.97 180)
 		(effects
 			(font
@@ -8317,7 +8317,7 @@
 		)
 		(uuid "d91a13d5-32c0-45d1-a52f-32321553de1c")
 	)
-	(label "ESP_RST"
+	(label "ESP_EN"
 		(at 229.87 118.11 0)
 		(effects
 			(font

@@ -1,5 +1,4 @@
-../Src/usart.c:33:6:MX_USART1_UART_Init	5
-../Src/usart.c:77:6:MX_USART2_UART_Init	5
-../Src/usart.c:120:6:HAL_UART_MspInit	6
-../Src/usart.c:216:6:HAL_UART_MspDeInit	3
-../Src/usart.c:264:6:HAL_UART_ChangeSpeed	2
+../Src/usart.c:31:6:MX_USART1_UART_Init	5
+../Src/usart.c:74:6:HAL_UART_MspInit	3
+../Src/usart.c:115:6:HAL_UART_MspDeInit	2
+../Src/usart.c:140:6:HAL_UART_ChangeSpeed	2

@@ -69,7 +69,6 @@ void Error_Handler(void);
 #define MUS_BCK_GPIO_Port GPIOC
 #define GYRO_INT_Pin GPIO_PIN_0
 #define GYRO_INT_GPIO_Port GPIOA
-#define GYRO_INT_EXTI_IRQn EXTI0_1_IRQn
 #define LED_BLUE_Pin GPIO_PIN_1
 #define LED_BLUE_GPIO_Port GPIOA
 #define LED_RED_Pin GPIO_PIN_4
@@ -88,10 +87,10 @@ void Error_Handler(void);
 #define KBD_COL2_GPIO_Port GPIOB
 #define KBD_COL10_Pin GPIO_PIN_10
 #define KBD_COL10_GPIO_Port GPIOB
-#define ESP_EN_Pin GPIO_PIN_14
+#define ESP_BOOT_Pin GPIO_PIN_14
+#define ESP_BOOT_GPIO_Port GPIOB
+#define ESP_EN_Pin GPIO_PIN_15
 #define ESP_EN_GPIO_Port GPIOB
-#define ESP_RST_Pin GPIO_PIN_15
-#define ESP_RST_GPIO_Port GPIOB
 #define MUS_LB_Pin GPIO_PIN_6
 #define MUS_LB_GPIO_Port GPIOC
 #define MUS_MB_Pin GPIO_PIN_7

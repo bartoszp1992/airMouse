@@ -54,20 +54,24 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, LED_BLUE_Pin|LED_RED_Pin|LED_GREEN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ESP_EN_Pin|ESP_RST_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, ESP_BOOT_Pin|ESP_EN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, KBD_ROW1_Pin|KBD_ROW2_Pin|KBD_ROW3_Pin|KBD_ROW4_Pin
                           |KBD_ROW5_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : MUS_PRC_Pin MUS_HOME_Pin MUS_DPI_Pin MUS_FWD_Pin
-                           MUS_BCK_Pin MUS_LB_Pin MUS_MB_Pin MUS_RB_Pin
-                           MUS_UP_Pin MUS_DN_Pin */
-  GPIO_InitStruct.Pin = MUS_PRC_Pin|MUS_HOME_Pin|MUS_DPI_Pin|MUS_FWD_Pin
-                          |MUS_BCK_Pin|MUS_LB_Pin|MUS_MB_Pin|MUS_RB_Pin
-                          |MUS_UP_Pin|MUS_DN_Pin;
+  /*Configure GPIO pins : MUS_PRC_Pin MUS_HOME_Pin MUS_DPI_Pin MUS_LB_Pin
+                           MUS_MB_Pin MUS_RB_Pin MUS_UP_Pin MUS_DN_Pin */
+  GPIO_InitStruct.Pin = MUS_PRC_Pin|MUS_HOME_Pin|MUS_DPI_Pin|MUS_LB_Pin
+                          |MUS_MB_Pin|MUS_RB_Pin|MUS_UP_Pin|MUS_DN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : MUS_FWD_Pin MUS_BCK_Pin */
+  GPIO_InitStruct.Pin = MUS_FWD_Pin|MUS_BCK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : GYRO_INT_Pin */
@@ -93,12 +97,19 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : ESP_EN_Pin ESP_RST_Pin */
-  GPIO_InitStruct.Pin = ESP_EN_Pin|ESP_RST_Pin;
+  /*Configure GPIO pin : ESP_BOOT_Pin */
+  GPIO_InitStruct.Pin = ESP_BOOT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(ESP_BOOT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : ESP_EN_Pin */
+  GPIO_InitStruct.Pin = ESP_EN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(ESP_EN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : KBD_ROW1_Pin KBD_ROW2_Pin KBD_ROW3_Pin KBD_ROW4_Pin
                            KBD_ROW5_Pin */
@@ -108,10 +119,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
 
 }
 
