@@ -1,0 +1,6 @@
+../Src/keyboard.c:10:16:readPin	8	static
+../Src/keyboard.c:17:6:writePin	8	static
+../Src/keyboard.c:32:13:kbd_init	24	static
+../Src/keyboard.c:76:13:kbd_set_columns	24	static
+../Src/keyboard.c:99:13:kbd_set_rows	24	static
+../Src/keyboard.c:121:6:kbd_scanning	16	static

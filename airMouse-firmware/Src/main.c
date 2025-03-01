@@ -28,6 +28,7 @@
 #include "espat.h"
 #include "lsm6ds.h"
 #include <math.h>
+#include "keyboard.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,6 +51,8 @@
 /* USER CODE BEGIN PV */
 espat_radio_t bleRadio;
 lsm6ds_sensor_t mems;
+kbd_keyboard_t qwerty;
+
 char rxBuffer[25];
 
 volatile int32_t amx = 0;
@@ -105,7 +108,35 @@ int main(void) {
 	MX_ADC1_Init();
 	/* USER CODE BEGIN 2 */
 
-	//enter download mode or reset ESP
+	kbd_init(&qwerty, 10, 5, 20);
+	kbd_set_columns(&qwerty,
+	KBD_COL1_GPIO_Port, KBD_COL1_Pin,
+	KBD_COL2_GPIO_Port, KBD_COL2_Pin,
+	KBD_COL3_GPIO_Port, KBD_COL3_Pin,
+	KBD_COL4_GPIO_Port, KBD_COL4_Pin,
+	KBD_COL5_GPIO_Port, KBD_COL5_Pin,
+	KBD_COL6_GPIO_Port, KBD_COL6_Pin,
+	KBD_COL7_GPIO_Port, KBD_COL7_Pin,
+	KBD_COL8_GPIO_Port, KBD_COL8_Pin,
+	KBD_COL9_GPIO_Port, KBD_COL9_Pin,
+	KBD_COL10_GPIO_Port, KBD_COL10_Pin);
+	kbd_set_rows(&qwerty,
+	KBD_ROW1_GPIO_Port, KBD_ROW1_Pin,
+	KBD_ROW2_GPIO_Port, KBD_ROW2_Pin,
+	KBD_ROW3_GPIO_Port, KBD_ROW3_Pin,
+	KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,
+	KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);
+
+	//test kbd write pin function
+//	kbd_pin_t testPin;
+//	testPin.port = LED_GREEN_GPIO_Port;
+//	testPin.pin = LED_GREEN_Pin;
+//
+//	kbd_writePin(&testPin, KBD_SET);
+//	HAL_Delay(500);
+//	kbd_writePin(&testPin, KBD_RESET);
+
+//enter download mode or reset ESP
 	HAL_Delay(200);
 	if (HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET)
 		esp32download();

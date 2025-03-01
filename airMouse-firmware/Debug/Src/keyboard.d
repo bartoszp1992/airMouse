@@ -1,5 +1,5 @@
-Src/stm32g0xx_it.o: ../Src/stm32g0xx_it.c ../Inc/main.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
+Src/keyboard.o: ../Src/keyboard.c ../Inc/keyboard.h ../Inc/gpio.h \
+ ../Inc/main.h ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
@@ -33,8 +33,9 @@ Src/stm32g0xx_it.o: ../Src/stm32g0xx_it.c ../Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- ../Inc/stm32g0xx_it.h ../Inc/keyboard.h ../Inc/gpio.h ../Inc/main.h
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h
+../Inc/keyboard.h:
+../Inc/gpio.h:
 ../Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Inc/stm32g0xx_hal_conf.h:
@@ -71,7 +72,3 @@ Src/stm32g0xx_it.o: ../Src/stm32g0xx_it.c ../Inc/main.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
-../Inc/stm32g0xx_it.h:
-../Inc/keyboard.h:
-../Inc/gpio.h:
-../Inc/main.h:

@@ -22,6 +22,7 @@
 #include "stm32g0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "keyboard.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,7 +59,7 @@ volatile uint32_t onCounter = 0;
 /* External variables --------------------------------------------------------*/
 
 /* USER CODE BEGIN EV */
-
+extern kbd_keyboard_t qwerty;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -141,6 +142,7 @@ void SysTick_Handler(void)
 	  HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, 0);
 
 
+  kbd_scanning(&qwerty);
   /* USER CODE END SysTick_IRQn 1 */
 }
 

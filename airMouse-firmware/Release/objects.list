@@ -22,6 +22,7 @@
 "./Src/espat.o"
 "./Src/gpio.o"
 "./Src/i2c.o"
+"./Src/keyboard.o"
 "./Src/lsm6ds.o"
 "./Src/main.o"
 "./Src/stm32g0xx_hal_msp.o"
