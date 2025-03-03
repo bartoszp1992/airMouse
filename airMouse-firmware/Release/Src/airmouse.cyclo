@@ -1,0 +1,10 @@
+../Src/airmouse.c:92:6:airMouseProcess	8
+../Src/airmouse.c:151:6:noWarningWOrkaround	5
+../Src/airmouse.c:163:6:HAL_GPIO_EXTI_Rising_Callback	2
+../Src/airmouse.c:169:6:esp32download	1
+../Src/airmouse.c:180:6:esp32on	1
+../Src/airmouse.c:33:6:airMouseSetup	2
+../Src/airmouse.c:184:6:esp32off	1
+../Src/airmouse.c:188:6:esp32rst	1
+../Src/airmouse.c:197:6:ledOn	1
+../Src/airmouse.c:201:6:ledOff	1

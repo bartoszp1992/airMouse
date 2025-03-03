@@ -1,0 +1,6 @@
+../Src/airmouse.c:50:6:airMouseSetup	2
+../Src/airmouse.c:126:6:airMouseProcess	14
+../Src/airmouse.c:185:6:airMouseTick	3
+../Src/airmouse.c:200:6:HAL_GPIO_EXTI_Rising_Callback	2
+../Src/airmouse.c:207:6:ledOn	1
+../Src/airmouse.c:211:6:ledOff	1

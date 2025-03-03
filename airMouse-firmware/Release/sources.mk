@@ -24,5 +24,6 @@ C_DEPS :=
 SUBDIRS := \
 Drivers/STM32G0xx_HAL_Driver/Src \
 Src \
+Src/lib \
 Startup \
 

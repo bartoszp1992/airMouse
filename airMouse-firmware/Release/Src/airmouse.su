@@ -1,0 +1,10 @@
+../Src/airmouse.c:92:6:airMouseProcess	56	static
+../Src/airmouse.c:151:6:noWarningWOrkaround	0	static
+../Src/airmouse.c:163:6:HAL_GPIO_EXTI_Rising_Callback	0	static
+../Src/airmouse.c:169:6:esp32download	16	static
+../Src/airmouse.c:180:6:esp32on	8	static
+../Src/airmouse.c:33:6:airMouseSetup	96	static
+../Src/airmouse.c:184:6:esp32off	8	static
+../Src/airmouse.c:188:6:esp32rst	16	static
+../Src/airmouse.c:197:6:ledOn	8	static
+../Src/airmouse.c:201:6:ledOff	8	static
