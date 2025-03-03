@@ -5,7 +5,7 @@
  *      Author: bartosz
  *
  *      todo:
- *      esp power and boot functions -> espat
+ *      DONE esp power and boot functions -> espat
  *      dataReady flag -> lsm6ds
  *      receiving data from esp -> espat
  *      HID reports sending only if connected(depending on the receiving data)
@@ -48,7 +48,8 @@ volatile uint32_t ledCounter = 0;
 volatile uint32_t onCounter = 0;
 
 void airMouseSetup(void) {
-	esp32on();
+
+	//_________________________________________KEYS_________________________________________
 
 	//init mouse buttons
 	kbd_init(&mouseButtons, 10, 1, 10, KBD_RESET);
@@ -84,17 +85,21 @@ void airMouseSetup(void) {
 	KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,
 	KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);
 
-	//enter download mode or reset ESP
-	HAL_Delay(200);
-	if (HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET)
-		esp32download();
 
-	sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1,
-			100, 100);
+
+	//_________________________________________RADIO_________________________________________
 
 	espStat = espAt_init(&bleRadio, &huart1, 50, 1500);
 	espStat = espAt_defineEn(&bleRadio, ESP_EN_GPIO_Port, ESP_EN_Pin);
 	espStat = espAt_defineBoot(&bleRadio, ESP_BOOT_GPIO_Port, ESP_BOOT_Pin);
+	//turn on
+	espStat = espAt_pwrOn(&bleRadio);
+
+	//enter download mode or reset ESP
+	if (HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET)
+		espStat = espAt_enterDownload(&bleRadio);
+
+
 
 	espStat = espAt_sendCommand(&bleRadio, G_RST);
 	HAL_Delay(1300);
@@ -112,6 +117,11 @@ void airMouseSetup(void) {
 	HAL_Delay(200);
 	HAL_UART_ChangeSpeed(&huart1, 3000000);
 
+
+	//_________________________________________IMU SENSOR_________________________________________
+
+	sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1,
+			100, 100);
 	sensorStat = lsm6ds_reset(&mems);
 
 	//	sensorStat = lsm6ds_setXLOutputDataRate(&mems, LSM6DS_ODR_XL_12_5_HZ);

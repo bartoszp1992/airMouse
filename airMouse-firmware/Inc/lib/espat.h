@@ -8,9 +8,8 @@
 #ifndef ESPAT_H_
 #define ESPAT_H_
 
-
-#define BOOT_SUPPORT 1
 #define EN_SUPPORT 1
+#define BOOT_SUPPORT 1
 
 #if (BOOT_SUPPORT == 1) || (EN_SUPPORT == 1)
 #include <stdarg.h>
@@ -59,7 +58,8 @@ typedef enum {
 	ESPAT_STATE_OK = 0,
 	ESPAT_STATE_ERR = 1,
 	ESPAT_STATE_TIMEOUT = 2,
-	ESPAT_STATE_BUSY = 3
+	ESPAT_STATE_BUSY = 3,
+	ESPAT_STATE_PIN_NOT_DEFINED = 4
 } espat_state_t;
 
 //hardware specific uart structure
@@ -105,16 +105,19 @@ espat_state_t espAt_receive(espat_radio_t *radio, char *response, uint16_t size)
 
 #if (EN_SUPPORT == 1)
 espat_state_t espAt_defineEn(espat_radio_t *radio, ...);
+espat_state_t espAt_pwrOn(espat_radio_t *radio);
+espat_state_t espAt_pwrOff(espat_radio_t *radio);
+
 #endif
 
 #if (BOOT_SUPPORT == 1)
 espat_state_t espAt_defineBoot(espat_radio_t *radio, ...);
 #endif
 
+#if (BOOT_SUPPORT == 1) && (EN_SUPPORT == 1)
+espat_state_t espAt_enterDownload(espat_radio_t *radio);
+espat_state_t esp32rst(espat_radio_t *radio);
+#endif
 
-void esp32download(void);
-void esp32rst(void);
-void esp32on(void);
-void esp32off(void);
 
 #endif /* ESPAT_H_ */

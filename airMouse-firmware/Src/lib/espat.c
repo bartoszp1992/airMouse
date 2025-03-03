@@ -26,14 +26,14 @@ espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
 	HAL_StatusTypeDef state = HAL_OK;
 
-	state = HAL_UART_Transmit(uart->uart, (uint8_t*) data,
-			size, uart->sendTimeout);
+	state = HAL_UART_Transmit(uart->uart, (uint8_t*) data, size,
+			uart->sendTimeout);
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;
 	else if (state == HAL_TIMEOUT)
 		return ESPAT_STATE_TIMEOUT;
-	else if(state == HAL_BUSY)
+	else if (state == HAL_BUSY)
 		return ESPAT_STATE_BUSY;
 	else
 		return ESPAT_STATE_ERR;
@@ -44,8 +44,8 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 
 	HAL_StatusTypeDef state;
 
-	state = HAL_UART_Receive(uart->uart, (uint8_t*) data,
-			size, uart->receiveTimeout);
+	state = HAL_UART_Receive(uart->uart, (uint8_t*) data, size,
+			uart->receiveTimeout);
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;
@@ -72,7 +72,7 @@ void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) {
 #endif
 
 //port
-void espAt_delay(uint32_t delay){
+void espAt_delay(uint32_t delay) {
 	HAL_Delay(delay);
 }
 
@@ -93,6 +93,15 @@ espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 	radio->espUart.uart = uart;
 	radio->espUart.sendTimeout = txTimeout;
 	radio->espUart.receiveTimeout = rxTimeout;
+
+#if (EN_SUPPORT == 1)
+	radio->pinEn.port = NULL;
+#endif
+
+#if (BOOT_SUPPORT == 1)
+	radio->pinBoot.port = NULL;
+#endif
+
 	return ESPAT_STATE_OK;
 
 }
@@ -272,7 +281,7 @@ espat_state_t espAt_receive(espat_radio_t *radio, char *response, uint16_t size)
 }
 
 #if (EN_SUPPORT == 1)
-espat_state_t espAt_defineEn(espat_radio_t *radio, ...){
+espat_state_t espAt_defineEn(espat_radio_t *radio, ...) {
 
 	va_list ap;
 	va_start(ap, radio);
@@ -284,10 +293,29 @@ espat_state_t espAt_defineEn(espat_radio_t *radio, ...){
 
 	return ESPAT_STATE_OK;
 }
+
+espat_state_t espAt_pwrOn(espat_radio_t *radio) {
+	if (radio->pinEn.port != NULL) {
+		espAt_writePin(&radio->pinEn, ESPAT_SET);
+		return ESPAT_STATE_OK;
+	} else
+		return ESPAT_STATE_PIN_NOT_DEFINED;
+}
+
+espat_state_t espAt_pwrOff(espat_radio_t *radio) {
+	if (radio->pinEn.port != NULL) {
+		espAt_writePin(&radio->pinEn, ESPAT_RESET);
+		return ESPAT_STATE_OK;
+	} else
+		return ESPAT_STATE_PIN_NOT_DEFINED;
+}
+
+
+
 #endif
 
 #if (BOOT_SUPPORT == 1)
-espat_state_t espAt_defineBoot(espat_radio_t *radio, ...){
+espat_state_t espAt_defineBoot(espat_radio_t *radio, ...) {
 
 	va_list ap;
 	va_start(ap, radio);
@@ -302,30 +330,36 @@ espat_state_t espAt_defineBoot(espat_radio_t *radio, ...){
 }
 #endif
 
-void esp32download(void) {
-	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 0);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(ESP_BOOT_GPIO_Port, ESP_BOOT_Pin, 0);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 1);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(ESP_BOOT_GPIO_Port, ESP_BOOT_Pin, 1);
-	HAL_Delay(100);
+#if (BOOT_SUPPORT == 1) && (EN_SUPPORT == 1)
+espat_state_t espAt_enterDownload(espat_radio_t *radio) {
+
+	if (radio->pinBoot.port != NULL && radio->pinEn.port != NULL) {
+		espAt_writePin(&radio->pinEn, ESPAT_RESET);
+		espAt_delay(100);
+		espAt_writePin(&radio->pinBoot, ESPAT_RESET);
+		espAt_delay(100);
+		espAt_writePin(&radio->pinEn, ESPAT_SET);
+		espAt_delay(100);
+		espAt_writePin(&radio->pinBoot, ESPAT_SET);
+		espAt_delay(100);
+		return ESPAT_STATE_OK;
+	} else
+		return ESPAT_STATE_PIN_NOT_DEFINED;
+
 }
 
-void esp32on(void) {
-	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 1);
-}
+espat_state_t esp32rst(espat_radio_t *radio) {
 
-void esp32off(void) {
-	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 0);
+	if (radio->pinBoot.port != NULL && radio->pinEn.port != NULL) {
+			espAt_writePin(&radio->pinBoot, ESPAT_SET);
+			espAt_delay(100);
+			espAt_writePin(&radio->pinEn, ESPAT_RESET);
+			espAt_delay(100);
+			espAt_writePin(&radio->pinEn, ESPAT_SET);
+			espAt_delay(100);
+			return ESPAT_STATE_OK;
+		} else
+			return ESPAT_STATE_PIN_NOT_DEFINED;
 }
+#endif
 
-void esp32rst(void) {
-	HAL_GPIO_WritePin(ESP_BOOT_GPIO_Port, ESP_BOOT_Pin, 1);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 0);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(ESP_EN_GPIO_Port, ESP_EN_Pin, 1);
-	HAL_Delay(100);
-}

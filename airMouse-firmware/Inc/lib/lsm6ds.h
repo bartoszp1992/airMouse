@@ -8,19 +8,8 @@
 #ifndef LSM6DS_H_
 #define LSM6DS_H_
 
-//select SPI mode
-#define SPI 0
-
 //port- hardware specific
-#if SPI
-
-#include "spi.h"
-
-#else
-
 #include "i2c.h"
-
-#endif
 
 //others
 #include <stdint.h>

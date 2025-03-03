@@ -1,6 +1,6 @@
 ../Src/airmouse.c:50:6:airMouseSetup	80	static
-../Src/airmouse.c:126:6:airMouseProcess	40	static
-../Src/airmouse.c:185:6:airMouseTick	8	static
-../Src/airmouse.c:200:6:HAL_GPIO_EXTI_Rising_Callback	16	static
-../Src/airmouse.c:207:6:ledOn	8	static
-../Src/airmouse.c:211:6:ledOff	8	static
+../Src/airmouse.c:136:6:airMouseProcess	40	static
+../Src/airmouse.c:195:6:airMouseTick	8	static
+../Src/airmouse.c:210:6:HAL_GPIO_EXTI_Rising_Callback	16	static
+../Src/airmouse.c:217:6:ledOn	8	static
+../Src/airmouse.c:221:6:ledOff	8	static
