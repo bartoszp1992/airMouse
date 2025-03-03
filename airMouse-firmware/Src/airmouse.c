@@ -6,7 +6,7 @@
  *
  *      todo:
  *      DONE esp power and boot functions -> espat
- *      dataReady flag -> lsm6ds
+ *      DONE dataReady flag -> lsm6ds
  *      receiving data from esp -> espat
  *      HID reports sending only if connected(depending on the receiving data)
  *      accelerometer used to correct cursor movement(simple or vector)
@@ -31,15 +31,12 @@ lsm6ds_state_t sensorStat;
 
 char rxBuffer[25];
 
-volatile int32_t amx = 0;
-volatile int32_t amy = 0;
-volatile int32_t amz = 0;
-volatile uint8_t flagDrdyG = 0;
+volatile int32_t hidAmx = 0;
+volatile int32_t hidAmy = 0;
+volatile int32_t hidAmz = 0;
 
-int32_t sensitivity = 100; //10000 are 1
-int32_t acceleration = 140; //100- no acceleration
-
-uint8_t newDataAvailable = 0;
+int32_t hidSensitivity = 100; //10000 are 1
+int32_t hidAcceleration = 140; //100- no acceleration
 
 uint8_t mouseButtonState = 0;
 int32_t maxVal = 100;
@@ -134,50 +131,49 @@ void airMouseSetup(void) {
 
 }
 void airMouseProcess(void) {
-	if (flagDrdyG) {
-		flagDrdyG = 0;
+	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
 
 		sensorStat = lsm6ds_updateGR(&mems);
 
 		//sensitivity
-		amx = ((int32_t) mems.outGR.x * sensitivity) / 10000;
-		amz = ((int32_t) mems.outGR.z * sensitivity) / 10000;
+		hidAmx = ((int32_t) mems.outGR.x * hidSensitivity) / 10000;
+		hidAmz = ((int32_t) mems.outGR.z * hidSensitivity) / 10000;
 
 		//acceleration
 
 		uint8_t isNegative;
 
-		if (amx < 0)
+		if (hidAmx < 0)
 			isNegative = 1;
 		else
 			isNegative = 0;
 
-		amx = pow((double) abs(amx), ((double) acceleration) / 100);
+		hidAmx = pow((double) abs(hidAmx), ((double) hidAcceleration) / 100);
 		if (isNegative)
-			amx = -amx;
+			hidAmx = -hidAmx;
 
-		if (amz < 0)
+		if (hidAmz < 0)
 			isNegative = 1;
 		else
 			isNegative = 0;
-		amz = pow((double) abs(amz), ((double) acceleration) / 100);
+		hidAmz = pow((double) abs(hidAmz), ((double) hidAcceleration) / 100);
 		if (isNegative)
-			amz = -amz;
+			hidAmz = -hidAmz;
 
 		//to high value secure
-		if (amx > maxVal)
-			amx = maxVal;
-		if (amx < -maxVal)
-			amx = -maxVal;
+		if (hidAmx > maxVal)
+			hidAmx = maxVal;
+		if (hidAmx < -maxVal)
+			hidAmx = -maxVal;
 
-		if (amz > maxVal)
-			amz = maxVal;
-		if (amz < -maxVal)
-			amz = -maxVal;
+		if (hidAmz > maxVal)
+			hidAmz = maxVal;
+		if (hidAmz < -maxVal)
+			hidAmz = -maxVal;
 
 		//revert sign
 		//			amz *= -1;
-		amx *= -1;
+		hidAmx *= -1;
 
 		mouseButtonState = 0;
 		mouseButtonState = !HAL_GPIO_ReadPin(MUS_LB_GPIO_Port, MUS_LB_Pin) << 0
@@ -186,7 +182,7 @@ void airMouseProcess(void) {
 				| !HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin) << 3
 				| !HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) << 4;
 
-		espAt_sendParams(&bleRadio, P_BHM, 4, mouseButtonState, amx, amz, 0);
+		espAt_sendParams(&bleRadio, P_BHM, 4, mouseButtonState, hidAmx, hidAmz, 0);
 
 	}
 
@@ -209,7 +205,7 @@ void airMouseTick(void) {
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == GYRO_INT_Pin) {
-		flagDrdyG = 1;
+		lsm6ds_flagDataReadySet(&mems);
 	}
 }
 

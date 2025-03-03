@@ -11,10 +11,6 @@
 #define EN_SUPPORT 1
 #define BOOT_SUPPORT 1
 
-#if (BOOT_SUPPORT == 1) || (EN_SUPPORT == 1)
-#include <stdarg.h>
-#endif
-
 //port- hardware specific
 #include "usart.h"
 #if (BOOT_SUPPORT == 1) || (EN_SUPPORT == 1)
@@ -104,14 +100,14 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 espat_state_t espAt_receive(espat_radio_t *radio, char *response, uint16_t size);
 
 #if (EN_SUPPORT == 1)
-espat_state_t espAt_defineEn(espat_radio_t *radio, ...);
+espat_state_t espAt_defineEn(espat_radio_t *radio, espat_port_t *port, uint32_t pin);
 espat_state_t espAt_pwrOn(espat_radio_t *radio);
 espat_state_t espAt_pwrOff(espat_radio_t *radio);
 
 #endif
 
 #if (BOOT_SUPPORT == 1)
-espat_state_t espAt_defineBoot(espat_radio_t *radio, ...);
+espat_state_t espAt_defineBoot(espat_radio_t *radio, espat_port_t *port, uint32_t pin);
 #endif
 
 #if (BOOT_SUPPORT == 1) && (EN_SUPPORT == 1)

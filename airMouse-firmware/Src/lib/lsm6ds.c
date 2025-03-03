@@ -97,6 +97,10 @@ lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 	memset(&sensor->outXL, 0, sizeof(sensor->outXL));
 	sensor->outTemperature = 0;
 
+#if INT_SUPPORT == 1
+	sensor->dataReady = LSM6DS_DATA_NREADY;
+#endif
+
 	//check communication
 	lsm6ds_state_t state = LSM6DS_STATE_ERR;
 	uint8_t receivedWhoIAm = 0;
@@ -346,7 +350,34 @@ lsm6ds_state_t lsm6ds_updateGR(lsm6ds_sensor_t *sensor){
 	sensor->outGR.y = outputData.separated[1];
 	sensor->outGR.z = outputData.separated[2];
 
-
 	return status;
-
 }
+
+#if INT_SUPPORT == 1
+
+/*
+ * run this function when EXTI occurs
+ * @param: sensor
+ *
+ * @retval: none
+ */
+void lsm6ds_flagDataReadySet(lsm6ds_sensor_t *sensor){
+	sensor->dataReady = LSM6DS_DATA_READY;
+}
+
+/*
+ * check if dataready flag is set by EXTI
+ * @param: sensor
+ *
+ * @retval: LSM6DS_DATA_READY/NREADY
+ */
+lsm6ds_drdy_t lsm6ds_flagDataReadyRead(lsm6ds_sensor_t *sensor){
+	if(sensor->dataReady == LSM6DS_DATA_READY){
+		sensor->dataReady = LSM6DS_DATA_NREADY;
+		return LSM6DS_DATA_READY;
+	}else
+		return LSM6DS_DATA_NREADY;
+}
+
+
+#endif

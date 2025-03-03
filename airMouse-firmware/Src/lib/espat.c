@@ -54,16 +54,28 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 	else
 		return ESPAT_STATE_ERR;
 }
-//port
+
 #if (BOOT_SUPPORT == 1) || (EN_SUPPORT == 1)
-espat_pinState_t espAt_readPin(espat_pin_t *pin) {
+/*
+ * read GPIO
+ * @param: pin
+ *
+ * @retval: readed pin state
+ */
+espat_pinState_t espAt_readPin(espat_pin_t *pin) {//port
 	if (HAL_GPIO_ReadPin(pin->port, pin->pin) == GPIO_PIN_RESET)
 		return ESPAT_RESET;
 	else
 		return ESPAT_SET;
 }
-//port
-void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) {
+
+/*
+ * write GPIO
+ * @param: pin
+ *
+ * @retval: none
+ */
+void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) {//port
 	if (state == ESPAT_RESET)
 		HAL_GPIO_WritePin(pin->port, pin->pin, GPIO_PIN_RESET);
 	else
@@ -71,8 +83,13 @@ void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) {
 }
 #endif
 
-//port
-void espAt_delay(uint32_t delay) {
+/*
+ * wait function
+ * @param: time in ms
+ *
+ * @retval: none
+ */
+void espAt_delay(uint32_t delay) {//port
 	HAL_Delay(delay);
 }
 
@@ -281,19 +298,28 @@ espat_state_t espAt_receive(espat_radio_t *radio, char *response, uint16_t size)
 }
 
 #if (EN_SUPPORT == 1)
-espat_state_t espAt_defineEn(espat_radio_t *radio, ...) {
+/*
+ * define EN pin of ESP32.
+ * @param: radio
+ * @param: port
+ * @param: pin
+ *
+ * @retval: status
+ */
+espat_state_t espAt_defineEn(espat_radio_t *radio, espat_port_t *port, uint32_t pin) {
 
-	va_list ap;
-	va_start(ap, radio);
-
-	radio->pinEn.port = va_arg(ap, espat_port_t*);
-	radio->pinEn.pin = va_arg(ap, uint32_t);
-
-	va_end(ap);
+	radio->pinEn.port = port;
+	radio->pinEn.pin = pin;
 
 	return ESPAT_STATE_OK;
 }
 
+/*
+ * power on using EN pin
+ * @param: radio
+ *
+ * @retval: status
+ */
 espat_state_t espAt_pwrOn(espat_radio_t *radio) {
 	if (radio->pinEn.port != NULL) {
 		espAt_writePin(&radio->pinEn, ESPAT_SET);
@@ -302,6 +328,13 @@ espat_state_t espAt_pwrOn(espat_radio_t *radio) {
 		return ESPAT_STATE_PIN_NOT_DEFINED;
 }
 
+
+/*
+ * power off using EN pin
+ * @param: radio
+ *
+ * @retval: status
+ */
 espat_state_t espAt_pwrOff(espat_radio_t *radio) {
 	if (radio->pinEn.port != NULL) {
 		espAt_writePin(&radio->pinEn, ESPAT_RESET);
@@ -315,15 +348,18 @@ espat_state_t espAt_pwrOff(espat_radio_t *radio) {
 #endif
 
 #if (BOOT_SUPPORT == 1)
-espat_state_t espAt_defineBoot(espat_radio_t *radio, ...) {
+/*
+ * define port and pin connected to BOOT of ESP32.
+ * @param: radio
+ * @param: port
+ * @param: pin
+ *
+ * @retval: status
+ */
+espat_state_t espAt_defineBoot(espat_radio_t *radio, espat_port_t *port, uint32_t pin) {
 
-	va_list ap;
-	va_start(ap, radio);
-
-	radio->pinBoot.port = va_arg(ap, espat_port_t*);
-	radio->pinBoot.pin = va_arg(ap, uint32_t);
-
-	va_end(ap);
+	radio->pinBoot.port = port;
+	radio->pinBoot.pin = pin;
 
 	return ESPAT_STATE_OK;
 
@@ -331,6 +367,12 @@ espat_state_t espAt_defineBoot(espat_radio_t *radio, ...) {
 #endif
 
 #if (BOOT_SUPPORT == 1) && (EN_SUPPORT == 1)
+/*
+ * reset in download mode
+ * @param: radio
+ *
+ * @retval: status
+ */
 espat_state_t espAt_enterDownload(espat_radio_t *radio) {
 
 	if (radio->pinBoot.port != NULL && radio->pinEn.port != NULL) {
@@ -348,6 +390,12 @@ espat_state_t espAt_enterDownload(espat_radio_t *radio) {
 
 }
 
+/*
+ * reset in normal mode
+ * @param: radio
+ *
+ * @retval: status
+ */
 espat_state_t esp32rst(espat_radio_t *radio) {
 
 	if (radio->pinBoot.port != NULL && radio->pinEn.port != NULL) {
