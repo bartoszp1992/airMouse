@@ -2478,7 +2478,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Regulator_Switching:MCP1640Cx-xCHY"
+		(symbol "Regulator_Switching:TLV61070ADBV"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2491,8 +2491,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "MCP1640Cx-xCHY"
-				(at -1.27 8.89 0)
+			(property "Value" "TLV61070ADBV"
+				(at 0 8.89 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2511,8 +2511,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/20002234D.pdf"
-				(at -6.35 11.43 0)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv61070a.pdf"
+				(at 0 12.7 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2520,7 +2520,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Synchronous Boost Regulator, Adjustable Output 2.0V-5.5V, PWM/PFM Input to Output Bypass, SOT-23"
+			(property "Description" "Boost Converter, 2.5A switch current limit, 2.2-5.5V Output Voltage, 0.5-5.5V Input Voltage, SOT-23-6"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2529,7 +2529,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Step-Up Boost DC-DC Regulator Adjustable"
+			(property "ki_keywords" "Boost adjustable converter"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2547,7 +2547,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "MCP1640Cx-xCHY_0_1"
+			(symbol "TLV61070ADBV_0_1"
 				(rectangle
 					(start -7.62 7.62)
 					(end 7.62 -5.08)
@@ -2560,7 +2560,7 @@
 					)
 				)
 			)
-			(symbol "MCP1640Cx-xCHY_1_1"
+			(symbol "TLV61070ADBV_1_1"
 				(pin power_in line
 					(at -10.16 5.08 0)
 					(length 2.54)
@@ -5435,7 +5435,7 @@
 	)
 	(text "remove LASER resistor\nremove R3/R4\nC7- change to 0805\nchange converter to: TLV61070A\nmuch much wider BAT- width\nstep up voltage from BAT(charge pump)"
 		(exclude_from_sim no)
-		(at 326.39 148.59 0)
+		(at 293.37 132.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11474,7 +11474,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Regulator_Switching:MCP1640Cx-xCHY")
+		(lib_id "Regulator_Switching:TLV61070ADBV")
 		(at 71.12 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11490,7 +11490,7 @@
 				)
 			)
 		)
-		(property "Value" "MCP1640CT-I/CHY"
+		(property "Value" "TLV61070ADBV"
 			(at 81.28 33.02 0)
 			(effects
 				(font
@@ -11509,8 +11509,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/20002234D.pdf"
-			(at 64.77 13.97 0)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv61070a.pdf"
+			(at 71.12 12.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11518,7 +11518,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Synchronous Boost Regulator, Adjustable Output 2.0V-5.5V, PWM/PFM Input to Output Bypass, SOT-23"
+		(property "Description" "Boost Converter, 2.5A switch current limit, 2.2-5.5V Output Voltage, 0.5-5.5V Input Voltage, SOT-23-6"
 			(at 71.12 25.4 0)
 			(effects
 				(font
@@ -12511,7 +12511,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "976k"
+		(property "Value" "1M"
 			(at 93.98 27.9399 0)
 			(effects
 				(font
@@ -13289,7 +13289,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "562k"
+		(property "Value" "180k"
 			(at 93.98 36.8299 0)
 			(effects
 				(font

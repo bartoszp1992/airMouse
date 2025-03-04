@@ -112,7 +112,7 @@ espat_state_t espAt_defineBoot(espat_radio_t *radio, espat_port_t *port, uint32_
 
 #if (BOOT_SUPPORT == 1) && (EN_SUPPORT == 1)
 espat_state_t espAt_enterDownload(espat_radio_t *radio);
-espat_state_t esp32rst(espat_radio_t *radio);
+espat_state_t espAt_rst(espat_radio_t *radio);
 #endif
 
 

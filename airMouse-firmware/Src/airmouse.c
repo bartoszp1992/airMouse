@@ -86,20 +86,21 @@ void airMouseSetup(void) {
 
 	//_________________________________________RADIO_________________________________________
 
-	espStat = espAt_init(&bleRadio, &huart1, 50, 1500);
+	espStat = espAt_init(&bleRadio, &huart1, 5, 1500);
 	espStat = espAt_defineEn(&bleRadio, ESP_EN_GPIO_Port, ESP_EN_Pin);
 	espStat = espAt_defineBoot(&bleRadio, ESP_BOOT_GPIO_Port, ESP_BOOT_Pin);
-	//turn on
-	espStat = espAt_pwrOn(&bleRadio);
-
 	//enter download mode or reset ESP
 	if (HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET)
 		espStat = espAt_enterDownload(&bleRadio);
 
+	//turn on
+	espStat = espAt_pwrOn(&bleRadio);
+	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
 
 
-	espStat = espAt_sendCommand(&bleRadio, G_RST);
-	HAL_Delay(1300);
+//	espStat = espAt_sendCommand(&bleRadio, G_RST);
+//	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
+//	HAL_Delay(2000);
 
 	espStat = espAt_sendString(&bleRadio, S_BHN, "bartsHID4");
 	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));

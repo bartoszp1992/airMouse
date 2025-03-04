@@ -40,12 +40,19 @@ espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 }
 
 //port
-espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size) {
+espat_state_t uartReceive(espat_uartInstance_t *uart, char *data,
+		uint32_t size) {
 
 	HAL_StatusTypeDef state;
 
+	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1); //debug
+
 	state = HAL_UART_Receive(uart->uart, (uint8_t*) data, size,
 			uart->receiveTimeout);
+//	uint16_t rxlen;
+//	state = HAL_UARTEx_ReceiveToIdle(uart->uart, (uint8_t*)data, size, &rxlen, uart->receiveTimeout);
+
+	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0); //debug
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;
@@ -62,7 +69,7 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
  *
  * @retval: readed pin state
  */
-espat_pinState_t espAt_readPin(espat_pin_t *pin) {//port
+espat_pinState_t espAt_readPin(espat_pin_t *pin) { //port
 	if (HAL_GPIO_ReadPin(pin->port, pin->pin) == GPIO_PIN_RESET)
 		return ESPAT_RESET;
 	else
@@ -75,7 +82,7 @@ espat_pinState_t espAt_readPin(espat_pin_t *pin) {//port
  *
  * @retval: none
  */
-void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) {//port
+void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) { //port
 	if (state == ESPAT_RESET)
 		HAL_GPIO_WritePin(pin->port, pin->pin, GPIO_PIN_RESET);
 	else
@@ -89,7 +96,7 @@ void espAt_writePin(espat_pin_t *pin, espat_pinState_t state) {//port
  *
  * @retval: none
  */
-void espAt_delay(uint32_t delay) {//port
+void espAt_delay(uint32_t delay) { //port
 	HAL_Delay(delay);
 }
 
@@ -100,7 +107,7 @@ void espAt_delay(uint32_t delay) {//port
  * @param: radio struct
  * @param: uart MCU specific struct
  * @param: timeout for transmit
- * @param: timout for receive
+ * @param: timout for receive- 1500ms seems
  *
  * @retval: always ESPATHID_OK
  */
@@ -286,15 +293,28 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
  * receive raw data from ESP
  * @param: radio struct
  * @param: pointer to save response
- * @param: size to receive
+ * @param: buffer size
  *
  * @retval: state
  */
 espat_state_t espAt_receive(espat_radio_t *radio, char *response, uint16_t size) {
 
 	memset(response, ' ', size);
-	return uartReceive(&radio->espUart, response, size);
+	espat_state_t state;
 
+	for(uint32_t actualReceived = 0; actualReceived<size; actualReceived++){
+
+		state = uartReceive(&radio->espUart, &response[actualReceived], 1);
+
+		if(state != ESPAT_STATE_OK)
+			return state;
+
+		if(response[actualReceived] == '\n' && response[actualReceived-1] == '\r'){
+			state = ESPAT_STATE_OK;
+			break;//znajdź sposób na wykrycie końca ramki. Prawdopodobnie każda z nich kończy się OK, ERROR, bądź innym standardowym komunikatem
+		}
+	}
+	return state;
 }
 
 #if (EN_SUPPORT == 1)
@@ -306,7 +326,8 @@ espat_state_t espAt_receive(espat_radio_t *radio, char *response, uint16_t size)
  *
  * @retval: status
  */
-espat_state_t espAt_defineEn(espat_radio_t *radio, espat_port_t *port, uint32_t pin) {
+espat_state_t espAt_defineEn(espat_radio_t *radio, espat_port_t *port,
+		uint32_t pin) {
 
 	radio->pinEn.port = port;
 	radio->pinEn.pin = pin;
@@ -328,7 +349,6 @@ espat_state_t espAt_pwrOn(espat_radio_t *radio) {
 		return ESPAT_STATE_PIN_NOT_DEFINED;
 }
 
-
 /*
  * power off using EN pin
  * @param: radio
@@ -343,8 +363,6 @@ espat_state_t espAt_pwrOff(espat_radio_t *radio) {
 		return ESPAT_STATE_PIN_NOT_DEFINED;
 }
 
-
-
 #endif
 
 #if (BOOT_SUPPORT == 1)
@@ -356,7 +374,8 @@ espat_state_t espAt_pwrOff(espat_radio_t *radio) {
  *
  * @retval: status
  */
-espat_state_t espAt_defineBoot(espat_radio_t *radio, espat_port_t *port, uint32_t pin) {
+espat_state_t espAt_defineBoot(espat_radio_t *radio, espat_port_t *port,
+		uint32_t pin) {
 
 	radio->pinBoot.port = port;
 	radio->pinBoot.pin = pin;
@@ -396,18 +415,18 @@ espat_state_t espAt_enterDownload(espat_radio_t *radio) {
  *
  * @retval: status
  */
-espat_state_t esp32rst(espat_radio_t *radio) {
+espat_state_t espAt_rst(espat_radio_t *radio) {
 
 	if (radio->pinBoot.port != NULL && radio->pinEn.port != NULL) {
-			espAt_writePin(&radio->pinBoot, ESPAT_SET);
-			espAt_delay(100);
-			espAt_writePin(&radio->pinEn, ESPAT_RESET);
-			espAt_delay(100);
-			espAt_writePin(&radio->pinEn, ESPAT_SET);
-			espAt_delay(100);
-			return ESPAT_STATE_OK;
-		} else
-			return ESPAT_STATE_PIN_NOT_DEFINED;
+		espAt_writePin(&radio->pinBoot, ESPAT_SET);
+		espAt_delay(100);
+		espAt_writePin(&radio->pinEn, ESPAT_RESET);
+		espAt_delay(100);
+		espAt_writePin(&radio->pinEn, ESPAT_SET);
+		espAt_delay(100);
+		return ESPAT_STATE_OK;
+	} else
+		return ESPAT_STATE_PIN_NOT_DEFINED;
 }
 #endif
 
