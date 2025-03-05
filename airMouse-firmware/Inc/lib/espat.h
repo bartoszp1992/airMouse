@@ -64,7 +64,8 @@ typedef enum {
 	ESPAT_STATE_ERR = 1,
 	ESPAT_STATE_TIMEOUT = 2,
 	ESPAT_STATE_BUSY = 3,
-	ESPAT_STATE_PIN_NOT_DEFINED = 4
+	ESPAT_STATE_PIN_NOT_DEFINED = 4,
+	ESPAT_STATE_ERROR_DMA_RX_ACTIVE = 5
 } espat_state_t;
 
 typedef enum {
@@ -99,6 +100,7 @@ typedef struct {
 	espat_uartInstance_t espUart;
 	char rxBuffer[RX_BUFFER_SIZE];
 	espat_response_t response;
+	uint8_t flagDmaReceive;
 
 #if (BOOT_SUPPORT == 1)
 	espat_pin_t pinBoot;

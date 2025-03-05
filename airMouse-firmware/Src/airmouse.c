@@ -101,7 +101,7 @@ void airMouseSetup(void) {
 //	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
 //	HAL_Delay(2000);
 
-	espStat = espAt_sendString(&bleRadio, S_BHN, "IMU Pointer Bart's Design");
+	espStat = espAt_sendString(&bleRadio, S_BHN, "IMU Flow");
 	espStat = espAt_getResponse(&bleRadio);
 	HAL_Delay(200);
 

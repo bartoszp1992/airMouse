@@ -62,7 +62,8 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 		return ESPAT_STATE_ERR;
 }
 
-espat_state_t uartReceiveDMA(espat_uartInstance_t *uart, char *data, uint32_t size) {
+espat_state_t uartReceiveDMA(espat_uartInstance_t *uart, char *data,
+		uint32_t size) {
 
 	HAL_StatusTypeDef state;
 
@@ -132,6 +133,8 @@ espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 	radio->espUart.sendTimeout = txTimeout;
 	radio->espUart.receiveTimeout = rxTimeout;
 	memset(radio->rxBuffer, ' ', RX_BUFFER_SIZE);
+	radio->response = ESPAT_RESPONSE_ERROR;
+	radio->flagDmaReceive = 0;
 
 #if (EN_SUPPORT == 1)
 	radio->pinEn.port = NULL;
@@ -315,91 +318,109 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
  */
 espat_state_t espAt_getResponse(espat_radio_t *radio) {
 
-	memset(radio->rxBuffer, ' ', RX_BUFFER_SIZE);
-	espat_state_t state;
+	if (!radio->flagDmaReceive) {
+		memset(radio->rxBuffer, ' ', RX_BUFFER_SIZE);
+		espat_state_t state;
 
-	for (uint32_t actualReceived = 0; actualReceived < RX_BUFFER_SIZE; actualReceived++) {
+		for (uint32_t actualReceived = 0; actualReceived < RX_BUFFER_SIZE;
+				actualReceived++) {
 
-		state = uartReceive(&radio->espUart, &radio->rxBuffer[actualReceived], 1);
+			state = uartReceive(&radio->espUart,
+					&radio->rxBuffer[actualReceived], 1);
 
-		if (state != ESPAT_STATE_OK)
-			return state;
+			if (state != ESPAT_STATE_OK)
+				return state;
 
-		if (radio->rxBuffer[actualReceived] == '\n'
-				&& radio->rxBuffer[actualReceived-1] == '\r' && actualReceived > 1) {
+			if (radio->rxBuffer[actualReceived] == '\n'
+					&& radio->rxBuffer[actualReceived - 1] == '\r'
+					&& actualReceived > 1) {
 
-			uint8_t sizeOk = strlen(AT_OK);
-			uint8_t sizeErr = strlen(AT_ERROR);
-			uint8_t sizeBusy = strlen(AT_BUSY);
-			uint8_t sizeReady = strlen(AT_READY);
+				uint8_t sizeOk = strlen(AT_OK);
+				uint8_t sizeErr = strlen(AT_ERROR);
+				uint8_t sizeBusy = strlen(AT_BUSY);
+				uint8_t sizeReady = strlen(AT_READY);
 
-			if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeOk], AT_OK, sizeOk)
-					== 0) {
-				radio->response = ESPAT_RESPONSE_OK;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1- sizeErr],
-			AT_ERROR, sizeErr) == 0) {
-				radio->response = ESPAT_RESPONSE_ERROR;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBusy],
-			AT_BUSY, sizeBusy) == 0) {
-				radio->response = ESPAT_RESPONSE_BUSY;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeReady],
-			AT_READY, sizeReady) == 0) {
-				radio->response = ESPAT_RESPONSE_READY;
-				break;
+				if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeOk], AT_OK,
+						sizeOk) == 0) {
+					radio->response = ESPAT_RESPONSE_OK;
+					break;
+				} else if (memcmp(
+						&radio->rxBuffer[actualReceived - 1 - sizeErr],
+						AT_ERROR, sizeErr) == 0) {
+					radio->response = ESPAT_RESPONSE_ERROR;
+					break;
+				} else if (memcmp(
+						&radio->rxBuffer[actualReceived - 1 - sizeBusy],
+						AT_BUSY, sizeBusy) == 0) {
+					radio->response = ESPAT_RESPONSE_BUSY;
+					break;
+				} else if (memcmp(
+						&radio->rxBuffer[actualReceived - 1 - sizeReady],
+						AT_READY, sizeReady) == 0) {
+					radio->response = ESPAT_RESPONSE_READY;
+					break;
+				}
+			} else {
+				radio->response = ESPAT_RESPONSE_PARSING_ERROR;
 			}
-		}else{
-			radio->response = ESPAT_RESPONSE_PARSING_ERROR;
 		}
-	}
-	return state;
-}
+		return state;
+	} else
+		return ESPAT_STATE_ERROR_DMA_RX_ACTIVE;
 
+}
 
 espat_state_t espAt_getResponseDMA(espat_radio_t *radio) {
 
-//	memset(radio->rxBuffer, ' ', RX_BUFFER_SIZE);
-	espat_state_t state;
+	if (!radio->flagDmaReceive) {
+		memset(radio->rxBuffer, ' ', RX_BUFFER_SIZE);
+		espat_state_t state;
 
-	for (uint32_t actualReceived = 0; actualReceived < RX_BUFFER_SIZE; actualReceived++) {
+		for (uint32_t actualReceived = 0; actualReceived < RX_BUFFER_SIZE;
+				actualReceived++) {
 
-		state = uartReceive(&radio->espUart, &radio->rxBuffer[actualReceived], 1);
+			state = uartReceiveDMA(&radio->espUart,
+					&radio->rxBuffer[actualReceived], 1);
 
-		if (state != ESPAT_STATE_OK)
-			return state;
+			if (state != ESPAT_STATE_OK)
+				return state;
 
-		if (radio->rxBuffer[actualReceived] == '\n'
-				&& radio->rxBuffer[actualReceived-1] == '\r' && actualReceived > 1) {
+			if (radio->rxBuffer[actualReceived] == '\n'
+					&& radio->rxBuffer[actualReceived - 1] == '\r'
+					&& actualReceived > 1) {
 
-			uint8_t sizeOk = strlen(AT_OK);
-			uint8_t sizeErr = strlen(AT_ERROR);
-			uint8_t sizeBusy = strlen(AT_BUSY);
-			uint8_t sizeReady = strlen(AT_READY);
+				uint8_t sizeOk = strlen(AT_OK);
+				uint8_t sizeErr = strlen(AT_ERROR);
+				uint8_t sizeBusy = strlen(AT_BUSY);
+				uint8_t sizeReady = strlen(AT_READY);
 
-			if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeOk], AT_OK, sizeOk)
-					== 0) {
-				radio->response = ESPAT_RESPONSE_OK;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1- sizeErr],
-			AT_ERROR, sizeErr) == 0) {
-				radio->response = ESPAT_RESPONSE_ERROR;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBusy],
-			AT_BUSY, sizeBusy) == 0) {
-				radio->response = ESPAT_RESPONSE_BUSY;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeReady],
-			AT_READY, sizeReady) == 0) {
-				radio->response = ESPAT_RESPONSE_READY;
-				break;
+				if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeOk], AT_OK,
+						sizeOk) == 0) {
+					radio->response = ESPAT_RESPONSE_OK;
+					break;
+				} else if (memcmp(
+						&radio->rxBuffer[actualReceived - 1 - sizeErr],
+						AT_ERROR, sizeErr) == 0) {
+					radio->response = ESPAT_RESPONSE_ERROR;
+					break;
+				} else if (memcmp(
+						&radio->rxBuffer[actualReceived - 1 - sizeBusy],
+						AT_BUSY, sizeBusy) == 0) {
+					radio->response = ESPAT_RESPONSE_BUSY;
+					break;
+				} else if (memcmp(
+						&radio->rxBuffer[actualReceived - 1 - sizeReady],
+						AT_READY, sizeReady) == 0) {
+					radio->response = ESPAT_RESPONSE_READY;
+					break;
+				}
+			} else {
+				radio->response = ESPAT_RESPONSE_PARSING_ERROR;
 			}
-		}else{
-			radio->response = ESPAT_RESPONSE_PARSING_ERROR;
 		}
-	}
-	return state;
+		return state;
+	} else
+		return ESPAT_STATE_ERROR_DMA_RX_ACTIVE;
 }
 
 #if (EN_SUPPORT == 1)
