@@ -29,7 +29,6 @@ kbd_keyboard_t mouseButtons;
 espat_state_t espStat;
 lsm6ds_state_t sensorStat;
 
-char rxBuffer[25];
 
 volatile int32_t hidAmx = 0;
 volatile int32_t hidAmy = 0;
@@ -86,7 +85,7 @@ void airMouseSetup(void) {
 
 	//_________________________________________RADIO_________________________________________
 
-	espStat = espAt_init(&bleRadio, &huart1, 5, 1500);
+	espStat = espAt_init(&bleRadio, &huart1, 2, 1500);
 	espStat = espAt_defineEn(&bleRadio, ESP_EN_GPIO_Port, ESP_EN_Pin);
 	espStat = espAt_defineBoot(&bleRadio, ESP_BOOT_GPIO_Port, ESP_BOOT_Pin);
 	//enter download mode or reset ESP
@@ -95,19 +94,19 @@ void airMouseSetup(void) {
 
 	//turn on
 	espStat = espAt_pwrOn(&bleRadio);
-	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
-
+	espStat = espAt_getResponse(&bleRadio);
+	HAL_Delay(200);
 
 //	espStat = espAt_sendCommand(&bleRadio, G_RST);
 //	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
 //	HAL_Delay(2000);
 
-	espStat = espAt_sendString(&bleRadio, S_BHN, "bartsHID4");
-	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
+	espStat = espAt_sendString(&bleRadio, S_BHN, "IMU Pointer Bart's Design");
+	espStat = espAt_getResponse(&bleRadio);
 	HAL_Delay(200);
 
 	espStat = espAt_sendParams(&bleRadio, P_BHI, 1, 1);
-	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
+	espStat = espAt_getResponse(&bleRadio);
 	HAL_Delay(200);
 
 	//change baudrate
@@ -127,6 +126,7 @@ void airMouseSetup(void) {
 
 	sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_VHIGH);
 	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_208_HZ);
+//	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_12_5_HZ);
 	sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_2000DPS);
 	sensorStat = lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
 
@@ -184,6 +184,10 @@ void airMouseProcess(void) {
 				| !HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) << 4;
 
 		espAt_sendParams(&bleRadio, P_BHM, 4, mouseButtonState, hidAmx, hidAmz, 0);
+//		espAt_getResponse(&bleRadio);
+//		if(response == ESPAT_RESPONSE_BUSY){
+//			hidAmz++;
+//		}
 
 	}
 
