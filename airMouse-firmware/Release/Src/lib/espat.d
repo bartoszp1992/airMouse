@@ -33,7 +33,8 @@ Src/lib/espat.o: ../Src/lib/espat.c ../Inc/lib/espat.h ../Inc/usart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
+ ../Inc/gpio.h
 ../Inc/lib/espat.h:
 ../Inc/usart.h:
 ../Inc/main.h:
@@ -72,3 +73,4 @@ Src/lib/espat.o: ../Src/lib/espat.c ../Inc/lib/espat.h ../Inc/usart.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
+../Inc/gpio.h:

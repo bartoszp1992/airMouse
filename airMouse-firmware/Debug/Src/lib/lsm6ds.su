@@ -14,5 +14,8 @@
 ../Src/lib/lsm6ds.c:274:16:lsm6ds_updateTemp	40	static
 ../Src/lib/lsm6ds.c:301:16:lsm6ds_updateXL	48	static
 ../Src/lib/lsm6ds.c:332:16:lsm6ds_updateGR	48	static
-../Src/lib/lsm6ds.c:364:6:lsm6ds_flagDataReadySet	16	static
-../Src/lib/lsm6ds.c:374:15:lsm6ds_flagDataReadyRead	16	static
+../Src/lib/lsm6ds.c:362:9:lsm6ds_readTemperature	16	static
+../Src/lib/lsm6ds.c:373:9:lsm6ds_readXL	16	static
+../Src/lib/lsm6ds.c:384:9:lsm6ds_readGR	16	static
+../Src/lib/lsm6ds.c:396:6:lsm6ds_flagDataReadySet	16	static
+../Src/lib/lsm6ds.c:406:15:lsm6ds_flagDataReadyRead	16	static

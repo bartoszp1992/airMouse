@@ -51,11 +51,16 @@ typedef struct{
 	uint8_t numberOfKeys;
 	uint8_t actualScannedRow;
 
+	/*
+	 * stores keyboard layout as char 2-dimensional array
+	 */
+	char *layout;
+
 	//for slow-down scanning due to filters
 	uint32_t prescaler;
 	uint32_t masterTimer;
 
-	/*state of pressed button. If buttons are pulled up
+	/*state of pressed button. If buttons are pulled up:
 	 *-> depressed button are KBD_SET
 	 *-> pressed button are KBD_RESET
 	 *-> actual scanning row will be set to KBD_RESET

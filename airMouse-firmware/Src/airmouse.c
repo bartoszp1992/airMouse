@@ -8,37 +8,44 @@
  *      DONE esp power and boot functions -> espat
  *      DONE dataReady flag -> lsm6ds
  *      receiving data from esp -> espat
- *      HID reports sending only if connected(depending on the receiving data)
+ *      DONE on moving, not connected: HID reports sending only if connected(depending on the receiving data)
  *      accelerometer used to correct cursor movement(simple or vector)
  *      presicion move when the back of the hand is placed upwards
  *      sending keyboard data
  *      sending mouse button data
  *      leds handling
  *      low battery alert
+ *      low power mode
+ *      keyboard layout
+ *
+ *      name propositions:
+ *      IMU		flow
+ *      neuro	glide
+ *      Aero	sync
+ *      Warp	pointer
+ *      Void	hover
+ *      Omni	grip
+ *      hyper	vortex
+ *      hover
+
  *
  */
 
 #include "airmouse.h"
+
+extern void SystemClock_Config(void);
 
 //PV
 espat_radio_t bleRadio;
 lsm6ds_sensor_t mems;
 kbd_keyboard_t qwerty;
 kbd_keyboard_t mouseButtons;
+cursor_t cursor;
 
 espat_state_t espStat;
 lsm6ds_state_t sensorStat;
 
-
-volatile int32_t hidAmx = 0;
-volatile int32_t hidAmy = 0;
-volatile int32_t hidAmz = 0;
-
-int32_t hidSensitivity = 100; //10000 are 1
-int32_t hidAcceleration = 140; //100- no acceleration
-
 uint8_t mouseButtonState = 0;
-int32_t maxVal = 100;
 
 volatile uint32_t ledCounter = 0;
 volatile uint32_t onCounter = 0;
@@ -81,8 +88,6 @@ void airMouseSetup(void) {
 	KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,
 	KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);
 
-
-
 	//_________________________________________RADIO_________________________________________
 
 	espStat = espAt_init(&bleRadio, &huart1, 2, 1500);
@@ -101,7 +106,7 @@ void airMouseSetup(void) {
 //	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
 //	HAL_Delay(2000);
 
-	espStat = espAt_sendString(&bleRadio, S_BHN, "IMU Flow");
+	espStat = espAt_sendString(&bleRadio, S_BHN, "neuroGlide");
 	espStat = espAt_getResponse(&bleRadio);
 	HAL_Delay(200);
 
@@ -110,71 +115,44 @@ void airMouseSetup(void) {
 	HAL_Delay(200);
 
 	//change baudrate
-	espAt_sendParams(&bleRadio, P_UC, 5, 3000000, 8, 1, 0, 0);
+	espAt_sendParams(&bleRadio, P_UC, 5, 2000000, 8, 1, 0, 0);
 	HAL_Delay(200);
-	HAL_UART_ChangeSpeed(&huart1, 3000000);
-
+	HAL_UART_ChangeSpeed(&huart1, 2000000);
 
 	//_________________________________________IMU SENSOR_________________________________________
 
-	sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1,
-			100, 100);
+	sensorStat = lsm6ds_init(&mems, LSM6DS_ADDR_SA0_L, &hi2c1, 100, 100);
 	sensorStat = lsm6ds_reset(&mems);
 
 	//	sensorStat = lsm6ds_setXLOutputDataRate(&mems, LSM6DS_ODR_XL_12_5_HZ);
 	//	sensorStat = lsm6ds_setXLFullScale(&mems, LSM6DS_FS_XL_16G);
 
-	sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_VHIGH);
-	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_208_HZ);
-//	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_12_5_HZ);
-	sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_2000DPS);
+	sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_LOW);
+	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_416_HZ);
+	sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_1000DPS);
 	sensorStat = lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
+
+	//_________________________________________CUROSR_________________________________________
+	cursor_init(&cursor);
+	cursor_setReverse(&cursor, CURSOR_AXIS_X, CURSOR_REVERSED);
+	cursor_setReverse(&cursor, CURSOR_AXIS_Y, CURSOR_NOT_REVERSED);
+	cursor_setReverse(&cursor, CURSOR_AXIS_Z, CURSOR_NOT_REVERSED);
+
+	cursor_setSensitivity(&cursor, 15);
+	cursor_setAcceleration(&cursor, 130, CURSOR_ACCELERATION_MULTIPLY);
+	cursor_setMax(&cursor, 40);
 
 }
 void airMouseProcess(void) {
+
+
 	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
 
 		sensorStat = lsm6ds_updateGR(&mems);
 
-		//sensitivity
-		hidAmx = ((int32_t) mems.outGR.x * hidSensitivity) / 10000;
-		hidAmz = ((int32_t) mems.outGR.z * hidSensitivity) / 10000;
-
-		//acceleration
-
-		uint8_t isNegative;
-
-		if (hidAmx < 0)
-			isNegative = 1;
-		else
-			isNegative = 0;
-
-		hidAmx = pow((double) abs(hidAmx), ((double) hidAcceleration) / 100);
-		if (isNegative)
-			hidAmx = -hidAmx;
-
-		if (hidAmz < 0)
-			isNegative = 1;
-		else
-			isNegative = 0;
-		hidAmz = pow((double) abs(hidAmz), ((double) hidAcceleration) / 100);
-		if (isNegative)
-			hidAmz = -hidAmz;
-
-		//to high value secure
-		if (hidAmx > maxVal)
-			hidAmx = maxVal;
-		if (hidAmx < -maxVal)
-			hidAmx = -maxVal;
-
-		if (hidAmz > maxVal)
-			hidAmz = maxVal;
-		if (hidAmz < -maxVal)
-			hidAmz = -maxVal;
-
-		//revert sign
-		//			amz *= -1;
-		hidAmx *= -1;
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X), CURSOR_AXIS_X);
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Y), CURSOR_AXIS_Y);
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z), CURSOR_AXIS_Z);
 
 		mouseButtonState = 0;
 		mouseButtonState = !HAL_GPIO_ReadPin(MUS_LB_GPIO_Port, MUS_LB_Pin) << 0
@@ -183,11 +161,17 @@ void airMouseProcess(void) {
 				| !HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin) << 3
 				| !HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) << 4;
 
-		espAt_sendParams(&bleRadio, P_BHM, 4, mouseButtonState, hidAmx, hidAmz, 0);
-//		espAt_getResponse(&bleRadio);
-//		if(response == ESPAT_RESPONSE_BUSY){
-//			hidAmz++;
-//		}
+		int32_t x = cursor_output(&cursor, CURSOR_AXIS_X);
+//		int32_t y = cursor_output(&cursor, CURSOR_Y);
+		int32_t z = cursor_output(&cursor, CURSOR_AXIS_Z);
+
+		if (mouseButtonState != 0 || abs(x) > 0 || abs(z) > 0) {
+			espAt_sendParams(&bleRadio, P_BHM, 4, mouseButtonState, x, z, 0);
+			if (qwerty.stateMatrix[0]) {
+				espAt_getResponse(&bleRadio);
+				sensorStat++;
+			}
+		}
 
 	}
 
@@ -214,12 +198,27 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
 	}
 }
 
-
 void ledOn(void) {
 	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
 }
 
 void ledOff(void) {
 	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
+}
+
+void sleep(void){
+
+	//enter sleep
+	//peripheral
+
+
+	//MCU
+	HAL_SuspendTick();
+	HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
+
+	//wake up
+	HAL_ResumeTick();
+	SystemClock_Config();
+
 }
 

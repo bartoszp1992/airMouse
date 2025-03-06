@@ -1,6 +1,6 @@
-../Src/lib/keyboard.c:10:16:readPin	1
-../Src/lib/keyboard.c:17:6:writePin	2
-../Src/lib/keyboard.c:34:13:kbd_init	5
-../Src/lib/keyboard.c:79:13:kbd_set_columns	2
-../Src/lib/keyboard.c:102:13:kbd_set_rows	2
-../Src/lib/keyboard.c:124:6:kbd_scanning	5
+../Src/lib/keyboard.c:10:16:kbd_readPin	1
+../Src/lib/keyboard.c:17:6:kbd_writePin	2
+../Src/lib/keyboard.c:34:13:kbd_init	7
+../Src/lib/keyboard.c:82:13:kbd_set_columns	2
+../Src/lib/keyboard.c:106:13:kbd_set_rows	3
+../Src/lib/keyboard.c:131:6:kbd_scanning	6

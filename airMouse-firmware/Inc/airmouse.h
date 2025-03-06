@@ -13,6 +13,7 @@
 #include <math.h>
 #include "keyboard.h"
 #include <stdint.h>
+#include "cursor.h"
 
 
 void airMouseSetup(void);

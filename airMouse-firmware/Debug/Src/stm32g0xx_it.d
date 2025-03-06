@@ -36,7 +36,8 @@ Src/stm32g0xx_it.o: ../Src/stm32g0xx_it.c ../Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
  ../Inc/stm32g0xx_it.h ../Inc/airmouse.h ../Inc/lib/espat.h \
  ../Inc/usart.h ../Inc/main.h ../Inc/gpio.h ../Inc/lib/lsm6ds.h \
- ../Inc/i2c.h ../Inc/lib/lsm6ds_reg.h ../Inc/lib/keyboard.h
+ ../Inc/i2c.h ../Inc/lib/lsm6ds_reg.h ../Inc/lib/keyboard.h \
+ ../Inc/lib/cursor.h
 ../Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Inc/stm32g0xx_hal_conf.h:
@@ -83,3 +84,4 @@ Src/stm32g0xx_it.o: ../Src/stm32g0xx_it.c ../Inc/main.h \
 ../Inc/i2c.h:
 ../Inc/lib/lsm6ds_reg.h:
 ../Inc/lib/keyboard.h:
+../Inc/lib/cursor.h:

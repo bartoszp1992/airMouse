@@ -1,0 +1,7 @@
+../Src/lib/cursor.c:19:6:cursor_init	16	static
+../Src/lib/cursor.c:42:6:cursor_writeInput	24	static
+../Src/lib/cursor.c:53:6:cursor_setSensitivity	16	static
+../Src/lib/cursor.c:65:6:cursor_setAcceleration	24	static
+../Src/lib/cursor.c:76:6:cursor_setMax	16	static
+../Src/lib/cursor.c:86:6:cursor_setReverse	16	static
+../Src/lib/cursor.c:98:9:cursor_output	24	static

@@ -65,6 +65,14 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 		return KBD_NOT_ENOUGH_MEMORY;
 	}
 
+	keyboard->layout = malloc(keyboard->numberOfKeys * sizeof(char));
+	if(keyboard->layout == NULL){
+		free(keyboard->columns);
+		free(keyboard->rows);
+		free(keyboard->stateMatrix);
+		return KBD_NOT_ENOUGH_MEMORY;
+	}
+
 	memset(keyboard->stateMatrix, 0, rows * sizeof(uint32_t));
 
 	keyboard->actualScannedRow = 0;

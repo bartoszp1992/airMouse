@@ -29,6 +29,7 @@
 "./Src/sysmem.o"
 "./Src/system_stm32g0xx.o"
 "./Src/usart.o"
+"./Src/lib/cursor.o"
 "./Src/lib/espat.o"
 "./Src/lib/keyboard.o"
 "./Src/lib/lsm6ds.o"

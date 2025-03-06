@@ -1,0 +1,3 @@
+../Src/lib/cursor.c:15:6:cursor_init	0	static
+../Src/lib/cursor.c:27:6:cursor_input	8	static
+../Src/lib/cursor.c:37:9:cursor_output	40	static

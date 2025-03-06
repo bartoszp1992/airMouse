@@ -93,8 +93,8 @@ lsm6ds_state_t lsm6ds_init(lsm6ds_sensor_t *sensor, uint16_t devAddr,
 	sensor->lsm6dsI2c.receiveTimeout = rxTimeout;
 	sensor->lsm6dsI2c.sendTimeout = txTimeout;
 
-	memset(&sensor->outGR, 0, sizeof(sensor->outGR));
-	memset(&sensor->outXL, 0, sizeof(sensor->outXL));
+	memset(&sensor->outputGR, 0, sizeof(sensor->outputGR));
+	memset(&sensor->outputXL, 0, sizeof(sensor->outputXL));
 	sensor->outTemperature = 0;
 
 #if INT_SUPPORT == 1
@@ -305,7 +305,7 @@ lsm6ds_state_t lsm6ds_updateXL(lsm6ds_sensor_t *sensor){
 	//array to value converter
 	union{
 		uint8_t raw[6];
-		int16_t separated[3];
+		int16_t combined[3];
 	}outputData;
 
 	memset(&outputData, 0, sizeof(outputData));
@@ -315,9 +315,9 @@ lsm6ds_state_t lsm6ds_updateXL(lsm6ds_sensor_t *sensor){
 	if(status != LSM6DS_STATE_OK)
 		return status;
 
-	sensor->outXL.x = outputData.separated[0];
-	sensor->outXL.y = outputData.separated[1];
-	sensor->outXL.z = outputData.separated[2];
+	sensor->outputXL[LSM6DS_AXIS_X] = outputData.combined[0];
+	sensor->outputXL[LSM6DS_AXIS_Y] = outputData.combined[1];
+	sensor->outputXL[LSM6DS_AXIS_Z] = outputData.combined[2];
 
 	return status;
 
@@ -336,7 +336,7 @@ lsm6ds_state_t lsm6ds_updateGR(lsm6ds_sensor_t *sensor){
 	//array to value converter
 	union{
 		uint8_t raw[6];
-		int16_t separated[3];
+		int16_t combined[3];
 	}outputData;
 
 	memset(&outputData, 0, sizeof(outputData));
@@ -346,11 +346,43 @@ lsm6ds_state_t lsm6ds_updateGR(lsm6ds_sensor_t *sensor){
 	if(status != LSM6DS_STATE_OK)
 		return status;
 
-	sensor->outGR.x = outputData.separated[0];
-	sensor->outGR.y = outputData.separated[1];
-	sensor->outGR.z = outputData.separated[2];
+	sensor->outputGR[LSM6DS_AXIS_X] = outputData.combined[0];
+	sensor->outputGR[LSM6DS_AXIS_Y] = outputData.combined[1];
+	sensor->outputGR[LSM6DS_AXIS_Z] = outputData.combined[2];
 
 	return status;
+}
+
+/*
+ * read temperature data. remember to run lsm6ds_updateTemp() first!
+ * @param: sensor
+ *
+ * @retval: temperature data in centi Celsius degress - e.g. 2405 for 24,05 degress.
+ */
+int16_t lsm6ds_readTemperature(lsm6ds_sensor_t *sensor){
+	return sensor->outTemperature;
+}
+
+/*
+ * read accelerometer data. remember to run lsm6ds_updateXL() first!
+ * @param: sensor
+ * @param: axis- LSM6DS_AXIS_X/Y/Z
+ *
+ * @retval: accelerometer data
+ */
+int16_t lsm6ds_readXL(lsm6ds_sensor_t *sensor, lsm6ds_axis_t axis){
+	return sensor->outputXL[axis];
+}
+
+/*
+ * read gyroscope data. remember to run lsm6ds_updateGR() first!
+ * @param: sensor
+ * @param: axis- LSM6DS_AXIS_X/Y/Z
+ *
+ * @retval: gyroscope data
+ */
+int16_t lsm6ds_readGR(lsm6ds_sensor_t *sensor, lsm6ds_axis_t axis){
+	return sensor->outputGR[axis];
 }
 
 #if INT_SUPPORT == 1

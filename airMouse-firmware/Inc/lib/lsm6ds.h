@@ -50,18 +50,19 @@ typedef struct {
 } lsm6ds_serialInstance_t;
 
 //sensor output struct
-typedef struct{
-	int16_t x;
-	int16_t y;
-	int16_t z;
-} lsm6ds_output_t;
+
+typedef enum {
+	LSM6DS_AXIS_X = 0, LSM6DS_AXIS_Y = 1, LSM6DS_AXIS_Z = 2
+} lsm6ds_axis_t;
 
 //sensor struct
 typedef struct {
 	lsm6ds_serialInstance_t lsm6dsI2c;
 	uint16_t deviceAddr;
-	lsm6ds_output_t outXL;
-	lsm6ds_output_t outGR;
+//	lsm6ds_output_t outXL;
+//	lsm6ds_output_t outGR;
+	int16_t outputXL[3];
+	int16_t outputGR[3];
 	int16_t outTemperature; //temperature in centi Celsius degress - e.g. 2405 for 24,05 degress.
 
 #if (INT_SUPPORT == 1)
@@ -87,6 +88,11 @@ lsm6ds_state_t lsm6ds_newDataAvailableCheck(lsm6ds_sensor_t *sensor,
 lsm6ds_state_t lsm6ds_updateTemp(lsm6ds_sensor_t *sensor);
 lsm6ds_state_t lsm6ds_updateXL(lsm6ds_sensor_t *sensor);
 lsm6ds_state_t lsm6ds_updateGR(lsm6ds_sensor_t *sensor);
+
+int16_t lsm6ds_readTemperature(lsm6ds_sensor_t *sensor);
+int16_t lsm6ds_readXL(lsm6ds_sensor_t *sensor, lsm6ds_axis_t axis);
+int16_t lsm6ds_readGR(lsm6ds_sensor_t *sensor, lsm6ds_axis_t axis);
+
 
 #if INT_SUPPORT == 1
 void lsm6ds_flagDataReadySet(lsm6ds_sensor_t *sensor);
