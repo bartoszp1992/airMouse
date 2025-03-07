@@ -3,6 +3,11 @@
  *
  *  Created on: Mar 1, 2025
  *      Author: bartosz
+ *
+ *      this library allows to create specific keyboard.
+ *      You can read pressed buttons reading stateMatrix field from keyboard struct.
+ *      Each element of stateMatrix array stores bit states of pressed keys in whole row
+ *      One stateMatrix element->one row
  */
 
 #include "keyboard.h"
@@ -87,7 +92,7 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
  *
  * @retval: status
  */
-kbd_state_t kbd_set_columns(kbd_keyboard_t *keyboard, ...) {
+kbd_state_t kbd_setColumns(kbd_keyboard_t *keyboard, ...) {
 
 	va_list ap;
 	va_start(ap, keyboard);
@@ -111,7 +116,7 @@ kbd_state_t kbd_set_columns(kbd_keyboard_t *keyboard, ...) {
  *
  * @retval: status
  */
-kbd_state_t kbd_set_rows(kbd_keyboard_t *keyboard, ...) {
+kbd_state_t kbd_setRows(kbd_keyboard_t *keyboard, ...) {
 
 	if(keyboard->numberOfRows <= 1)
 		return KBD_NOT_IN_SCANNING_MODE;
@@ -127,6 +132,49 @@ kbd_state_t kbd_set_rows(kbd_keyboard_t *keyboard, ...) {
 	va_end(ap);
 
 	return KBD_OK;
+
+}
+
+
+///*
+// * this function allows you to assign one byte to ech keyboard key.
+// * @param: keyboard
+// * @params: 1byte values of each keyboard button
+// *
+// * @retval: status
+// */
+//kbd_state_t kbd_defineLayout(kbd_keyboard_t *keyboard, ...){
+//
+//	keyboard->layout = malloc(keyboard->numberOfKeys);
+//	if(keyboard->layout == NULL)
+//		return KBD_NOT_ENOUGH_MEMORY;
+//
+//	va_list ap;
+//	va_start(ap, keyboard);
+//
+//	for(uint16_t i = 0; i<keyboard->numberOfKeys; i++){
+//		keyboard->layout[i] = (uint8_t)va_arg(ap, uint32_t);
+//	}
+//
+//	va_end(ap);
+//	return KBD_OK;
+//
+//}
+
+/*
+ * read keyboard row as one number
+ * one bit are one key
+ *
+ * @param: keyboard
+ * @param: row to read
+ *
+ * @retval: row state
+ */
+uint32_t kbd_readRow(kbd_keyboard_t *keyboard, uint8_t row){
+
+	if(row>=keyboard->numberOfRows) // >= becouse if numberofRows are 3, max row can be 2(0, 1, 2)
+		return KBD_ERR;
+	return keyboard->stateMatrix[row];
 
 }
 

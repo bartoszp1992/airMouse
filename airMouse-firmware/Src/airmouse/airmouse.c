@@ -45,18 +45,13 @@ cursor_t cursor;
 espat_state_t espStat;
 lsm6ds_state_t sensorStat;
 
-uint8_t mouseButtonState = 0;
-
-volatile uint32_t ledCounter = 0;
-volatile uint32_t onCounter = 0;
-
 void airMouseSetup(void) {
 
 	//_________________________________________KEYS_________________________________________
 
 	//init mouse buttons
 	kbd_init(&mouseButtons, 10, 1, 10, KBD_RESET);
-	kbd_set_columns(&mouseButtons,
+	kbd_setColumns(&mouseButtons,
 	MUS_LB_GPIO_Port, MUS_LB_Pin,
 	MUS_RB_GPIO_Port, MUS_RB_Pin,
 	MUS_MB_GPIO_Port, MUS_MB_Pin,
@@ -70,7 +65,7 @@ void airMouseSetup(void) {
 
 	//init qwerty
 	kbd_init(&qwerty, 10, 5, 10, KBD_RESET);
-	kbd_set_columns(&qwerty,
+	kbd_setColumns(&qwerty,
 	KBD_COL1_GPIO_Port, KBD_COL1_Pin,
 	KBD_COL2_GPIO_Port, KBD_COL2_Pin,
 	KBD_COL3_GPIO_Port, KBD_COL3_Pin,
@@ -81,7 +76,7 @@ void airMouseSetup(void) {
 	KBD_COL8_GPIO_Port, KBD_COL8_Pin,
 	KBD_COL9_GPIO_Port, KBD_COL9_Pin,
 	KBD_COL10_GPIO_Port, KBD_COL10_Pin);
-	kbd_set_rows(&qwerty,
+	kbd_setRows(&qwerty,
 	KBD_ROW1_GPIO_Port, KBD_ROW1_Pin,
 	KBD_ROW2_GPIO_Port, KBD_ROW2_Pin,
 	KBD_ROW3_GPIO_Port, KBD_ROW3_Pin,
@@ -115,9 +110,9 @@ void airMouseSetup(void) {
 	HAL_Delay(200);
 
 	//change baudrate
-	espAt_sendParams(&bleRadio, P_UC, 5, 2000000, 8, 1, 0, 0);
+	espAt_sendParams(&bleRadio, P_UC, 5, BAUDRATE_FAST, 8, 1, 0, 0);
 	HAL_Delay(200);
-	HAL_UART_ChangeSpeed(&huart1, 2000000);
+	HAL_UART_ChangeSpeed(&huart1, BAUDRATE_FAST);
 
 	//_________________________________________IMU SENSOR_________________________________________
 
@@ -129,7 +124,7 @@ void airMouseSetup(void) {
 
 	sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_LOW);
 	sensorStat = lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_416_HZ);
-	sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_1000DPS);
+	sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_500DPS);
 	sensorStat = lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
 
 	//_________________________________________CUROSR_________________________________________
@@ -138,87 +133,68 @@ void airMouseSetup(void) {
 	cursor_setReverse(&cursor, CURSOR_AXIS_Y, CURSOR_NOT_REVERSED);
 	cursor_setReverse(&cursor, CURSOR_AXIS_Z, CURSOR_NOT_REVERSED);
 
-	cursor_setSensitivity(&cursor, 15);
-	cursor_setAcceleration(&cursor, 130, CURSOR_ACCELERATION_MULTIPLY);
+	cursor_setSensitivity(&cursor, 20);
+	cursor_setAcceleration(&cursor, 120, CURSOR_ACCELERATION_MULTIPLY);
 	cursor_setMax(&cursor, 40);
 
 }
 void airMouseProcess(void) {
 
-
 	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
 
+		//update gyro data
 		sensorStat = lsm6ds_updateGR(&mems);
 
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X), CURSOR_AXIS_X);
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Y), CURSOR_AXIS_Y);
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z), CURSOR_AXIS_Z);
+		//send gyro data to cursor lib
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X),
+				CURSOR_AXIS_X);
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Y),
+				CURSOR_AXIS_Y);
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z),
+				CURSOR_AXIS_Z);
 
-		mouseButtonState = 0;
-		mouseButtonState = !HAL_GPIO_ReadPin(MUS_LB_GPIO_Port, MUS_LB_Pin) << 0
-				| !HAL_GPIO_ReadPin(MUS_RB_GPIO_Port, MUS_RB_Pin) << 1
-				| !HAL_GPIO_ReadPin(MUS_MB_GPIO_Port, MUS_MB_Pin) << 2
-				| !HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin) << 3
-				| !HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) << 4;
-
+		//read mouse movement from cursor lib
 		int32_t x = cursor_output(&cursor, CURSOR_AXIS_X);
-//		int32_t y = cursor_output(&cursor, CURSOR_Y);
 		int32_t z = cursor_output(&cursor, CURSOR_AXIS_Z);
 
-		if (mouseButtonState != 0 || abs(x) > 0 || abs(z) > 0) {
-			espAt_sendParams(&bleRadio, P_BHM, 4, mouseButtonState, x, z, 0);
-			if (qwerty.stateMatrix[0]) {
-				espAt_getResponse(&bleRadio);
-				sensorStat++;
-			}
+		//read mouse buttons
+		amKeys_readMouse();
+
+		//send mouse report
+		if (amKeys_reportMouseButton != 0 || abs(x) > 0 || abs(z) > 0) {
+			espAt_sendParams(&bleRadio, P_BHM, 4, amKeys_reportMouseButton, x,
+					z, 0);
 		}
 
-	}
+		//send keybaord report
 
-}
-
-void airMouseTick(void) {
-	ledCounter++;
-	onCounter++;
-	if (ledCounter % 2000 == 0) {
-		HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, 1);
-		onCounter = 0;
-	}
-
-	if (onCounter > 5)
-		HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, 0);
-
-	kbd_scanning(&qwerty);
-	kbd_scanning(&mouseButtons);
-}
-
-void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
-	if (GPIO_Pin == GYRO_INT_Pin) {
-		lsm6ds_flagDataReadySet(&mems);
 	}
 }
+/*
+ UNUSED CODE
 
-void ledOn(void) {
-	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
-}
-
-void ledOff(void) {
-	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
-}
-
-void sleep(void){
-
-	//enter sleep
-	//peripheral
+ 	kbd_defineLayout(&mouseButtons,
+	HID_MOUSE_MASK_L,
+	HID_MOUSE_MASK_R,
+	HID_MOUSE_MASK_M,
+	HID_MOUSE_MASK_FWD,
+	HID_MOUSE_MASK_BCK, HID_SPECIAL_WHEELUP, HID_SPECIAL_WHEELDN,
+			HID_SPECIAL_DPI, HID_SPECIAL_HOME, HID_SPECIAL_PRC);
 
 
-	//MCU
-	HAL_SuspendTick();
-	HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
+				kbd_defineLayout(&qwerty,
+	HID_KEY_1, HID_KEY_2, HID_KEY_3, HID_KEY_4, HID_KEY_5, HID_KEY_6, HID_KEY_7,
+	HID_KEY_8, HID_KEY_9, HID_KEY_0,
+	HID_KEY_Q, HID_KEY_W, HID_KEY_E, HID_KEY_R, HID_KEY_T, HID_KEY_Y,
+	HID_KEY_U, HID_KEY_I, HID_KEY_O, HID_KEY_P,
+	HID_KEY_A, HID_KEY_S, HID_KEY_D, HID_KEY_F, HID_KEY_G, HID_KEY_H,
+	HID_KEY_J, HID_KEY_K, HID_KEY_L, HID_KEY_ENTER,
+	HID_MOD_MASK_LSHIFT, HID_KEY_Z, HID_KEY_X, HID_KEY_C, HID_KEY_V,
+	HID_KEY_B, HID_KEY_N, HID_KEY_M, HID_MOD_MASK_RSHIFT, HID_KEY_UP,
+	HID_MOD_MASK_LCTRL, HID_SPECIAL_FN, HID_MOD_MASK_LGUI, HID_MOD_MASK_LALT,
+	HID_KEY_SPACE, HID_MOD_MASK_RALT, HID_KEY_LEFT, HID_KEY_DOWN,
+	HID_KEY_RIGHT);
 
-	//wake up
-	HAL_ResumeTick();
-	SystemClock_Config();
 
-}
+ */
 

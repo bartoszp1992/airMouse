@@ -1,5 +1,5 @@
-Src/airmouse.o: ../Src/airmouse.c ../Inc/airmouse.h ../Inc/lib/espat.h \
- ../Inc/usart.h ../Inc/main.h \
+Src/airmouse/am_keys.o: ../Src/airmouse/am_keys.c \
+ ../Inc/airmouse/am_keys.h ../Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
@@ -35,11 +35,8 @@ Src/airmouse.o: ../Src/airmouse.c ../Inc/airmouse.h ../Inc/lib/espat.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- ../Inc/gpio.h ../Inc/lib/lsm6ds.h ../Inc/i2c.h ../Inc/lib/lsm6ds_reg.h \
- ../Inc/lib/keyboard.h ../Inc/lib/cursor.h
-../Inc/airmouse.h:
-../Inc/lib/espat.h:
-../Inc/usart.h:
+ ../Inc/lib/hidcodes.h ../Inc/lib/keyboard.h ../Inc/gpio.h ../Inc/main.h
+../Inc/airmouse/am_keys.h:
 ../Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Inc/stm32g0xx_hal_conf.h:
@@ -76,9 +73,7 @@ Src/airmouse.o: ../Src/airmouse.c ../Inc/airmouse.h ../Inc/lib/espat.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
-../Inc/gpio.h:
-../Inc/lib/lsm6ds.h:
-../Inc/i2c.h:
-../Inc/lib/lsm6ds_reg.h:
+../Inc/lib/hidcodes.h:
 ../Inc/lib/keyboard.h:
-../Inc/lib/cursor.h:
+../Inc/gpio.h:
+../Inc/main.h:

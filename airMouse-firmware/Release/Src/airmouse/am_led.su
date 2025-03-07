@@ -1,0 +1,2 @@
+../Src/airmouse/am_led.c:11:6:ledOn	8	static
+../Src/airmouse/am_led.c:15:6:ledOff	8	static

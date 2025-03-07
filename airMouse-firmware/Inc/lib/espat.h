@@ -58,6 +58,7 @@ typedef enum {
 #define P_BHM "BLEHIDMUS"	//send mouse data (keys, x, y, wheel)
 #define S_BHN "BLEHIDNAME"
 #define S_BN "BLENAME"
+#define P_BHK "BLEHIDKEY" //send keyboard data(mod, k1, k2, k3, k4, k5, k6)
 
 typedef enum {
 	ESPAT_STATE_OK = 0,
