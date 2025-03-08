@@ -43,6 +43,7 @@ kbd_keyboard_t mouseButtons;
 cursor_t cursor;
 
 espat_state_t espStat;
+espat_response_t espResponse;
 lsm6ds_state_t sensorStat;
 
 void airMouseSetup(void) {
@@ -94,20 +95,16 @@ void airMouseSetup(void) {
 
 	//turn on
 	espStat = espAt_pwrOn(&bleRadio);
-	espStat = espAt_getResponse(&bleRadio);
-	HAL_Delay(200);
-
-//	espStat = espAt_sendCommand(&bleRadio, G_RST);
-//	espStat = espAt_receive(&bleRadio, rxBuffer, sizeof(rxBuffer));
-//	HAL_Delay(2000);
+	espStat = espAt_downloadResponse(&bleRadio);
+	espResponse = espAt_returnResponseStatus(&bleRadio);
 
 	espStat = espAt_sendString(&bleRadio, S_BHN, "neuroGlide");
-	espStat = espAt_getResponse(&bleRadio);
-	HAL_Delay(200);
+	espStat = espAt_downloadResponse(&bleRadio);
+	espResponse = espAt_returnResponseStatus(&bleRadio);
 
 	espStat = espAt_sendParams(&bleRadio, P_BHI, 1, 1);
-	espStat = espAt_getResponse(&bleRadio);
-	HAL_Delay(200);
+	espStat = espAt_downloadResponse(&bleRadio);
+	espResponse = espAt_returnResponseStatus(&bleRadio);
 
 	//change baudrate
 	espAt_sendParams(&bleRadio, P_UC, 5, BAUDRATE_FAST, 8, 1, 0, 0);

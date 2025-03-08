@@ -46,6 +46,9 @@ typedef enum {
 #define AT_READY "ready"
 
 //______________________________________________COMMANDS______________________________________________
+//P- PARAM- sending some data
+//S- STRING- sending string
+//G- GENERIC- just command, without sending data, like reset.
 //general
 #define G_RST "RST"
 
@@ -59,6 +62,7 @@ typedef enum {
 #define S_BHN "BLEHIDNAME"
 #define S_BN "BLENAME"
 #define P_BHK "BLEHIDKEY" //send keyboard data(mod, k1, k2, k3, k4, k5, k6)
+#define P_BCP "BLECONNPARAM"
 
 typedef enum {
 	ESPAT_STATE_OK = 0,
@@ -100,8 +104,7 @@ typedef struct {
 typedef struct {
 	espat_uartInstance_t espUart;
 	char rxBuffer[RX_BUFFER_SIZE];
-	espat_response_t response;
-	uint8_t flagDmaReceive;
+	espat_response_t response; //response for AT command
 
 #if (BOOT_SUPPORT == 1)
 	espat_pin_t pinBoot;
@@ -118,9 +121,11 @@ espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 espat_state_t espAt_sendCommand(espat_radio_t *radio, char *command);
 espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
 		uint16_t paramCount, ...);
+espat_state_t espAt_sendQuestion(espat_radio_t *radio, char *command);
 espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 		char *string);
-espat_state_t espAt_getResponse(espat_radio_t *radio);
+espat_state_t espAt_downloadResponse(espat_radio_t *radio);
+espat_response_t espAt_returnResponseStatus(espat_radio_t *radio);
 
 #if (EN_SUPPORT == 1)
 espat_state_t espAt_defineEn(espat_radio_t *radio, espat_port_t *port,

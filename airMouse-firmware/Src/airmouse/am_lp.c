@@ -25,10 +25,10 @@ void sleep(void){
 	//peripheral wkup
 	HAL_UART_ChangeSpeed(&huart1, BAUDRATE_DEFAULT);
 	espAt_pwrOn(&bleRadio);
-	espAt_getResponse(&bleRadio);
+	espAt_downloadResponse(&bleRadio);
 	espAt_sendString(&bleRadio, S_BHN, "neuroGlide");
 	espAt_sendParams(&bleRadio, P_BHI, 1, 1);
 	espAt_sendParams(&bleRadio, P_UC, 5, BAUDRATE_FAST, 8, 1, 0, 0);
-	espAt_getResponse(&bleRadio);
+	espAt_downloadResponse(&bleRadio);
 	HAL_UART_ChangeSpeed(&huart1, BAUDRATE_FAST);
 }
