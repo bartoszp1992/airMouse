@@ -61,7 +61,7 @@ void SystemClock_Config(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.amKeys_reportMouseButtonamKeys_reportMouseButtonamKeys_reportMouseButtonamKeys_reportMouseButton
+  * @brief  The application entry point.
   * @retval int
   */
 int main(void)

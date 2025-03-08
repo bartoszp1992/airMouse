@@ -9,7 +9,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define BAUDRATE_FAST 3000000
+#define BAUDRATE_FAST 1000000
 #define BAUDRATE_DEFAULT 115200
 
 #endif /* CONFIG_H_ */

@@ -16389,7 +16389,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
 
 080064cc <main>:
 /**
-  * @brief  The application entry point.amKeys_reportMouseButtonamKeys_reportMouseButtonamKeys_reportMouseButtonamKeys_reportMouseButton
+  * @brief  The application entry point.
   * @retval int
   */
 int main(void)
@@ -17107,9 +17107,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
  8006818:	187b      	adds	r3, r7, r1
  800681a:	2220      	movs	r2, #32
  800681c:	601a      	str	r2, [r3, #0]
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
  800681e:	187b      	adds	r3, r7, r1
- 8006820:	2202      	movs	r2, #2
+ 8006820:	2212      	movs	r2, #18
  8006822:	605a      	str	r2, [r3, #4]
     GPIO_InitStruct.Pull = GPIO_PULLUP;
  8006824:	187b      	adds	r3, r7, r1
@@ -17670,7 +17670,7 @@ void airMouseSetup(void) {
  8006be8:	080096d8 	.word	0x080096d8
  8006bec:	080096e4 	.word	0x080096e4
  8006bf0:	080096f0 	.word	0x080096f0
- 8006bf4:	002dc6c0 	.word	0x002dc6c0
+ 8006bf4:	000f4240 	.word	0x000f4240
  8006bf8:	080096fc 	.word	0x080096fc
  8006bfc:	200000f4 	.word	0x200000f4
  8006c00:	20000234 	.word	0x20000234
@@ -17784,6 +17784,7 @@ void airMouseProcess(void) {
 	//read mouse buttons
 	amKeys_readMouse();
  8006cba:	f000 f83f 	bl	8006d3c <amKeys_readMouse>
+
 	//set flag only if press occurs
 	if (amKeys_reportMouseButton || amKeys_reportWheel)
  8006cbe:	4b1b      	ldr	r3, [pc, #108]	@ (8006d2c <airMouseProcess+0x120>)

@@ -167,6 +167,7 @@ void airMouseProcess(void) {
 
 	//read mouse buttons
 	amKeys_readMouse();
+
 	//set flag only if press occurs
 	if (amKeys_reportMouseButton || amKeys_reportWheel)
 		flagMouseSendReport = 1;

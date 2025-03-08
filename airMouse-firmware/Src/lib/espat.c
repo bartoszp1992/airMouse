@@ -327,7 +327,7 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 }
 
 /*
- * receive raw data from ESP
+ * receive raw data from ESP. send command first, before run this function.
  * @param: radio struct
  * @output: ESPAT_RESPONSE_OK/ERROR/BUSY/PARSING_ERROR
  *
