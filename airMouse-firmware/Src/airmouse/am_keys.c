@@ -3,6 +3,9 @@
  *
  *  Created on: Mar 7, 2025
  *      Author: bartosz
+ *
+ *      this module is responsible for converting button presses into reports for AT+BLEHID
+ *
  */
 
 #include "am_keys.h"
@@ -16,14 +19,19 @@ uint32_t test;
 
 void amKeys_readMouse(void) {
 	amKeys_reportMouseButton = 0;
-	amKeys_reportMouseButton = !HAL_GPIO_ReadPin(MUS_LB_GPIO_Port, MUS_LB_Pin) << HID_MOUSE_BITSHIFT_L
-			| !HAL_GPIO_ReadPin(MUS_RB_GPIO_Port, MUS_RB_Pin) << HID_MOUSE_BITSHIFT_R
-			| !HAL_GPIO_ReadPin(MUS_MB_GPIO_Port, MUS_MB_Pin) << HID_MOUSE_BITSHIFT_M
-			| !HAL_GPIO_ReadPin(MUS_FWD_GPIO_Port, MUS_FWD_Pin) << HID_MOUSE_BITSHIFT_FWD
-			| !HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) << HID_MOUSE_BITSHIFT_BCK;
+	amKeys_reportWheel = 0;
+	uint32_t rawKeyboardReading = kbd_readRow(&mouseButtons, 0);
 
-	test = kbd_readRow(&mouseButtons, 1);
-//	if(amKeys_reportMouseButton )
+	if(rawKeyboardReading & KEY_MOUSE_L) amKeys_reportMouseButton |= HID_MOUSE_MASK_L;
+	if(rawKeyboardReading & KEY_MOUSE_R) amKeys_reportMouseButton |= HID_MOUSE_MASK_R;
+	if(rawKeyboardReading & KEY_MOUSE_M) amKeys_reportMouseButton |= HID_MOUSE_MASK_M;
+	if(rawKeyboardReading & KEY_MOUSE_FWD) amKeys_reportMouseButton |= HID_MOUSE_MASK_FWD;
+	if(rawKeyboardReading & KEY_MOUSE_BCK) amKeys_reportMouseButton |= HID_MOUSE_MASK_BCK;
+
+	if(rawKeyboardReading & KEY_MOUSE_WHEELUP) amKeys_reportWheel=1;
+	if(rawKeyboardReading & KEY_MOUSE_WHEELDN) amKeys_reportWheel=-1;
+
+
 }
 
 void amKeys_readWheel(void){

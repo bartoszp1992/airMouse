@@ -46,6 +46,10 @@ espat_state_t espStat;
 espat_response_t espResponse;
 lsm6ds_state_t sensorStat;
 
+uint8_t flagMouseSendReport = 0;
+int32_t x = 0;
+int32_t z = 0;
+
 void airMouseSetup(void) {
 
 	//_________________________________________KEYS_________________________________________
@@ -130,13 +134,14 @@ void airMouseSetup(void) {
 	cursor_setReverse(&cursor, CURSOR_AXIS_Y, CURSOR_NOT_REVERSED);
 	cursor_setReverse(&cursor, CURSOR_AXIS_Z, CURSOR_NOT_REVERSED);
 
-	cursor_setSensitivity(&cursor, 20);
-	cursor_setAcceleration(&cursor, 120, CURSOR_ACCELERATION_MULTIPLY);
+	cursor_setSensitivity(&cursor, 10);
+	cursor_setAcceleration(&cursor, 140, CURSOR_ACCELERATION_MULTIPLY);
 	cursor_setMax(&cursor, 40);
 
 }
 void airMouseProcess(void) {
 
+	//read sensor
 	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
 
 		//update gyro data
@@ -151,46 +156,54 @@ void airMouseProcess(void) {
 				CURSOR_AXIS_Z);
 
 		//read mouse movement from cursor lib
-		int32_t x = cursor_output(&cursor, CURSOR_AXIS_X);
-		int32_t z = cursor_output(&cursor, CURSOR_AXIS_Z);
+		x = cursor_output(&cursor, CURSOR_AXIS_X);
+		z = cursor_output(&cursor, CURSOR_AXIS_Z);
 
-		//read mouse buttons
-		amKeys_readMouse();
+		//set flag only if movement occurs
+		if (abs(x) > 0 || abs(z) > 0)
+			flagMouseSendReport = 1;
+
+	}
+
+	//read mouse buttons
+	amKeys_readMouse();
+	//set flag only if press occurs
+	if (amKeys_reportMouseButton || amKeys_reportWheel)
+		flagMouseSendReport = 1;
+
+	//send report
+	if (flagMouseSendReport) {
+		flagMouseSendReport = 0;
 
 		//send mouse report
-		if (amKeys_reportMouseButton != 0 || abs(x) > 0 || abs(z) > 0) {
-			espAt_sendParams(&bleRadio, P_BHM, 4, amKeys_reportMouseButton, x,
-					z, 0);
-		}
-
-		//send keybaord report
-
+		espAt_sendParams(&bleRadio, P_BHM, 4, amKeys_reportMouseButton, x, z,
+				amKeys_reportWheel);
 	}
 }
 /*
  UNUSED CODE
 
- 	kbd_defineLayout(&mouseButtons,
-	HID_MOUSE_MASK_L,
-	HID_MOUSE_MASK_R,
-	HID_MOUSE_MASK_M,
-	HID_MOUSE_MASK_FWD,
-	HID_MOUSE_MASK_BCK, HID_SPECIAL_WHEELUP, HID_SPECIAL_WHEELDN,
-			HID_SPECIAL_DPI, HID_SPECIAL_HOME, HID_SPECIAL_PRC);
+ kbd_defineLayout(&mouseButtons,
+ HID_MOUSE_MASK_L,
+ HID_MOUSE_MASK_R,
+ HID_MOUSE_MASK_M,
+ HID_MOUSE_MASK_FWD,
+ HID_MOUSE_MASK_BCK, HID_SPECIAL_WHEELUP, HID_SPECIAL_WHEELDN,
+ HID_SPECIAL_DPI, HID_SPECIAL_HOME, HID_SPECIAL_PRC);
 
 
-				kbd_defineLayout(&qwerty,
-	HID_KEY_1, HID_KEY_2, HID_KEY_3, HID_KEY_4, HID_KEY_5, HID_KEY_6, HID_KEY_7,
-	HID_KEY_8, HID_KEY_9, HID_KEY_0,
-	HID_KEY_Q, HID_KEY_W, HID_KEY_E, HID_KEY_R, HID_KEY_T, HID_KEY_Y,
-	HID_KEY_U, HID_KEY_I, HID_KEY_O, HID_KEY_P,
-	HID_KEY_A, HID_KEY_S, HID_KEY_D, HID_KEY_F, HID_KEY_G, HID_KEY_H,
-	HID_KEY_J, HID_KEY_K, HID_KEY_L, HID_KEY_ENTER,
-	HID_MOD_MASK_LSHIFT, HID_KEY_Z, HID_KEY_X, HID_KEY_C, HID_KEY_V,
-	HID_KEY_B, HID_KEY_N, HID_KEY_M, HID_MOD_MASK_RSHIFT, HID_KEY_UP,
-	HID_MOD_MASK_LCTRL, HID_SPECIAL_FN, HID_MOD_MASK_LGUI, HID_MOD_MASK_LALT,
-	HID_KEY_SPACE, HID_MOD_MASK_RALT, HID_KEY_LEFT, HID_KEY_DOWN,
-	HID_KEY_RIGHT);
+ kbd_defineLayout(&qwerty,
+ HID_KEY_1, HID_KEY_2, HID_KEY_3, HID_KEY_4, HID_KEY_5, HID_KEY_6, HID_KEY_7,
+ HID_KEY_8, HID_KEY_9, HID_KEY_0,
+ HID_KEY_Q, HID_KEY_W, HID_KEY_E, HID_KEY_R, HID_KEY_T, HID_KEY_Y,
+ HID_KEY_U, HID_KEY_I, HID_KEY_O, HID_KEY_P,
+ HID_KEY_A, HID_KEY_S, HID_KEY_D, HID_KEY_F, HID_KEY_G, HID_KEY_H,
+ HID_KEY_J, HID_KEY_K, HID_KEY_L, HID_KEY_ENTER,
+ HID_MOD_MASK_LSHIFT, HID_KEY_Z, HID_KEY_X, HID_KEY_C, HID_KEY_V,
+ HID_KEY_B, HID_KEY_N, HID_KEY_M, HID_MOD_MASK_RSHIFT, HID_KEY_UP,
+ HID_MOD_MASK_LCTRL, HID_SPECIAL_FN, HID_MOD_MASK_LGUI, HID_MOD_MASK_LALT,
+ HID_KEY_SPACE, HID_MOD_MASK_RALT, HID_KEY_LEFT, HID_KEY_DOWN,
+ HID_KEY_RIGHT);
 
 
  */

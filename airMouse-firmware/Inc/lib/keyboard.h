@@ -89,7 +89,6 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 kbd_state_t kbd_setColumns(kbd_keyboard_t *keyboard, ...);
 kbd_state_t kbd_setRows(kbd_keyboard_t *keyboard, ...);
 uint32_t kbd_readRow(kbd_keyboard_t *keyboard, uint8_t row);
-//kbd_state_t kbd_defineLayout(kbd_keyboard_t *keyboard, ...);
 void kbd_scanning(kbd_keyboard_t *keyboard);
 
 #endif /* KEYBOARD_H_ */

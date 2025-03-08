@@ -35,7 +35,8 @@ Src/airmouse/am_keys.o: ../Src/airmouse/am_keys.c \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- ../Inc/lib/hidcodes.h ../Inc/lib/keyboard.h ../Inc/gpio.h ../Inc/main.h
+ ../Inc/lib/hidcodes.h ../Inc/lib/keyboard.h ../Inc/gpio.h ../Inc/main.h \
+ ../Inc/airmouse/am_keys_codes.h
 ../Inc/airmouse/am_keys.h:
 ../Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
@@ -77,3 +78,4 @@ Src/airmouse/am_keys.o: ../Src/airmouse/am_keys.c \
 ../Inc/lib/keyboard.h:
 ../Inc/gpio.h:
 ../Inc/main.h:
+../Inc/airmouse/am_keys_codes.h:

@@ -38,7 +38,8 @@ Src/airmouse/airmouse.o: ../Src/airmouse/airmouse.c \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
  ../Inc/gpio.h ../Inc/config.h ../Inc/lib/lsm6ds.h ../Inc/i2c.h \
  ../Inc/lib/lsm6ds_reg.h ../Inc/lib/keyboard.h ../Inc/lib/cursor.h \
- ../Inc/lib/hidcodes.h ../Inc/airmouse/am_keys.h ../Inc/main.h
+ ../Inc/lib/hidcodes.h ../Inc/airmouse/am_keys.h ../Inc/main.h \
+ ../Inc/airmouse/am_keys_codes.h
 ../Inc/airmouse/airmouse.h:
 ../Inc/airmouse/am_lp.h:
 ../Inc/lib/espat.h:
@@ -89,3 +90,4 @@ Src/airmouse/airmouse.o: ../Src/airmouse/airmouse.c \
 ../Inc/lib/hidcodes.h:
 ../Inc/airmouse/am_keys.h:
 ../Inc/main.h:
+../Inc/airmouse/am_keys_codes.h:

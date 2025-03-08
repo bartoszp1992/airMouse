@@ -3,6 +3,8 @@
  *
  *  Created on: Mar 7, 2025
  *      Author: bartosz
+ *
+ *      this file contains standard HID keyboard codes
  */
 
 #ifndef LIB_HIDCODES_H_

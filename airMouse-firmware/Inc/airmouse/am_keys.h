@@ -12,6 +12,7 @@
 #include "main.h"
 #include "hidcodes.h"
 #include "keyboard.h"
+#include "am_keys_codes.h"
 
 extern uint8_t amKeys_reportMouseButton;
 extern int8_t amKeys_reportWheel;

@@ -135,38 +135,12 @@ kbd_state_t kbd_setRows(kbd_keyboard_t *keyboard, ...) {
 
 }
 
-
-///*
-// * this function allows you to assign one byte to ech keyboard key.
-// * @param: keyboard
-// * @params: 1byte values of each keyboard button
-// *
-// * @retval: status
-// */
-//kbd_state_t kbd_defineLayout(kbd_keyboard_t *keyboard, ...){
-//
-//	keyboard->layout = malloc(keyboard->numberOfKeys);
-//	if(keyboard->layout == NULL)
-//		return KBD_NOT_ENOUGH_MEMORY;
-//
-//	va_list ap;
-//	va_start(ap, keyboard);
-//
-//	for(uint16_t i = 0; i<keyboard->numberOfKeys; i++){
-//		keyboard->layout[i] = (uint8_t)va_arg(ap, uint32_t);
-//	}
-//
-//	va_end(ap);
-//	return KBD_OK;
-//
-//}
-
 /*
  * read keyboard row as one number
  * one bit are one key
  *
  * @param: keyboard
- * @param: row to read
+ * @param: row to read[0-3 for 4 row keyboard]
  *
  * @retval: row state
  */
@@ -218,3 +192,28 @@ void kbd_scanning(kbd_keyboard_t *keyboard) {
 	}
 
 }
+
+
+/*
+ UNUSED CODE
+
+//kbd_state_t kbd_defineLayout(kbd_keyboard_t *keyboard, ...){
+//
+//	keyboard->layout = malloc(keyboard->numberOfKeys);
+//	if(keyboard->layout == NULL)
+//		return KBD_NOT_ENOUGH_MEMORY;
+//
+//	va_list ap;
+//	va_start(ap, keyboard);
+//
+//	for(uint16_t i = 0; i<keyboard->numberOfKeys; i++){
+//		keyboard->layout[i] = (uint8_t)va_arg(ap, uint32_t);
+//	}
+//
+//	va_end(ap);
+//	return KBD_OK;
+//
+//}
+
+
+ */
