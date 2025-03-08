@@ -90,7 +90,7 @@ void airMouseSetup(void) {
 
 	//_________________________________________RADIO_________________________________________
 
-	espStat = espAt_init(&bleRadio, &huart1, 2, 1500);
+	espStat = espAt_init(&bleRadio, &huart1, 10, 2500);
 	espStat = espAt_defineEn(&bleRadio, ESP_EN_GPIO_Port, ESP_EN_Pin);
 	espStat = espAt_defineBoot(&bleRadio, ESP_BOOT_GPIO_Port, ESP_BOOT_Pin);
 	//enter download mode or reset ESP
@@ -102,11 +102,38 @@ void airMouseSetup(void) {
 	espStat = espAt_downloadResponse(&bleRadio);
 	espResponse = espAt_returnResponseStatus(&bleRadio);
 
-	espStat = espAt_sendString(&bleRadio, S_BHN, "neuroGlide");
+	//turn on BLE
+	espStat = espAt_sendParams(&bleRadio, P_BI, 1, 2);
 	espStat = espAt_downloadResponse(&bleRadio);
 	espResponse = espAt_returnResponseStatus(&bleRadio);
 
-	espStat = espAt_sendParams(&bleRadio, P_BHI, 1, 1);
+	//change name
+	espStat = espAt_sendString(&bleRadio, S_BN, "neuroGATT");
+	espStat = espAt_downloadResponse(&bleRadio);
+	espResponse = espAt_returnResponseStatus(&bleRadio);
+
+	//read mac
+	char bleRadioMac[17];
+
+	espStat = espAt_sendQuery(&bleRadio, C_BA);
+	espStat = espAt_downloadResponse(&bleRadio);
+	espResponse = espAt_returnResponseStatus(&bleRadio);
+
+	espStat = espAt_pullPhysicalAddress(&bleRadio, bleRadioMac);
+
+	//set adv params
+	espStat = espAt_sendComplex(&bleRadio, C_BAP, 10,
+			ESPAT_PARAM_TYPE_NUMBER, 1000, //min interval
+			ESPAT_PARAM_TYPE_NUMBER, 2000, //max interval
+			ESPAT_PARAM_TYPE_NUMBER, 0, //adv type ind
+			ESPAT_PARAM_TYPE_NUMBER, 0, //own addr type public
+			ESPAT_PARAM_TYPE_NUMBER, 7, //adv channel all
+			ESPAT_PARAM_TYPE_NUMBER, 0, //filter any any
+			ESPAT_PARAM_TYPE_NUMBER, 0, //addr type public
+			ESPAT_PARAM_TYPE_STRING, bleRadioMac,
+			ESPAT_PARAM_TYPE_NUMBER, 1,
+			ESPAT_PARAM_TYPE_NUMBER, 1
+	);
 	espStat = espAt_downloadResponse(&bleRadio);
 	espResponse = espAt_returnResponseStatus(&bleRadio);
 
@@ -205,6 +232,14 @@ void airMouseProcess(void) {
  HID_MOD_MASK_LCTRL, HID_SPECIAL_FN, HID_MOD_MASK_LGUI, HID_MOD_MASK_LALT,
  HID_KEY_SPACE, HID_MOD_MASK_RALT, HID_KEY_LEFT, HID_KEY_DOWN,
  HID_KEY_RIGHT);
+
+ //	espStat = espAt_sendString(&bleRadio, S_BHN, "neuroGlide");
+ //	espStat = espAt_downloadResponse(&bleRadio);
+ //	espResponse = espAt_returnResponseStatus(&bleRadio);
+ //
+ //	espStat = espAt_sendParams(&bleRadio, P_BHI, 1, 1);
+ //	espStat = espAt_downloadResponse(&bleRadio);
+ //	espResponse = espAt_returnResponseStatus(&bleRadio);
 
 
  */
