@@ -20,7 +20,7 @@ extern uint8_t amKeys_modifiers;
 extern char amKeys_keys[6];
 extern kbd_keyboard_t mouseButtons;;
 
-void amKeys_readMouse(void);
+uint8_t amKeys_readMouse(void);
 
 
 #endif /* AIRMOUSE_AM_KEYS_H_ */

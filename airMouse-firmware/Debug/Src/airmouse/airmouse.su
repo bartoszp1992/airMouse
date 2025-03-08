@@ -1,2 +1,2 @@
-../Src/airmouse/airmouse.c:53:6:airMouseSetup	80	static
-../Src/airmouse/airmouse.c:142:6:airMouseProcess	32	static
+../Src/airmouse/airmouse.c:54:6:airMouseSetup	80	static
+../Src/airmouse/airmouse.c:143:6:airMouseProcess	32	static

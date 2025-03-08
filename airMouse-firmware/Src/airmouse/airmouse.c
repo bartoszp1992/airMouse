@@ -47,6 +47,7 @@ espat_response_t espResponse;
 lsm6ds_state_t sensorStat;
 
 uint8_t flagMouseSendReport = 0;
+uint8_t buttonsChanged = 0;
 int32_t x = 0;
 int32_t z = 0;
 
@@ -159,27 +160,29 @@ void airMouseProcess(void) {
 		x = cursor_output(&cursor, CURSOR_AXIS_X);
 		z = cursor_output(&cursor, CURSOR_AXIS_Z);
 
-		//set flag only if movement occurs
 		if (abs(x) > 0 || abs(z) > 0)
 			flagMouseSendReport = 1;
 
 	}
 
 	//read mouse buttons
-	amKeys_readMouse();
+	buttonsChanged = amKeys_readMouse();
 
 	//set flag only if press occurs
-	if (amKeys_reportMouseButton || amKeys_reportWheel)
+	if (amKeys_reportMouseButton || amKeys_reportWheel || buttonsChanged)
 		flagMouseSendReport = 1;
 
 	//send report
 	if (flagMouseSendReport) {
 		flagMouseSendReport = 0;
-
 		//send mouse report
 		espAt_sendParams(&bleRadio, P_BHM, 4, amKeys_reportMouseButton, x, z,
 				amKeys_reportWheel);
 	}
+
+//	espAt_sendParams(&bleRadio, P_BHM, 4, amKeys_reportMouseButton, x, z,
+//					amKeys_reportWheel);
+
 }
 /*
  UNUSED CODE
