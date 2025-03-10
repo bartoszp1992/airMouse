@@ -1,3 +1,0 @@
-../Src/airmouse/am_keys.c:20:6:amKeys_readMouse	16	static
-../Src/airmouse/am_keys.c:37:6:amKeys_readWheel	8	static
-../Src/airmouse/am_keys.c:40:6:amKeys_readModifiers	8	static

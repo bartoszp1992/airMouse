@@ -1,2 +1,0 @@
-../Src/lib/interrupts.c:18:6:systemTick	8	static
-../Src/lib/interrupts.c:33:6:HAL_GPIO_EXTI_Rising_Callback	16	static
