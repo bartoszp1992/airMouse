@@ -19,9 +19,8 @@
 
 //---------------------------IMPLICIT FUNCTIONS---------------------------
 /*
- * uart send/receive functions. fill it by hardware-specific uart send/receive functions
- * port
- * wrapper for hardware specific uartSend/Receive
+ * uart send wrapper
+ * fill it by hardware-specific uart send function
  */
 espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
@@ -41,6 +40,10 @@ espat_state_t uartSend(espat_uartInstance_t *uart, char *data, uint32_t size) {
 }
 
 //port
+/*
+ * uart receive wrapper
+ * fill with hardware specific uart byte receive function
+ */
 espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size) {
 
 	HAL_StatusTypeDef state;
@@ -195,8 +198,8 @@ espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
 
 	//make arguments list string
 	uint16_t characterCounter = 0;
-	char argumentsBuffer[AT_BUFFER_SIZE];
-	memset(argumentsBuffer, '\0', AT_BUFFER_SIZE);
+	char argumentsBuffer[AT_ARGUMENTS_BUFFER_SIZE];
+	memset(argumentsBuffer, '\0', AT_ARGUMENTS_BUFFER_SIZE);
 
 	for (uint16_t i = 0; i < paramCount; i++) {
 		itoa(parameters[i], &argumentsBuffer[characterCounter], 10);
@@ -243,7 +246,7 @@ espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
  *
  * @retval: status
  */
-espat_state_t espAt_sendQuestion(espat_radio_t *radio, char *command) {
+espat_state_t espAt_sendQuery(espat_radio_t *radio, char *command) {
 
 	//check if command are valid
 	if (command == NULL)
@@ -327,6 +330,117 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 }
 
 /*
+ * send mix params and strings, e. g. AT+BLECONNPARAM=1,2,3,4,"00:11:22:33:44:55", 1, 1
+ * @param: radio
+ * @param: command
+ * @param: number of parameters
+ * @params: give pairs: type, param; type, param, etc.
+ *
+ *
+ * @retval: status
+ *
+ */
+espat_state_t espAt_sendComplex(espat_radio_t *radio, char *command,
+		uint8_t paramCount, ...) {
+
+	//check if command are valid
+	if (command == NULL)
+		return ESPAT_STATE_ERR;
+
+	va_list ap;
+	va_start(ap, paramCount);
+
+	//make parameters types array
+	espat_param_t paramTypes[paramCount];
+
+	//make parameters values array
+	void *parameters[paramCount];
+
+	//counter of string parameters. Uset to count how many quote marks has to be used(for buffer size calculation)
+	uint8_t stringParametersCounter = 0;
+
+	//fill parameters array
+	for (uint16_t i = 0; i < paramCount; i++) {
+		paramTypes[i] = (espat_param_t) va_arg(ap, int);
+		if (paramTypes[i] == ESPAT_PARAM_TYPE_STRING) {
+			parameters[i] = va_arg(ap, char*);
+			stringParametersCounter++;
+		} else if (paramTypes[i] == ESPAT_PARAM_TYPE_NUMBER)
+			parameters[i] = (void*) (intptr_t) va_arg(ap, int);
+		else
+			return ESPAT_STATE_ERROR_PARAM;
+	}
+
+	va_end(ap);
+
+	//make arguments list string
+	uint16_t characterCounter = 0;
+	char argumentsBuffer[AT_ARGUMENTS_BUFFER_SIZE];
+	memset(argumentsBuffer, '\0', AT_ARGUMENTS_BUFFER_SIZE);
+
+	uint8_t quoteMarkLength = strlen(AT_STRING_QUOTE_MARK);
+
+	for (uint16_t i = 0; i < paramCount; i++) {
+
+		if (paramTypes[i] == ESPAT_PARAM_TYPE_NUMBER) {
+			itoa((int32_t) parameters[i], &argumentsBuffer[characterCounter],
+					10);
+		} else if (paramTypes[i] == ESPAT_PARAM_TYPE_STRING) {
+
+			uint8_t stringParamLength = strlen(parameters[i]);
+
+			memcpy(&argumentsBuffer[characterCounter], AT_STRING_QUOTE_MARK,
+					quoteMarkLength); //quote mark
+
+			memcpy(
+					&argumentsBuffer[characterCounter
+							+ strlen(AT_STRING_QUOTE_MARK)], parameters[i],
+					stringParamLength); //string
+
+			memcpy(
+					&argumentsBuffer[characterCounter + quoteMarkLength
+							+ stringParamLength], AT_STRING_QUOTE_MARK,
+					strlen(AT_STRING_QUOTE_MARK)); //quote mark
+		}
+
+		characterCounter += strlen(&argumentsBuffer[characterCounter]) + 1;
+
+		//add comma only if NOT last parameter
+		if (i < paramCount - 1)
+			argumentsBuffer[characterCounter - 1] = ',';
+	}
+
+	//count buffer length
+	uint16_t prefixLength = strlen(AT_PREFIX);
+	uint16_t commandLength = strlen(command);
+	uint16_t assignmentLength = strlen(AT_ASSIGNMENT);
+	uint16_t parametersLength = --characterCounter;
+	uint16_t quoteLength = strlen(AT_STRING_QUOTE_MARK) * 2
+			* stringParametersCounter;
+	uint16_t endingLength = strlen(AT_ENDING);
+
+	//create master buffer and clear it
+	uint16_t bufferSize = prefixLength + commandLength + assignmentLength
+			+ parametersLength + quoteLength + endingLength;
+	char buffer[bufferSize];
+	memset(buffer, ' ', bufferSize);
+
+	//build command
+	memcpy(&buffer[0], AT_PREFIX, prefixLength);
+	memcpy(&buffer[prefixLength], command, commandLength);
+	memcpy(&buffer[prefixLength + commandLength], AT_ASSIGNMENT,
+			assignmentLength);
+	memcpy(&buffer[prefixLength + commandLength + assignmentLength],
+			argumentsBuffer, parametersLength);
+	memcpy(
+			&buffer[prefixLength + commandLength + assignmentLength
+					+ parametersLength], AT_ENDING, endingLength);
+
+	return uartSend(&radio->espUart, buffer, bufferSize);
+
+}
+
+/*
  * receive raw data from ESP. send command first, before run this function.
  * @param: radio struct
  * @output: ESPAT_RESPONSE_OK/ERROR/BUSY/PARSING_ERROR
@@ -386,6 +500,36 @@ espat_state_t espAt_downloadResponse(espat_radio_t *radio) {
  */
 espat_response_t espAt_returnResponseStatus(espat_radio_t *radio) {
 	return radio->response;
+}
+
+/*
+ * search and copy mac from rxdata as a string
+ * @param: radio
+ * @param: destination to save mac(make sure its enough sized
+ *
+ * @retval: status
+ *
+ */
+espat_state_t espAt_pullPhysicalAddress(espat_radio_t *radio, char *mac) {
+
+	uint8_t macLength = strlen(MAC_PATTERN);
+	uint8_t flagFound = 0;
+
+	for (uint32_t i = 0; i < RX_BUFFER_SIZE; i++) {
+
+		if (radio->rxBuffer[i] == MAC_SEPARATOR
+				&& radio->rxBuffer[i - 3] == '"') {
+
+			memcpy(mac, &radio->rxBuffer[i - 2], macLength);
+			flagFound = 1;
+		}
+	}
+
+	if (flagFound)
+		return ESPAT_STATE_OK;
+	else
+		return ESPAT_STATE_MAC_NOT_FOUND;
+
 }
 
 #if (EN_SUPPORT == 1)
