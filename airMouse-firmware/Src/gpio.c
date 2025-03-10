@@ -64,11 +64,11 @@ void MX_GPIO_Init(void)
                           |KBD_ROW5_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : MUS_PRC_Pin MUS_HOME_Pin MUS_DPI_Pin MUS_FWD_Pin
-                           MUS_BCK_Pin MUS_LB_Pin MUS_MB_Pin MUS_RB_Pin
-                           MUS_UP_Pin MUS_DN_Pin */
+                           MUS_BCK_Pin MUS_MB_Pin MUS_RB_Pin MUS_UP_Pin
+                           MUS_DN_Pin */
   GPIO_InitStruct.Pin = MUS_PRC_Pin|MUS_HOME_Pin|MUS_DPI_Pin|MUS_FWD_Pin
-                          |MUS_BCK_Pin|MUS_LB_Pin|MUS_MB_Pin|MUS_RB_Pin
-                          |MUS_UP_Pin|MUS_DN_Pin;
+                          |MUS_BCK_Pin|MUS_MB_Pin|MUS_RB_Pin|MUS_UP_Pin
+                          |MUS_DN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
@@ -110,6 +110,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(ESP_EN_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : MUS_LB_Pin */
+  GPIO_InitStruct.Pin = MUS_LB_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(MUS_LB_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : KBD_ROW1_Pin KBD_ROW2_Pin KBD_ROW3_Pin KBD_ROW4_Pin
                            KBD_ROW5_Pin */
   GPIO_InitStruct.Pin = KBD_ROW1_Pin|KBD_ROW2_Pin|KBD_ROW3_Pin|KBD_ROW4_Pin
@@ -122,6 +128,9 @@ void MX_GPIO_Init(void)
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
 
 }
 

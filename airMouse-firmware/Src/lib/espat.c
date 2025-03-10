@@ -48,12 +48,8 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 
 	HAL_StatusTypeDef state;
 
-	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1); //debug
-
 	state = HAL_UART_Receive(uart->uart, (uint8_t*) data, size,
 			uart->receiveTimeout);
-
-	HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0); //debug
 
 	if (state == HAL_OK)
 		return ESPAT_STATE_OK;

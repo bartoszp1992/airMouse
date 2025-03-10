@@ -8,16 +8,20 @@
 #ifndef AIRMOUSE_H_
 #define AIRMOUSE_H_
 
-#include <am_lp.h>
+#include <keys.h>
+#include <led.h>
 #include "espat.h"
 #include "lsm6ds.h"
 #include <math.h>
+#include <sleep.h>
 #include "keyboard.h"
 #include <stdint.h>
 #include "cursor.h"
 #include "hidcodes.h"
 #include "config.h"
-#include "am_keys.h"
+#include "radio.h"
+#include "sensor.h"
+
 
 
 void airMouseSetup(void);

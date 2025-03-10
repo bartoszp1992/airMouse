@@ -94,6 +94,7 @@ void Error_Handler(void);
 #define ESP_EN_GPIO_Port GPIOB
 #define MUS_LB_Pin GPIO_PIN_6
 #define MUS_LB_GPIO_Port GPIOC
+#define MUS_LB_EXTI_IRQn EXTI4_15_IRQn
 #define MUS_MB_Pin GPIO_PIN_7
 #define MUS_MB_GPIO_Port GPIOC
 #define MUS_RB_Pin GPIO_PIN_8

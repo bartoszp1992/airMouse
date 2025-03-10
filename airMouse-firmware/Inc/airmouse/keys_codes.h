@@ -5,8 +5,8 @@
  *      Author: bartosz
  */
 
-#ifndef AIRMOUSE_AM_KEYS_CODES_H_
-#define AIRMOUSE_AM_KEYS_CODES_H_
+#ifndef AIRMOUSE_KEYS_CODES_H_
+#define AIRMOUSE_KEYS_CODES_H_
 
 enum {
 	KEY_MOUSE_L = 			1 << 0,
@@ -73,4 +73,4 @@ enum {
 	KEY_QWERTY_RIGHT
 };
 
-#endif /* AIRMOUSE_AM_KEYS_CODES_H_ */
+#endif /* AIRMOUSE_KEYS_CODES_H_ */

@@ -28,6 +28,8 @@ void systemTick(void) {
 
 	kbd_scanning(&qwerty);
 	kbd_scanning(&mouseButtons);
+	sleep_timerInc();
+
 }
 
 void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {

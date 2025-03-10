@@ -10,7 +10,13 @@
 
 #include "main.h"
 
-void ledOn(void);
-void ledOff(void);
+enum{
+	LED_GREEN,
+	LED_BLUE,
+	LED_RED
+};
+
+void ledOn(uint8_t led);
+void ledOff(uint8_t led);
 
 #endif /* LIB_LED_H_ */

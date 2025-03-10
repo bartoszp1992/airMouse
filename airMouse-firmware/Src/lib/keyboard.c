@@ -193,27 +193,3 @@ void kbd_scanning(kbd_keyboard_t *keyboard) {
 
 }
 
-
-/*
- UNUSED CODE
-
-//kbd_state_t kbd_defineLayout(kbd_keyboard_t *keyboard, ...){
-//
-//	keyboard->layout = malloc(keyboard->numberOfKeys);
-//	if(keyboard->layout == NULL)
-//		return KBD_NOT_ENOUGH_MEMORY;
-//
-//	va_list ap;
-//	va_start(ap, keyboard);
-//
-//	for(uint16_t i = 0; i<keyboard->numberOfKeys; i++){
-//		keyboard->layout[i] = (uint8_t)va_arg(ap, uint32_t);
-//	}
-//
-//	va_end(ap);
-//	return KBD_OK;
-//
-//}
-
-
- */

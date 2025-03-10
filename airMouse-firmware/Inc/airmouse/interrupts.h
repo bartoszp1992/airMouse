@@ -8,6 +8,7 @@
 #ifndef LIB_INTERRUPTS_H_
 #define LIB_INTERRUPTS_H_
 
+#include <sleep.h>
 #include <stdint.h>
 #include "main.h"
 #include "keyboard.h"
