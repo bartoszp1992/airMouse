@@ -59,6 +59,22 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 		return ESPAT_STATE_ERR;
 }
 
+espat_state_t uartReceiveDMA(espat_uartInstance_t *uart, char *data,
+		uint32_t size) {
+
+	HAL_StatusTypeDef state;
+
+	state = HAL_UART_Receive_DMA(uart->uart, (uint8_t*) data, size);
+	HAL_UARTEx_ReceiveToIdle_DMA(huart, pData, Size)
+
+	if (state == HAL_OK)
+		return ESPAT_STATE_OK;
+	else if (state == HAL_TIMEOUT)
+		return ESPAT_STATE_TIMEOUT;
+	else
+		return ESPAT_STATE_ERR;
+}
+
 #if (BOOT_SUPPORT == 1) || (EN_SUPPORT == 1)
 /*
  * read GPIO
@@ -699,20 +715,7 @@ espat_state_t espAt_rst(espat_radio_t *radio) {
  }
 
 
- espat_state_t uartReceiveDMA(espat_uartInstance_t *uart, char *data,
- uint32_t size) {
 
- HAL_StatusTypeDef state;
-
- state = HAL_UART_Receive_DMA(uart->uart, (uint8_t*) data, size);
-
- if (state == HAL_OK)
- return ESPAT_STATE_OK;
- else if (state == HAL_TIMEOUT)
- return ESPAT_STATE_TIMEOUT;
- else
- return ESPAT_STATE_ERR;
- }
 
 
  */
