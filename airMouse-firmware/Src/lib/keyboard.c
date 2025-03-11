@@ -39,7 +39,7 @@ void kbd_writePin(kbd_pin_t *pin, kbd_pinState_t state) {
 kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 		uint32_t prescaler, kbd_state_t pressedState) {
 
-	if(rows < 1 || columns < 1)
+	if (rows < 1 || columns < 1)
 		return KBD_ROWS_OR_COLUMNS_NUMBER_CANT_BE_0;
 
 	if (columns > 32)
@@ -71,7 +71,7 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 	}
 
 	keyboard->layout = malloc(keyboard->numberOfKeys * sizeof(char));
-	if(keyboard->layout == NULL){
+	if (keyboard->layout == NULL) {
 		free(keyboard->columns);
 		free(keyboard->rows);
 		free(keyboard->stateMatrix);
@@ -83,6 +83,25 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 	keyboard->actualScannedRow = 0;
 	return KBD_OK;
 
+}
+
+/*
+ * set keyboard layout- assign one char to each key
+ * using this function are optional
+ * @param: keyboard
+ * @param: charsr
+ *
+ * @retval: none
+ */
+void kbd_setLayout(kbd_keyboard_t *keyboard, ...) {
+	va_list ap;
+	va_start(ap, keyboard);
+
+	for (uint8_t i = 0; i < keyboard->numberOfKeys; i++) {
+		keyboard->layout[i] = (char) va_arg(ap, uint32_t);
+	}
+
+	va_end(ap);
 }
 
 /*
@@ -118,7 +137,7 @@ kbd_state_t kbd_setColumns(kbd_keyboard_t *keyboard, ...) {
  */
 kbd_state_t kbd_setRows(kbd_keyboard_t *keyboard, ...) {
 
-	if(keyboard->numberOfRows <= 1)
+	if (keyboard->numberOfRows <= 1)
 		return KBD_NOT_IN_SCANNING_MODE;
 
 	va_list ap;
@@ -144,12 +163,45 @@ kbd_state_t kbd_setRows(kbd_keyboard_t *keyboard, ...) {
  *
  * @retval: row state
  */
-uint32_t kbd_readRow(kbd_keyboard_t *keyboard, uint8_t row){
+uint32_t kbd_readRow(kbd_keyboard_t *keyboard, uint8_t row) {
 
-	if(row>=keyboard->numberOfRows) // >= becouse if numberofRows are 3, max row can be 2(0, 1, 2)
+	if (row >= keyboard->numberOfRows) // >= becouse if numberofRows are 3, max row can be 2(0, 1, 2)
 		return KBD_ERR;
 	return keyboard->stateMatrix[row];
 
+}
+
+/*
+ * read 7 pressed keys
+ * @param: keyboard
+ * @param: pointer to array for store pressed buttons. Make sure array to have 7 bytes!
+ * 			array will be filled with chars assigned using kbd_setLayout()
+ *
+ *
+ * @retval: KBD_OK/ANY_PRESSED
+ */
+kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, char *buttonsArray) {
+
+	uint8_t buttonsArrayFillCounter = 0;
+
+	for (uint8_t rows = 0; rows < keyboard->numberOfRows; rows++) {
+		for (uint8_t columns = 0; columns < keyboard->numberOfColumns;
+				columns++) {
+			if (keyboard->stateMatrix[rows] & 1 << columns) {
+				if (buttonsArrayFillCounter < 7) {
+					buttonsArray[buttonsArrayFillCounter] =
+							keyboard->layout[rows * keyboard->numberOfColumns
+									+ columns];
+					buttonsArrayFillCounter++;
+				} else
+					break;
+			}
+		}
+	}
+	if (buttonsArrayFillCounter == 0)
+		return KBD_ANY_PRESSED;
+	else
+		return KBD_OK;
 }
 
 /*scanning function. run in synchronous interrupt(eg systick 1ms timer)

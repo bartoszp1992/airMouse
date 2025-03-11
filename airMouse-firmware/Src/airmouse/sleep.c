@@ -71,6 +71,6 @@ void sleep_enterSleep(void) {
 
 void sleep_timerInc(void) {
 	sleepTimer++;
-	if (sleepTimer > ONTIME)
+	if (sleepTimer > ONTIME*1000)
 		sleepFlag = 1;
 }

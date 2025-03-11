@@ -22,7 +22,7 @@ uint8_t keys_buttonsChanged = 0;
 int8_t keys_reportWheel;
 
 uint8_t keys_modifiers;
-char keys_keys[6];
+char keys_readQwertyKeys[7];
 
 /*
  * initialize keyboard and mouse keys
@@ -43,7 +43,7 @@ void keys_init(void) {
 	MUS_PRC_GPIO_Port, MUS_PRC_Pin);
 
 	//init qwerty
-	kbd_init(&qwerty, 10, 5, 10, KBD_RESET);
+	kbd_init(&qwerty, 10, 5, 8, KBD_RESET);
 	kbd_setColumns(&qwerty,
 	KBD_COL1_GPIO_Port, KBD_COL1_Pin,
 	KBD_COL2_GPIO_Port, KBD_COL2_Pin,
@@ -61,6 +61,15 @@ void keys_init(void) {
 	KBD_ROW3_GPIO_Port, KBD_ROW3_Pin,
 	KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,
 	KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);
+
+	//layout qwerty
+	kbd_setLayout(&qwerty, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+			'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd',
+			'f', 'g', 'h', 'j', 'k', 'l', KBD_MOD_ENTER,
+			KBD_MOD_LSHIFT, 'z', 'x', 'c', 'v', 'b', 'n', 'm', KBD_MOD_RSHIFT,
+			KBD_MOD_UP,
+			KBD_MOD_LCTRL, KBD_MOD_FN, KBD_MOD_LGUI, KBD_MOD_LALT, ' ',
+			KBD_MOD_RALT, KBD_MOD_LEFT, KBD_MOD_RIGHT, KBD_MOD_DOWN);
 }
 
 /*
@@ -95,5 +104,12 @@ void keys_readMouse(void) {
 
 void keys_readModifiers(void) {
 	keys_modifiers = 0;
+
+}
+
+void keys_readKeyboard(void) {
+
+	//qwerty read test
+	kbd_readFromLayout(&qwerty, keys_readQwertyKeys);
 
 }

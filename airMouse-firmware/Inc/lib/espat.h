@@ -122,6 +122,7 @@ typedef struct {
 	espat_uartInstance_t espUart;
 	char rxBuffer[RX_BUFFER_SIZE];
 	espat_response_t response; //response for AT command
+	uint8_t flagDmaReceive;
 
 #if (BOOT_SUPPORT == 1)
 	espat_pin_t pinBoot;

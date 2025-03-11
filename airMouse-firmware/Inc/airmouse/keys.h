@@ -22,12 +22,13 @@ extern uint8_t keys_buttonsChanged ;
 
 extern int8_t keys_reportWheel;
 extern uint8_t keys_modifiers;
-extern char keys_keys[6];
+extern uint8_t keys_keys[6];
 extern kbd_keyboard_t mouseButtons;
 
 void keys_init(void);
 
 void keys_readMouse(void);
+void keys_readKeyboard(void);
 
 
 #endif /* AIRMOUSE_KEYS_H_ */

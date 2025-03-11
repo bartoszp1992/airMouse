@@ -17,6 +17,8 @@
  *      low battery alert
  *      low power mode
  *      keyboard layout
+ *      sleep mode- gyroscope cant awake
+ *      receiving data from ESP trough DMA.
  *
  *      name propositions:
  *      IMU		flow
@@ -57,6 +59,8 @@ void airMouseSetup(void) {
 }
 void airMouseProcess(void) {
 
+
+
 	//read sensor
 	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
 
@@ -85,6 +89,9 @@ void airMouseProcess(void) {
 
 	//read mouse buttons
 	keys_readMouse();
+
+	//read qwerty buttons
+	keys_readKeyboard();
 
 	/*
 	 * check with previous report.
