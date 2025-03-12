@@ -66,7 +66,7 @@ typedef enum {
 #define P_BHI "BLEHIDINIT" //(1/0)
 #define P_BHM "BLEHIDMUS"	//send mouse data (keys, x, y, wheel)
 #define S_BHN "BLEHIDNAME"
-#define P_BHK "BLEHIDKEY" //send keyboard data(mod, k1, k2, k3, k4, k5, k6)
+#define P_BHK "BLEHIDKB" //send keyboard data(mod, k1, k2, k3, k4, k5, k6)
 #define P_BCP "BLECONNPARAM"
 
 #define P_BI "BLEINIT"

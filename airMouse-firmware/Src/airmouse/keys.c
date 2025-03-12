@@ -25,27 +25,31 @@ int8_t keys_mouseReportWheel;
 //keyboard
 kbd_key_t keys_qwertyPressedOn[KBD_MAX_PRESSED_BUTTONS];
 uint8_t keys_qwertyReportModifiers;
-uint8_t keys_qwertyReportKeys[6];
-
+uint8_t keys_qwertyReportModifiersPrevious;
+uint8_t keys_qwertyReportKeys[KEYS_MAX_KEYS];
+uint8_t keys_qwertyReportKeysPrevious[KEYS_MAX_KEYS];
+uint8_t keys_qwertyFlagSendReport = 0;
+uint8_t keys_qwertyKeysChanged = 0;
 
 /*
  * initialize keyboard and mouse keys
  */
 void keys_init(void) {
 	//init mouse buttons
-	kbd_init(&mouseButtons, 10, 1, 10, KBD_RESET, KBD_COLUMN_REVERSE_DIS);
-	kbd_setColumns(&mouseButtons,
-	MUS_LB_GPIO_Port, MUS_LB_Pin,
-	MUS_RB_GPIO_Port, MUS_RB_Pin,
-	MUS_MB_GPIO_Port, MUS_MB_Pin,
-	MUS_FWD_GPIO_Port, MUS_FWD_Pin,
-	MUS_BCK_GPIO_Port, MUS_BCK_Pin,
-	MUS_UP_GPIO_Port, MUS_UP_Pin,
-	MUS_DN_GPIO_Port, MUS_DN_Pin,
-	MUS_DPI_GPIO_Port, MUS_DPI_Pin,
-	MUS_HOME_GPIO_Port, MUS_HOME_Pin,
-	MUS_PRC_GPIO_Port, MUS_PRC_Pin);
-	kbd_setLayout(&mouseButtons, //
+	kbd_init(&mouseButtons, 10, 1, 8, KBD_RESET, KBD_COLUMN_REVERSE_DIS);
+	kbd_setColumns(&mouseButtons,                           //
+			MUS_LB_GPIO_Port, MUS_LB_Pin,                           //
+			MUS_RB_GPIO_Port, MUS_RB_Pin,                           //
+			MUS_MB_GPIO_Port, MUS_MB_Pin,                           //
+			MUS_FWD_GPIO_Port, MUS_FWD_Pin,                         //
+			MUS_BCK_GPIO_Port, MUS_BCK_Pin,                         //
+			MUS_UP_GPIO_Port, MUS_UP_Pin,                           //
+			MUS_DN_GPIO_Port, MUS_DN_Pin,                           //
+			MUS_DPI_GPIO_Port, MUS_DPI_Pin,                         //
+			MUS_HOME_GPIO_Port, MUS_HOME_Pin,                       //
+			MUS_PRC_GPIO_Port, MUS_PRC_Pin                          //
+			);
+	kbd_setLayout(&mouseButtons,                            //
 			KBD_KEY_TYPE_BITSHIFT, HID_MOUSE_MASK_L,        //
 			KBD_KEY_TYPE_BITSHIFT, HID_MOUSE_MASK_R,        //
 			KBD_KEY_TYPE_BITSHIFT, HID_MOUSE_MASK_M,        //
@@ -61,22 +65,22 @@ void keys_init(void) {
 	//init qwerty
 	kbd_init(&qwerty, 10, 5, 8, KBD_RESET, KBD_COLUMN_REVERSE_EN);
 	kbd_setColumns(&qwerty,               //
-	KBD_COL1_GPIO_Port, KBD_COL1_Pin,     //
-	KBD_COL2_GPIO_Port, KBD_COL2_Pin,     //
-	KBD_COL3_GPIO_Port, KBD_COL3_Pin,     //
-	KBD_COL4_GPIO_Port, KBD_COL4_Pin,     //
-	KBD_COL5_GPIO_Port, KBD_COL5_Pin,     //
-	KBD_COL6_GPIO_Port, KBD_COL6_Pin,     //
-	KBD_COL7_GPIO_Port, KBD_COL7_Pin,     //
-	KBD_COL8_GPIO_Port, KBD_COL8_Pin,     //
-	KBD_COL9_GPIO_Port, KBD_COL9_Pin,     //
-	KBD_COL10_GPIO_Port, KBD_COL10_Pin);  //
+			KBD_COL1_GPIO_Port, KBD_COL1_Pin,     //
+			KBD_COL2_GPIO_Port, KBD_COL2_Pin,     //
+			KBD_COL3_GPIO_Port, KBD_COL3_Pin,     //
+			KBD_COL4_GPIO_Port, KBD_COL4_Pin,     //
+			KBD_COL5_GPIO_Port, KBD_COL5_Pin,     //
+			KBD_COL6_GPIO_Port, KBD_COL6_Pin,     //
+			KBD_COL7_GPIO_Port, KBD_COL7_Pin,     //
+			KBD_COL8_GPIO_Port, KBD_COL8_Pin,     //
+			KBD_COL9_GPIO_Port, KBD_COL9_Pin,     //
+			KBD_COL10_GPIO_Port, KBD_COL10_Pin);  //
 	kbd_setRows(&qwerty,                  //
-	KBD_ROW1_GPIO_Port, KBD_ROW1_Pin,     //
-	KBD_ROW2_GPIO_Port, KBD_ROW2_Pin,     //
-	KBD_ROW3_GPIO_Port, KBD_ROW3_Pin,     //
-	KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,     //
-	KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);    //
+			KBD_ROW1_GPIO_Port, KBD_ROW1_Pin,     //
+			KBD_ROW2_GPIO_Port, KBD_ROW2_Pin,     //
+			KBD_ROW3_GPIO_Port, KBD_ROW3_Pin,     //
+			KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,     //
+			KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);    //
 	kbd_setLayout(&qwerty,                                     //
 			KBD_KEY_TYPE_CHAR, '1',                            //
 			KBD_KEY_TYPE_CHAR, '2',                            //
@@ -143,19 +147,40 @@ void keys_readMouse(void) {
 
 	kbd_readFromLayout(&mouseButtons, keys_mousePressedOn);
 
-	for(uint8_t i=0; i<KBD_MAX_PRESSED_BUTTONS; i++){
-		if(keys_mousePressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
+	for (uint8_t i = 0; i < KBD_MAX_PRESSED_BUTTONS; i++) {
+
+		if (keys_mousePressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
 			keys_mouseReportButton |= keys_mousePressedOn[i].bitshift;
-		else if(keys_mousePressedOn[i].type == KBD_KEY_TYPE_WHEEL)
+
+		else if (keys_mousePressedOn[i].type == KBD_KEY_TYPE_WHEEL)
 			keys_mouseReportWheel = keys_mousePressedOn[i].wheel;
 	}
 
 }
 
+void keys_readQwerty(void) {
 
-void keys_readKeyboard(void) {
+	memset(keys_qwertyReportKeys, 0, sizeof(keys_qwertyReportKeys));
+	keys_qwertyReportModifiers = 0;
 
-	//qwerty read test
 	kbd_readFromLayout(&qwerty, keys_qwertyPressedOn);
+
+	uint8_t keysCounter = 0;
+
+	for (uint8_t i = 0; i < KBD_MAX_PRESSED_BUTTONS; i++) {
+
+		if (keys_qwertyPressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
+			keys_qwertyReportModifiers |= keys_qwertyPressedOn[i].bitshift;
+
+		else if (keys_qwertyPressedOn[i].type == KBD_KEY_TYPE_HIDCODE) {
+			if (keysCounter < KEYS_MAX_KEYS) {
+				keys_qwertyReportKeys[keysCounter] =
+						keys_mousePressedOn[i].code;
+				keysCounter++;
+			}
+
+		}
+
+	}
 
 }

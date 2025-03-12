@@ -216,14 +216,6 @@ kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, kbd_key_t *pressedKeys)
 			if (keyboard->stateMatrix[rows] & 1 << columns) {
 				if (buttonsArrayFillCounter < KBD_MAX_PRESSED_BUTTONS) {
 
-//					if (keyboard->reverse == KBD_COLUMN_REVERSE_EN)
-//						memcpy(&pressedKeys[buttonsArrayFillCounter],
-//								&keyboard->layoutTable[rows
-//										* keyboard->numberOfColumns
-//										+ keyboard->numberOfColumns - 1
-//										- columns], sizeof(kbd_key_t));
-
-//					else if (keyboard->reverse == KBD_COLUMN_REVERSE_DIS)
 						memcpy(&pressedKeys[buttonsArrayFillCounter],
 								&keyboard->layoutTable[rows
 										* keyboard->numberOfColumns + columns],

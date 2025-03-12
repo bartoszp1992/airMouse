@@ -37,7 +37,6 @@
 
 extern void SystemClock_Config(void);
 
-
 int32_t x = 0;
 int32_t z = 0;
 
@@ -55,11 +54,8 @@ void airMouseSetup(void) {
 
 	sensor_init();
 
-
 }
 void airMouseProcess(void) {
-
-
 
 	//read sensor
 	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
@@ -84,34 +80,64 @@ void airMouseProcess(void) {
 
 	}
 
-	//backup previous report
+	//backup previous reports
 	keys_mouseReportButtonPrevious = keys_mouseReportButton;
+	keys_qwertyReportModifiersPrevious = keys_qwertyReportModifiers;
+	memcpy(keys_qwertyReportKeysPrevious, keys_qwertyReportKeys,
+			sizeof(keys_qwertyReportKeys));
 
-	//read mouse buttons
+	//read buttons and keys
 	keys_readMouse();
-
-	//read qwerty buttons
-	keys_readKeyboard();
+	keys_readQwerty();
 
 	/*
 	 * check with previous report.
 	 * using for detection change from 1 to 0
 	 */
-	if(keys_mouseReportButton != keys_mouseReportButtonPrevious)
+	if (keys_mouseReportButton != keys_mouseReportButtonPrevious)
 		keys_mouseButtonsChanged = 1;
 
+	if (memcmp(keys_qwertyReportKeys, keys_qwertyReportKeysPrevious,KEYS_MAX_KEYS) != 0  //
+			|| keys_qwertyReportModifiers != keys_qwertyReportModifiersPrevious          //
+			)
+		keys_qwertyKeysChanged = 1;
 
 	//set flag only if press occurs
-	if (keys_mouseReportButton || keys_mouseReportWheel || keys_mouseButtonsChanged)
+	if (keys_mouseReportButton
+			|| keys_mouseReportWheel
+			|| keys_mouseButtonsChanged
+			)
 		keys_mouseFlagSendReport = 1;
 
-	//send report
+	if (keys_qwertyReportModifiers || keys_qwertyKeysChanged)
+		keys_qwertyFlagSendReport = 1;
+
+	//send mouse report
 	if (keys_mouseFlagSendReport) {
-		sleepTimer = 0;//reset sleep timer
+		sleepTimer = 0; //reset sleep timer
 		keys_mouseFlagSendReport = 0;
 		//send mouse report
-		espAt_sendParams(&bleRadio, P_BHM, 4, keys_mouseReportButton, x, z,
-				keys_mouseReportWheel);
+		espAt_sendParams(&bleRadio, P_BHM, 4,  //
+				keys_mouseReportButton,        //
+				x,                             //
+				z,                             //
+				keys_mouseReportWheel          //
+				);
+	}
+
+	//send keyboard report
+	if (keys_qwertyFlagSendReport) {
+		sleepTimer = 0;
+		keys_qwertyFlagSendReport = 0;
+		espAt_sendParams(&bleRadio, P_BHK, 7,  //
+				keys_qwertyReportModifiers,    //
+				keys_qwertyReportKeys[0],      //
+				keys_qwertyReportKeys[1],      //
+				keys_qwertyReportKeys[2],      //
+				keys_qwertyReportKeys[3],      //
+				keys_qwertyReportKeys[4],      //
+				keys_qwertyReportKeys[5]       //
+				);
 	}
 
 	sleep_enterSleep();
