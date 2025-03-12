@@ -26,8 +26,8 @@ int8_t keys_mouseReportWheel;
 kbd_key_t keys_qwertyPressedOn[KBD_MAX_PRESSED_BUTTONS];
 uint8_t keys_qwertyReportModifiers;
 uint8_t keys_qwertyReportModifiersPrevious;
-uint8_t keys_qwertyReportKeys[KEYS_MAX_KEYS];
-uint8_t keys_qwertyReportKeysPrevious[KEYS_MAX_KEYS];
+int8_t keys_qwertyReportKeys[KEYS_MAX_KEYS];
+int8_t keys_qwertyReportKeysPrevious[KEYS_MAX_KEYS];
 uint8_t keys_qwertyFlagSendReport = 0;
 uint8_t keys_qwertyKeysChanged = 0;
 
@@ -81,56 +81,57 @@ void keys_init(void) {
 			KBD_ROW3_GPIO_Port, KBD_ROW3_Pin,     //
 			KBD_ROW4_GPIO_Port, KBD_ROW4_Pin,     //
 			KBD_ROW5_GPIO_Port, KBD_ROW5_Pin);    //
-	kbd_setLayout(&qwerty,                                     //
-			KBD_KEY_TYPE_CHAR, '1',                            //
-			KBD_KEY_TYPE_CHAR, '2',                            //
-			KBD_KEY_TYPE_CHAR, '3',                            //
-			KBD_KEY_TYPE_CHAR, '4',                            //
-			KBD_KEY_TYPE_CHAR, '5',                            //
-			KBD_KEY_TYPE_CHAR, '6',                            //
-			KBD_KEY_TYPE_CHAR, '7',                            //
-			KBD_KEY_TYPE_CHAR, '8',                            //
-			KBD_KEY_TYPE_CHAR, '9',                            //
-			KBD_KEY_TYPE_CHAR, '0',                            //
-			KBD_KEY_TYPE_CHAR, 'q',                            //
-			KBD_KEY_TYPE_CHAR, 'w',                            //
-			KBD_KEY_TYPE_CHAR, 'e',                            //
-			KBD_KEY_TYPE_CHAR, 'r',                            //
-			KBD_KEY_TYPE_CHAR, 't',                            //
-			KBD_KEY_TYPE_CHAR, 'y',                            //
-			KBD_KEY_TYPE_CHAR, 'u',                            //
-			KBD_KEY_TYPE_CHAR, 'i',                            //
-			KBD_KEY_TYPE_CHAR, 'o',                            //
-			KBD_KEY_TYPE_CHAR, 'p',                            //
-			KBD_KEY_TYPE_CHAR, 'a',                            //
-			KBD_KEY_TYPE_CHAR, 's',                            //
-			KBD_KEY_TYPE_CHAR, 'd',                            //
-			KBD_KEY_TYPE_CHAR, 'f',                            //
-			KBD_KEY_TYPE_CHAR, 'g',                            //
-			KBD_KEY_TYPE_CHAR, 'h',                            //
-			KBD_KEY_TYPE_CHAR, 'j',                            //
-			KBD_KEY_TYPE_CHAR, 'k',                            //
-			KBD_KEY_TYPE_CHAR, 'l',                            //
-			KBD_KEY_TYPE_HIDCODE, HID_KEY_ENTER,               //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LSHIFT,        //
-			KBD_KEY_TYPE_CHAR, 'z',                            //
-			KBD_KEY_TYPE_CHAR, 'x',                            //
-			KBD_KEY_TYPE_CHAR, 'c',                            //
-			KBD_KEY_TYPE_CHAR, 'v',                            //
-			KBD_KEY_TYPE_CHAR, 'b',                            //
-			KBD_KEY_TYPE_CHAR, 'n',                            //
-			KBD_KEY_TYPE_CHAR, 'm',                            //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_RSHIFT,        //
-			KBD_KEY_TYPE_HIDCODE, HID_KEY_UP,                  //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LCTRL,         //
-			KBD_KEY_TYPE_INTERNAL, HID_INTERNAL_FN,            //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LGUI,          //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LALT,          //
-			KBD_KEY_TYPE_CHAR, ' ',                            //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_RALT,               //
-			KBD_KEY_TYPE_HIDCODE, HID_KEY_LEFT,                //
-			KBD_KEY_TYPE_HIDCODE, HID_KEY_RIGHT,               //
-			KBD_KEY_TYPE_HIDCODE, HID_KEY_DOWN                 //
+	kbd_setLayout(&qwerty,                                      //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_1,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_2,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_3,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_4,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_5,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_6,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_7,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_8,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_9,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_0,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_Q,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_W,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_E,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_R,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_T,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_Y,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_U,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_I,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_O,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_P,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_A,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_S,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_D,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_F,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_G,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_H,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_J,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_K,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_L,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_ENTER,            //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LSHIFT,     //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_Z,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_X,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_C,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_V,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_B,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_N,                //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_M,                //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_RSHIFT,     //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_UP,               //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LCTRL,      //
+			KBD_KEY_TYPE_INTERNAL, HID_INTERNAL_FN,         //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LGUI,       //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LALT,       //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_SPACE,            //
+			KBD_KEY_TYPE_NONE, 0,                           //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_RALT,            //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_LEFT,             //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_RIGHT,            //
+			KBD_KEY_TYPE_HIDCODE, HID_KEY_DOWN              //
 			);
 }
 
@@ -175,7 +176,7 @@ void keys_readQwerty(void) {
 		else if (keys_qwertyPressedOn[i].type == KBD_KEY_TYPE_HIDCODE) {
 			if (keysCounter < KEYS_MAX_KEYS) {
 				keys_qwertyReportKeys[keysCounter] =
-						keys_mousePressedOn[i].code;
+						keys_qwertyPressedOn[i].code;
 				keysCounter++;
 			}
 

@@ -27,8 +27,8 @@ extern int8_t keys_mouseReportWheel;
 extern kbd_key_t keys_qwertyPressedOn[KBD_MAX_PRESSED_BUTTONS];
 extern uint8_t keys_qwertyReportModifiers;
 extern uint8_t keys_qwertyReportModifiersPrevious;
-extern uint8_t keys_qwertyReportKeys[6];
-extern uint8_t keys_qwertyReportKeysPrevious[6];
+extern int8_t keys_qwertyReportKeys[6];
+extern int8_t keys_qwertyReportKeysPrevious[6];
 extern uint8_t keys_qwertyFlagSendReport;
 extern uint8_t keys_qwertyKeysChanged;
 

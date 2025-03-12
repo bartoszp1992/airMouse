@@ -60,7 +60,8 @@ typedef enum{
 	KBD_KEY_TYPE_HIDCODE, //hidcodes, like 0x05
 	KBD_KEY_TYPE_BITSHIFT, //bitshift's for mod keys/mouse buttons- becouse modkeys are sent as bit states in one byte
 	KBD_KEY_TYPE_WHEEL,//for mouse encoder
-	KBD_KEY_TYPE_INTERNAL //internal type keys, like sleep or something, not for send outside MCU, like FN key
+	KBD_KEY_TYPE_INTERNAL, //internal type keys, like sleep or something, not for send outside MCU, like FN key
+	KBD_KEY_TYPE_NONE//if key does not exist
 }kbd_keyType_t;
 
 //layout key entry
