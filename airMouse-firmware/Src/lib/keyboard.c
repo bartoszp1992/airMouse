@@ -32,7 +32,7 @@ void kbd_writePin(kbd_pin_t *pin, kbd_pinState_t state) {
  * @param: columns count(no more than 32)
  * @param: rows count
  * @param: prescaler for scanning
- * @param: KBD_SET/RESET
+ * @param: KBD_SET/RESET- logic level on actual scanning row, and logic level of pressed button
  *
  * @retval: status
  */
@@ -44,6 +44,9 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 
 	if (columns > 32)
 		return KBD_TOO_MUCH_COLUMNS;
+
+	//set layout output as spaces
+	//memset(layout, ' ', KBD_MAX_PRESSED);
 
 	keyboard->numberOfColumns = columns;
 	keyboard->numberOfRows = rows;
@@ -172,10 +175,11 @@ uint32_t kbd_readRow(kbd_keyboard_t *keyboard, uint8_t row) {
 }
 
 /*
- * read 7 pressed keys
+ * read KBD_MAX_PRESSED_BUTTONS pressed keys
  * @param: keyboard
- * @param: pointer to array for store pressed buttons. Make sure array to have 7 bytes!
- * 			array will be filled with chars assigned using kbd_setLayout()
+ * @param: pointer to array for store pressed buttons.
+ * Make sure array to have min. KBD_MAX_PRESSED_BUTTONS bytes!
+ * array will be filled with chars assigned using kbd_setLayout()
  *
  *
  * @retval: KBD_OK/ANY_PRESSED
@@ -188,16 +192,22 @@ kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, char *buttonsArray) {
 		for (uint8_t columns = 0; columns < keyboard->numberOfColumns;
 				columns++) {
 			if (keyboard->stateMatrix[rows] & 1 << columns) {
-				if (buttonsArrayFillCounter < 7) {
+				if (buttonsArrayFillCounter < KBD_MAX_PRESSED_BUTTONS) {
 					buttonsArray[buttonsArrayFillCounter] =
 							keyboard->layout[rows * keyboard->numberOfColumns
-									+ columns];
+									+ keyboard->numberOfColumns - 1 - columns];
 					buttonsArrayFillCounter++;
 				} else
 					break;
 			}
 		}
 	}
+
+	//fill not pressed as spaces
+	for(uint8_t i = buttonsArrayFillCounter; i<KBD_MAX_PRESSED_BUTTONS; i++){
+		buttonsArray[i] = ' ';
+	}
+
 	if (buttonsArrayFillCounter == 0)
 		return KBD_ANY_PRESSED;
 	else
@@ -219,7 +229,7 @@ void kbd_scanning(kbd_keyboard_t *keyboard) {
 		//save previous row to matrix
 		//read current row
 		for (uint8_t i = 0; i < keyboard->numberOfColumns; i++) {
-			if (kbd_readPin(&keyboard->columns[i]) == KBD_SCAN_ROW_STATE)
+			if (kbd_readPin(&keyboard->columns[i]) == keyboard->pressedState)
 				keyboard->stateMatrix[keyboard->actualScannedRow] |= 1 << i;
 			else
 				keyboard->stateMatrix[keyboard->actualScannedRow] &= ~(1 << i);
@@ -234,11 +244,11 @@ void kbd_scanning(kbd_keyboard_t *keyboard) {
 
 			//reset all rows
 			for (uint8_t i = 0; i < keyboard->numberOfRows; i++)
-				kbd_writePin(&keyboard->rows[i], !KBD_SCAN_ROW_STATE);
+				kbd_writePin(&keyboard->rows[i], !keyboard->pressedState);
 
 			//set next
 			kbd_writePin(&keyboard->rows[keyboard->actualScannedRow],
-			KBD_SCAN_ROW_STATE);
+					keyboard->pressedState);
 		}
 
 	}

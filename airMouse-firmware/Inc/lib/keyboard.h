@@ -29,6 +29,8 @@
 #define KBD_MOD_DOWN    0x0b
 #define KBD_MOD_RIGHT   0x0c
 
+#define KBD_MAX_PRESSED_BUTTONS 7
+
 typedef enum{
 	KBD_OK = 0,
 	KBD_ERR = 1,
@@ -44,9 +46,6 @@ typedef enum{
 	KBD_SET = 1
 }kbd_pinState_t;
 
-//level on actual scanner row. on other rows level will be opposite
-//thats also level of pressed button checked on corresponding column pin
-#define KBD_SCAN_ROW_STATE KBD_RESET
 
 
 //hardware specific pin struct //port
