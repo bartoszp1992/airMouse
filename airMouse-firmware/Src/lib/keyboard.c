@@ -216,14 +216,14 @@ kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, kbd_key_t *pressedKeys)
 			if (keyboard->stateMatrix[rows] & 1 << columns) {
 				if (buttonsArrayFillCounter < KBD_MAX_PRESSED_BUTTONS) {
 
-					if (keyboard->reverse == KBD_COLUMN_REVERSE_EN)
-						memcpy(&pressedKeys[buttonsArrayFillCounter],
-								&keyboard->layoutTable[rows
-										* keyboard->numberOfColumns
-										+ keyboard->numberOfColumns - 1
-										- columns], sizeof(kbd_key_t));
+//					if (keyboard->reverse == KBD_COLUMN_REVERSE_EN)
+//						memcpy(&pressedKeys[buttonsArrayFillCounter],
+//								&keyboard->layoutTable[rows
+//										* keyboard->numberOfColumns
+//										+ keyboard->numberOfColumns - 1
+//										- columns], sizeof(kbd_key_t));
 
-					else if (keyboard->reverse == KBD_COLUMN_REVERSE_DIS)
+//					else if (keyboard->reverse == KBD_COLUMN_REVERSE_DIS)
 						memcpy(&pressedKeys[buttonsArrayFillCounter],
 								&keyboard->layoutTable[rows
 										* keyboard->numberOfColumns + columns],
@@ -263,11 +263,30 @@ void kbd_scanning(kbd_keyboard_t *keyboard) {
 
 		//save previous row to matrix
 		//read current row
-		for (uint8_t i = 0; i < keyboard->numberOfColumns; i++) {
-			if (kbd_readPin(&keyboard->columns[i]) == keyboard->pressedState)
-				keyboard->stateMatrix[keyboard->actualScannedRow] |= 1 << i;
-			else
-				keyboard->stateMatrix[keyboard->actualScannedRow] &= ~(1 << i);
+
+		if (keyboard->reverse == KBD_COLUMN_REVERSE_DIS) {
+			for (uint8_t i = 0; i < keyboard->numberOfColumns; i++) {
+
+				if (kbd_readPin(&keyboard->columns[i])
+						== keyboard->pressedState)
+					keyboard->stateMatrix[keyboard->actualScannedRow] |= 1 << i;
+				else
+					keyboard->stateMatrix[keyboard->actualScannedRow] &= ~(1
+							<< i);
+			}
+
+		} else if (keyboard->reverse == KBD_COLUMN_REVERSE_EN) {
+			for (uint8_t i = 0; i < keyboard->numberOfColumns; i++) {
+
+				if (kbd_readPin(&keyboard->columns[i])
+						== keyboard->pressedState)
+					keyboard->stateMatrix[keyboard->actualScannedRow] |= 1
+							<< (keyboard->numberOfColumns - 1 - i);
+				else
+					keyboard->stateMatrix[keyboard->actualScannedRow] &= ~(1
+							<< (keyboard->numberOfColumns - 1 - i));
+			}
+
 		}
 
 		//switch row only if there's more than one(Scanning mode)
