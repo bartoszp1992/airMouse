@@ -33,11 +33,13 @@ void kbd_writePin(kbd_pin_t *pin, kbd_pinState_t state) {
  * @param: rows count
  * @param: prescaler for scanning
  * @param: KBD_SET/RESET- logic level on actual scanning row, and logic level of pressed button
+ * @param: KBD_REVERSE_DIS/EN- allows you to reverse column order
  *
  * @retval: status
  */
 kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
-		uint32_t prescaler, kbd_state_t pressedState) {
+		uint32_t prescaler, kbd_state_t pressedState,
+		kbd_columnReverse_t reverse) {
 
 	if (rows < 1 || columns < 1)
 		return KBD_ROWS_OR_COLUMNS_NUMBER_CANT_BE_0;
@@ -53,35 +55,27 @@ kbd_state_t kbd_init(kbd_keyboard_t *keyboard, uint8_t columns, uint8_t rows,
 	keyboard->numberOfKeys = keyboard->numberOfColumns * keyboard->numberOfRows;
 	keyboard->prescaler = prescaler;
 	keyboard->pressedState = pressedState;
+	keyboard->reverse = reverse;
 
 	uint32_t pinStructSize = sizeof(kbd_pin_t);
 
 	keyboard->columns = malloc(keyboard->numberOfColumns * pinStructSize);
-	if (keyboard->columns == NULL)
-		return KBD_NOT_ENOUGH_MEMORY;
-
 	keyboard->rows = malloc(keyboard->numberOfRows * pinStructSize);
-	if (keyboard->rows == NULL) {
-		free(keyboard->columns);
-		return KBD_NOT_ENOUGH_MEMORY;
-	}
-
 	keyboard->stateMatrix = malloc(rows * sizeof(uint32_t));
-	if (keyboard->stateMatrix == NULL) {
-		free(keyboard->columns);
-		free(keyboard->rows);
-		return KBD_NOT_ENOUGH_MEMORY;
-	}
+	keyboard->layoutTable = malloc(keyboard->numberOfKeys * sizeof(kbd_key_t));
 
-	keyboard->layout = malloc(keyboard->numberOfKeys * sizeof(char));
-	if (keyboard->layout == NULL) {
+	if (keyboard->columns == NULL || keyboard->rows == NULL
+			|| keyboard->stateMatrix == NULL || keyboard->layoutTable == NULL) {
 		free(keyboard->columns);
 		free(keyboard->rows);
 		free(keyboard->stateMatrix);
+		free(keyboard->layoutTable);
 		return KBD_NOT_ENOUGH_MEMORY;
 	}
 
 	memset(keyboard->stateMatrix, 0, rows * sizeof(uint32_t));
+	memset(keyboard->layoutTable, 0,
+			sizeof(keyboard->layoutTable) * keyboard->numberOfKeys);
 
 	keyboard->actualScannedRow = 0;
 	return KBD_OK;
@@ -101,7 +95,35 @@ void kbd_setLayout(kbd_keyboard_t *keyboard, ...) {
 	va_start(ap, keyboard);
 
 	for (uint8_t i = 0; i < keyboard->numberOfKeys; i++) {
-		keyboard->layout[i] = (char) va_arg(ap, uint32_t);
+
+		keyboard->layoutTable[i].type = (kbd_keyType_t) va_arg(ap, uint32_t);
+
+		switch (keyboard->layoutTable[i].type) {
+		case KBD_KEY_TYPE_BITSHIFT:
+			keyboard->layoutTable[i].bitshift = (uint8_t) va_arg(ap, uint32_t);
+			break;
+		case KBD_KEY_TYPE_CHAR:
+			keyboard->layoutTable[i].character = (char) va_arg(ap, uint32_t);
+			break;
+
+		case KBD_KEY_TYPE_HIDCODE:
+			keyboard->layoutTable[i].code = (int8_t) va_arg(ap, uint32_t);
+			break;
+
+		case KBD_KEY_TYPE_WHEEL:
+			keyboard->layoutTable[i].wheel = (int8_t) va_arg(ap, uint32_t);
+			break;
+
+		case KBD_KEY_TYPE_INTERNAL:
+			keyboard->layoutTable[i].internal = (uint8_t) va_arg(ap, uint32_t);
+			break;
+
+		default:	//e.g. for KBD_KEY_TYPE_RELEASED
+			va_arg(ap, uint32_t);
+			keyboard->layoutTable[i].internal = 0;
+			break;
+		}
+
 	}
 
 	va_end(ap);
@@ -177,14 +199,14 @@ uint32_t kbd_readRow(kbd_keyboard_t *keyboard, uint8_t row) {
 /*
  * read KBD_MAX_PRESSED_BUTTONS pressed keys
  * @param: keyboard
- * @param: pointer to array for store pressed buttons.
- * Make sure array to have min. KBD_MAX_PRESSED_BUTTONS bytes!
- * array will be filled with chars assigned using kbd_setLayout()
+ * @param: pointer to array for store pressed buttons	(*kbd_key_t)!!!!
+ * Make sure array to have min. (KBD_MAX_PRESSED_BUTTONS * kbd_key_t) size!
+ * array will be filled with types and values according to pressed buttons and layout table.
  *
  *
  * @retval: KBD_OK/ANY_PRESSED
  */
-kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, char *buttonsArray) {
+kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, kbd_key_t *pressedKeys) {
 
 	uint8_t buttonsArrayFillCounter = 0;
 
@@ -193,9 +215,20 @@ kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, char *buttonsArray) {
 				columns++) {
 			if (keyboard->stateMatrix[rows] & 1 << columns) {
 				if (buttonsArrayFillCounter < KBD_MAX_PRESSED_BUTTONS) {
-					buttonsArray[buttonsArrayFillCounter] =
-							keyboard->layout[rows * keyboard->numberOfColumns
-									+ keyboard->numberOfColumns - 1 - columns];
+
+					if (keyboard->reverse == KBD_COLUMN_REVERSE_EN)
+						memcpy(&pressedKeys[buttonsArrayFillCounter],
+								&keyboard->layoutTable[rows
+										* keyboard->numberOfColumns
+										+ keyboard->numberOfColumns - 1
+										- columns], sizeof(kbd_key_t));
+
+					else if (keyboard->reverse == KBD_COLUMN_REVERSE_DIS)
+						memcpy(&pressedKeys[buttonsArrayFillCounter],
+								&keyboard->layoutTable[rows
+										* keyboard->numberOfColumns + columns],
+								sizeof(kbd_key_t));
+
 					buttonsArrayFillCounter++;
 				} else
 					break;
@@ -203,9 +236,11 @@ kbd_state_t kbd_readFromLayout(kbd_keyboard_t *keyboard, char *buttonsArray) {
 		}
 	}
 
-	//fill not pressed as spaces
-	for(uint8_t i = buttonsArrayFillCounter; i<KBD_MAX_PRESSED_BUTTONS; i++){
-		buttonsArray[i] = ' ';
+	//fill not pressed button's fields
+	for (uint8_t i = buttonsArrayFillCounter; i < KBD_MAX_PRESSED_BUTTONS;
+			i++) {
+		pressedKeys[i].type = KBD_KEY_TYPE_RELEASED;
+		pressedKeys[i].internal = 0;
 	}
 
 	if (buttonsArrayFillCounter == 0)

@@ -8,6 +8,7 @@
 #ifndef AIRMOUSE_H_
 #define AIRMOUSE_H_
 
+#include <key_codes.h>
 #include <keys.h>
 #include <led.h>
 #include "espat.h"
@@ -17,7 +18,6 @@
 #include "keyboard.h"
 #include <stdint.h>
 #include "cursor.h"
-#include "hidcodes.h"
 #include "config.h"
 #include "radio.h"
 #include "sensor.h"

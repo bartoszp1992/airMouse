@@ -80,12 +80,12 @@ void airMouseProcess(void) {
 		z = cursor_output(&cursor, CURSOR_AXIS_Z);
 
 		if (abs(x) > 0 || abs(z) > 0)
-			keys_flagMouseSendReport = 1;
+			keys_mouseFlagSendReport = 1;
 
 	}
 
 	//backup previous report
-	keys_reportMouseButtonPrevious = keys_reportMouseButton;
+	keys_mouseReportButtonPrevious = keys_mouseReportButton;
 
 	//read mouse buttons
 	keys_readMouse();
@@ -97,21 +97,21 @@ void airMouseProcess(void) {
 	 * check with previous report.
 	 * using for detection change from 1 to 0
 	 */
-	if(keys_reportMouseButton != keys_reportMouseButtonPrevious)
-		keys_buttonsChanged = 1;
+	if(keys_mouseReportButton != keys_mouseReportButtonPrevious)
+		keys_mouseButtonsChanged = 1;
 
 
 	//set flag only if press occurs
-	if (keys_reportMouseButton || keys_reportWheel || keys_buttonsChanged)
-		keys_flagMouseSendReport = 1;
+	if (keys_mouseReportButton || keys_mouseReportWheel || keys_mouseButtonsChanged)
+		keys_mouseFlagSendReport = 1;
 
 	//send report
-	if (keys_flagMouseSendReport) {
+	if (keys_mouseFlagSendReport) {
 		sleepTimer = 0;//reset sleep timer
-		keys_flagMouseSendReport = 0;
+		keys_mouseFlagSendReport = 0;
 		//send mouse report
-		espAt_sendParams(&bleRadio, P_BHM, 4, keys_reportMouseButton, x, z,
-				keys_reportWheel);
+		espAt_sendParams(&bleRadio, P_BHM, 4, keys_mouseReportButton, x, z,
+				keys_mouseReportWheel);
 	}
 
 	sleep_enterSleep();

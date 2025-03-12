@@ -91,7 +91,7 @@ void HardFault_Handler(void)
   {
     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
 //		segmentation fault debug
-//	  	break;
+	  	break;
     /* USER CODE END W1_HardFault_IRQn 0 */
   }
 }
