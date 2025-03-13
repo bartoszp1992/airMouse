@@ -14,7 +14,9 @@
  *      -low battery alert
  *      -sleep mode- gyroscope cant awake
  *      -receiving data from ESP trough DMA.
- *      -keyboard buttons are send too frequently
+ *      -DONE keyboard buttons are send too frequently
+ *      -FN functionality(backspace, dot, comma, etc)
+ *      -back and forward buttons are not working
  *
  *      name propositions:
  *      IMU		flow
@@ -33,14 +35,11 @@
 
 extern void SystemClock_Config(void);
 
-int32_t x = 0;
-int32_t z = 0;
-
 void airMouseSetup(void) {
 
 	//_________________________________________KEYS_________________________________________
 
-	keys_init();
+	amhid_init();
 
 	//_________________________________________RADIO_________________________________________
 
@@ -53,86 +52,64 @@ void airMouseSetup(void) {
 }
 void airMouseProcess(void) {
 
+	//_________________________________________MOUSE_________________________________________
 	//read sensor
-	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
-
-		//update gyro data
-		sensorStat = lsm6ds_updateGR(&mems);
-
-		//send gyro data to cursor lib
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X),
-				CURSOR_AXIS_X);
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Y),
-				CURSOR_AXIS_Y);
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z),
-				CURSOR_AXIS_Z);
-
-		//read mouse movement from cursor lib
-		x = cursor_output(&cursor, CURSOR_AXIS_X);
-		z = cursor_output(&cursor, CURSOR_AXIS_Z);
-
-		if (abs(x) > 0 || abs(z) > 0)
-			keys_mouseFlagSendReport = 1;
-
-	}
-
-	//backup previous reports
-	keys_mouseReportButtonPrevious = keys_mouseReportButton;
-	keys_qwertyReportModifiersPrevious = keys_qwertyReportModifiers;
-	memcpy(keys_qwertyReportKeysPrevious, keys_qwertyReportKeys,
-			sizeof(keys_qwertyReportKeys));
-
-	//read buttons and keys
-	keys_readMouse();
-	keys_readQwerty();
+	amhid_readCursor();
+	amhid_mouseReportButtonPrevious = amhid_mouseReportButton;
+	amhid_readButtonsMouse();
 
 	/*
 	 * check with previous report.
 	 * using for detection change from 1 to 0
 	 */
-	if (keys_mouseReportButton != keys_mouseReportButtonPrevious)
-		keys_mouseButtonsChanged = 1;
-
-	if (memcmp(keys_qwertyReportKeys, keys_qwertyReportKeysPrevious,KEYS_MAX_KEYS) != 0  //
-			|| keys_qwertyReportModifiers != keys_qwertyReportModifiersPrevious          //
-			)
-		keys_qwertyKeysChanged = 1;
-
-	//set flag only if press occurs
-	if (keys_mouseReportButton
-			|| keys_mouseReportWheel
-			|| keys_mouseButtonsChanged
-			)
-		keys_mouseFlagSendReport = 1;
-
-	if (keys_qwertyReportModifiers || keys_qwertyKeysChanged)
-		keys_qwertyFlagSendReport = 1;
+	if (amhid_mouseReportButton != amhid_mouseReportButtonPrevious
+			|| amhid_mouseReportWheel)
+		amhid_mouseFlagSendReport = 1;
 
 	//send mouse report
-	if (keys_mouseFlagSendReport) {
+	if (amhid_mouseFlagSendReport) {
 		sleepTimer = 0; //reset sleep timer
-		keys_mouseFlagSendReport = 0;
+		amhid_mouseFlagSendReport = 0;
 		//send mouse report
-		espAt_sendParams(&bleRadio, P_BHM, 4,  //
-				keys_mouseReportButton,        //
-				x,                             //
-				z,                             //
-				keys_mouseReportWheel          //
+		espAt_sendParams(&bleRadio, P_BHM, 4,   //
+				amhid_mouseReportButton,        //
+				amhid_mouseXmove,               //
+				amhid_mouseYmove,               //
+				amhid_mouseReportWheel          //
 				);
 	}
 
+	//_________________________________________KEYBOARD_______________________________________
+
+
+	memcpy(amhid_qwertyReportKeysPrevious, amhid_qwertyReportKeys,
+			sizeof(amhid_qwertyReportKeys));
+	amhid_qwertyReportModifiersPrevious = amhid_qwertyReportModifiers;
+
+	//read buttons and keys
+
+	amhid_readKeysQwerty();
+
+	if (memcmp(amhid_qwertyReportKeys, amhid_qwertyReportKeysPrevious,
+	KEYS_MAX_KEYS) != 0
+			|| amhid_qwertyReportModifiers
+					!= amhid_qwertyReportModifiersPrevious)
+		amhid_qwertyFlagSendReport = 1;
+	else
+		amhid_qwertyFlagSendReport = 0;
+
 	//send keyboard report
-	if (keys_qwertyFlagSendReport) {
+	if (amhid_qwertyFlagSendReport) {
 		sleepTimer = 0;
-		keys_qwertyFlagSendReport = 0;
-		espAt_sendParams(&bleRadio, P_BHK, 7,  //
-				keys_qwertyReportModifiers,    //
-				keys_qwertyReportKeys[0],      //
-				keys_qwertyReportKeys[1],      //
-				keys_qwertyReportKeys[2],      //
-				keys_qwertyReportKeys[3],      //
-				keys_qwertyReportKeys[4],      //
-				keys_qwertyReportKeys[5]       //
+		amhid_qwertyFlagSendReport = 0;
+		espAt_sendParams(&bleRadio, P_BHK, 7,   //
+				amhid_qwertyReportModifiers,    //
+				amhid_qwertyReportKeys[0],      //
+				amhid_qwertyReportKeys[1],      //
+				amhid_qwertyReportKeys[2],      //
+				amhid_qwertyReportKeys[3],      //
+				amhid_qwertyReportKeys[4],      //
+				amhid_qwertyReportKeys[5]       //
 				);
 	}
 

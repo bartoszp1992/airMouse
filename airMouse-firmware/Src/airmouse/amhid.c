@@ -8,33 +8,35 @@
  *
  */
 
-#include <keys.h>
+#include <amhid.h>
 
 //keyboards structures
 kbd_keyboard_t qwerty;
 kbd_keyboard_t mouseButtons;
 
+//cursor
+int32_t amhid_mouseXmove = 0;
+int32_t amhid_mouseYmove = 0;
+
 //mouse
-kbd_key_t keys_mousePressedOn[KBD_MAX_PRESSED_BUTTONS];
-uint8_t keys_mouseReportButton;
-uint8_t keys_mouseReportButtonPrevious;
-uint8_t keys_mouseFlagSendReport = 0;
-uint8_t keys_mouseButtonsChanged = 0;
-int8_t keys_mouseReportWheel;
+kbd_key_t amhid_mousePressedOn[KBD_MAX_PRESSED_BUTTONS];
+uint8_t amhid_mouseReportButton;
+uint8_t amhid_mouseReportButtonPrevious;
+uint8_t amhid_mouseFlagSendReport = 0;
+int8_t amhid_mouseReportWheel;
 
 //keyboard
-kbd_key_t keys_qwertyPressedOn[KBD_MAX_PRESSED_BUTTONS];
-uint8_t keys_qwertyReportModifiers;
-uint8_t keys_qwertyReportModifiersPrevious;
-int8_t keys_qwertyReportKeys[KEYS_MAX_KEYS];
-int8_t keys_qwertyReportKeysPrevious[KEYS_MAX_KEYS];
-uint8_t keys_qwertyFlagSendReport = 0;
-uint8_t keys_qwertyKeysChanged = 0;
+kbd_key_t amhid_qwertyPressedOn[KBD_MAX_PRESSED_BUTTONS];
+uint8_t amhid_qwertyReportModifiers;
+uint8_t amhid_qwertyReportModifiersPrevious;
+int8_t amhid_qwertyReportKeys[KEYS_MAX_KEYS];
+int8_t amhid_qwertyReportKeysPrevious[KEYS_MAX_KEYS];
+uint8_t amhid_qwertyFlagSendReport = 0;
 
 /*
  * initialize keyboard and mouse keys
  */
-void keys_init(void) {
+void amhid_init(void) {
 	//init mouse buttons
 	kbd_init(&mouseButtons, 10, 1, 8, KBD_RESET, KBD_COLUMN_REVERSE_DIS);
 	kbd_setColumns(&mouseButtons,                           //
@@ -128,7 +130,7 @@ void keys_init(void) {
 			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_LALT,       //
 			KBD_KEY_TYPE_HIDCODE, HID_KEY_SPACE,            //
 			KBD_KEY_TYPE_NONE, 0,                           //
-			KBD_KEY_TYPE_BITSHIFT, HID_MOD_RALT,            //
+			KBD_KEY_TYPE_BITSHIFT, HID_MOD_MASK_RALT,            //
 			KBD_KEY_TYPE_HIDCODE, HID_KEY_LEFT,             //
 			KBD_KEY_TYPE_HIDCODE, HID_KEY_RIGHT,            //
 			KBD_KEY_TYPE_HIDCODE, HID_KEY_DOWN              //
@@ -136,47 +138,76 @@ void keys_init(void) {
 }
 
 /*
+ * read cursor move
+ * @param: none
+ *
+ * @retval: none
+ */
+void amhid_readCursor(void) {
+	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
+
+		//update gyro data
+		sensorStat = lsm6ds_updateGR(&mems);
+
+		//send gyro data to cursor lib
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X),
+				CURSOR_AXIS_X);
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Y),
+				CURSOR_AXIS_Y);
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z),
+				CURSOR_AXIS_Z);
+
+		//read mouse movement from cursor lib
+		amhid_mouseXmove = cursor_output(&cursor, CURSOR_AXIS_X);
+		amhid_mouseYmove = cursor_output(&cursor, CURSOR_AXIS_Z);
+
+		if (abs(amhid_mouseXmove) > 0 || abs(amhid_mouseYmove) > 0)
+			amhid_mouseFlagSendReport = 1;
+
+	}
+}
+
+/*
  * read mouse keys and wheel
  * @param: none
  *
- * @retval: state change- 1 if previous buttons status was changed
+ * @retval: none
  */
-void keys_readMouse(void) {
+void amhid_readButtonsMouse(void) {
 
-	keys_mouseReportButton = 0;
-	keys_mouseReportWheel = 0;
+	amhid_mouseReportButton = 0;
+	amhid_mouseReportWheel = 0;
 
-	kbd_readFromLayout(&mouseButtons, keys_mousePressedOn);
+	kbd_readFromLayout(&mouseButtons, amhid_mousePressedOn);
 
 	for (uint8_t i = 0; i < KBD_MAX_PRESSED_BUTTONS; i++) {
 
-		if (keys_mousePressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
-			keys_mouseReportButton |= keys_mousePressedOn[i].bitshift;
+		if (amhid_mousePressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
+			amhid_mouseReportButton |= amhid_mousePressedOn[i].bitshift;
 
-		else if (keys_mousePressedOn[i].type == KBD_KEY_TYPE_WHEEL)
-			keys_mouseReportWheel = keys_mousePressedOn[i].wheel;
+		else if (amhid_mousePressedOn[i].type == KBD_KEY_TYPE_WHEEL)
+			amhid_mouseReportWheel = amhid_mousePressedOn[i].wheel;
 	}
 
 }
 
-void keys_readQwerty(void) {
+void amhid_readKeysQwerty(void) {
 
-	memset(keys_qwertyReportKeys, 0, sizeof(keys_qwertyReportKeys));
-	keys_qwertyReportModifiers = 0;
-
-	kbd_readFromLayout(&qwerty, keys_qwertyPressedOn);
+	memset(amhid_qwertyReportKeys, 0, sizeof(amhid_qwertyReportKeys));
+	amhid_qwertyReportModifiers = 0;
+	kbd_readFromLayout(&qwerty, amhid_qwertyPressedOn);
 
 	uint8_t keysCounter = 0;
 
 	for (uint8_t i = 0; i < KBD_MAX_PRESSED_BUTTONS; i++) {
 
-		if (keys_qwertyPressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
-			keys_qwertyReportModifiers |= keys_qwertyPressedOn[i].bitshift;
+		if (amhid_qwertyPressedOn[i].type == KBD_KEY_TYPE_BITSHIFT)
+			amhid_qwertyReportModifiers |= amhid_qwertyPressedOn[i].bitshift;
 
-		else if (keys_qwertyPressedOn[i].type == KBD_KEY_TYPE_HIDCODE) {
+		else if (amhid_qwertyPressedOn[i].type == KBD_KEY_TYPE_HIDCODE) {
 			if (keysCounter < KEYS_MAX_KEYS) {
-				keys_qwertyReportKeys[keysCounter] =
-						keys_qwertyPressedOn[i].code;
+				amhid_qwertyReportKeys[keysCounter] =
+						amhid_qwertyPressedOn[i].code;
 				keysCounter++;
 			}
 
