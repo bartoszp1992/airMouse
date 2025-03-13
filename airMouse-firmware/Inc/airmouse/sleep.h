@@ -13,7 +13,7 @@
 #include "lsm6ds.h"
 #include "led.h"
 
-#define ONTIME 80000 //in seconds
+
 
 extern volatile uint32_t sleepTimer;
 extern volatile uint8_t sleepFlag;
