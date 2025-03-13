@@ -17,6 +17,8 @@
  *      -DONE keyboard buttons are send too frequently
  *      -FN functionality(backspace, dot, comma, etc)
  *      -back and forward buttons are not working
+ *      -low polling rate
+ *      -esp32 hid in separate library
  *
  *      name propositions:
  *      IMU		flow
@@ -71,6 +73,7 @@ void airMouseProcess(void) {
 		sleepTimer = 0; //reset sleep timer
 		amhid_mouseFlagSendReport = 0;
 		//send mouse report
+		prCounterMouse++;
 		espAt_sendParams(&bleRadio, P_BHM, 4,   //
 				amhid_mouseReportButton,        //
 				amhid_mouseXmove,               //
@@ -102,6 +105,7 @@ void airMouseProcess(void) {
 	if (amhid_qwertyFlagSendReport) {
 		sleepTimer = 0;
 		amhid_qwertyFlagSendReport = 0;
+		prCounterKeyboard++;
 		espAt_sendParams(&bleRadio, P_BHK, 7,   //
 				amhid_qwertyReportModifiers,    //
 				amhid_qwertyReportKeys[0],      //

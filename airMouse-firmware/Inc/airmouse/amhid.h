@@ -35,6 +35,9 @@ extern int8_t amhid_qwertyReportKeys[6];
 extern int8_t amhid_qwertyReportKeysPrevious[6];
 extern uint8_t amhid_qwertyFlagSendReport;
 
+extern volatile uint32_t prCounterMouse;
+extern volatile uint32_t prCounterKeyboard;
+
 void amhid_init(void);
 void amhid_readCursor(void);
 void amhid_readButtonsMouse(void);

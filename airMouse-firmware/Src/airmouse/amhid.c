@@ -33,6 +33,14 @@ int8_t amhid_qwertyReportKeys[KEYS_MAX_KEYS];
 int8_t amhid_qwertyReportKeysPrevious[KEYS_MAX_KEYS];
 uint8_t amhid_qwertyFlagSendReport = 0;
 
+//polling rate counting
+volatile uint32_t prMasterCounter = 0;
+volatile uint32_t prCounterMouse = 0;
+volatile uint32_t prCounterKeyboard = 0;
+
+volatile uint32_t prMouse = 0;
+volatile uint32_t prKeyboard = 0;
+
 /*
  * initialize keyboard and mouse keys
  */

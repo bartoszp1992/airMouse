@@ -14,6 +14,13 @@ extern kbd_keyboard_t qwerty;
 extern kbd_keyboard_t mouseButtons;
 extern lsm6ds_sensor_t mems;
 
+extern volatile uint32_t prCounterMouse;
+extern volatile uint32_t prCounterKeyboard;
+
+extern volatile uint32_t prMouse;
+extern volatile uint32_t prKeyboard;
+extern volatile uint32_t prMasterCounter;
+
 
 void systemTick(void) {
 	ledCounter++;
@@ -29,6 +36,16 @@ void systemTick(void) {
 	kbd_scanning(&qwerty);
 	kbd_scanning(&mouseButtons);
 	sleep_timerInc();
+
+	//polling rate counting
+	prMasterCounter++;
+	if(prMasterCounter % 1000 == 0){
+		prKeyboard = prCounterKeyboard;
+		prMouse = prCounterMouse;
+
+		prCounterKeyboard = 0;
+		prCounterMouse = 0;
+	}
 
 }
 
