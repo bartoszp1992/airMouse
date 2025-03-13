@@ -5,20 +5,16 @@
  *      Author: bartosz
  *
  *      todo:
- *      DONE esp power and boot functions -> espat
- *      DONE dataReady flag -> lsm6ds
- *      receiving data from esp -> espat
- *      DONE on moving, not connected: HID reports sending only if connected(depending on the receiving data)
- *      accelerometer used to correct cursor movement(simple or vector)
- *      presicion move when the back of the hand is placed upwards
- *      sending keyboard data
- *      sending mouse button data
- *      leds handling
- *      low battery alert
- *      low power mode
- *      keyboard layout
- *      sleep mode- gyroscope cant awake
- *      receiving data from ESP trough DMA.
+ *      DONE -esp power and boot functions -> espat
+ *      DONE -dataReady flag -> lsm6ds
+ *      DONE -on moving, not connected: HID reports sending only if connected(depending on the receiving data)
+ *      -accelerometer used to correct cursor movement(simple or vector)
+ *      -presicion move when the back of the hand is placed upwards
+ *      -leds handling
+ *      -low battery alert
+ *      -sleep mode- gyroscope cant awake
+ *      -receiving data from ESP trough DMA.
+ *      -keyboard buttons are send too frequently
  *
  *      name propositions:
  *      IMU		flow
