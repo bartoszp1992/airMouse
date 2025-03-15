@@ -17,8 +17,11 @@ void radio_init(void) {
 	espStat = espAt_defineEn(&bleRadio, ESP_EN_GPIO_Port, ESP_EN_Pin);
 	espStat = espAt_defineBoot(&bleRadio, ESP_BOOT_GPIO_Port, ESP_BOOT_Pin);
 	//enter download mode or reset ESP
-	if (HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET)
+	if (HAL_GPIO_ReadPin(MUS_BCK_GPIO_Port, MUS_BCK_Pin) == GPIO_PIN_RESET){
 		espStat = espAt_enterDownload(&bleRadio);
+		while(1);
+	}
+
 
 	//turn on
 	espStat = espAt_pwrOn(&bleRadio);

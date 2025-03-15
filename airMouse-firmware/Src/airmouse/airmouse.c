@@ -17,8 +17,7 @@
  *      -DONE keyboard buttons are send too frequently
  *      -FN functionality(backspace, dot, comma, etc)
  *      -back and forward buttons are not working
- *      -low polling rate
- *      -esp32 hid in separate library
+ *      -DONE low polling rate
  *
  *      name propositions:
  *      IMU		flow

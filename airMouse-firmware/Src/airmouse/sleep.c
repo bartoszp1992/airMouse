@@ -37,12 +37,20 @@ void sleep_enterSleep(void) {
 		ledOff(LED_RED);
 
 		//MCU sleep
+		  __HAL_RCC_GPIOC_CLK_DISABLE();
+		  __HAL_RCC_GPIOA_CLK_DISABLE();
+		  __HAL_RCC_GPIOB_CLK_DISABLE();
+		  __HAL_RCC_GPIOD_CLK_DISABLE();
 		HAL_SuspendTick();
 		HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
 		//MCU wkup
 		HAL_ResumeTick();
 		SystemClock_Config();
+		  __HAL_RCC_GPIOC_CLK_ENABLE();
+		  __HAL_RCC_GPIOA_CLK_ENABLE();
+		  __HAL_RCC_GPIOB_CLK_ENABLE();
+		  __HAL_RCC_GPIOD_CLK_ENABLE();
 
 		//peripheral wkup
 
@@ -70,8 +78,8 @@ void sleep_enterSleep(void) {
 		//wake up sensor
 		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
 
-				lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
-				lsm6ds_setGRFullScale(&mems, CONFIG_DPS);
+		lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
+		lsm6ds_setGRFullScale(&mems, CONFIG_DPS);
 
 	}
 
