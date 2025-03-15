@@ -37,6 +37,12 @@
 
 extern void SystemClock_Config(void);
 
+uint32_t reportCounterKBD = 0;
+uint32_t reportCounterMUS = 0;
+uint32_t downloadCounter = 0;
+espat_response_t responseMus = ESPAT_RESPONSE_ERROR;
+uint32_t dummyCounter = 0;
+
 void airMouseSetup(void) {
 
 	//_________________________________________KEYS_________________________________________
@@ -74,12 +80,19 @@ void airMouseProcess(void) {
 		amhid_mouseFlagSendReport = 0;
 		//send mouse report
 		prCounterMouse++;
+		reportCounterMUS++;
 		espAt_sendParams(&bleRadio, P_BHM, 4,   //
 				amhid_mouseReportButton,        //
 				amhid_mouseXmove,               //
 				amhid_mouseYmove,               //
 				amhid_mouseReportWheel          //
 				);
+
+//		espAt_downloadResponse(&bleRadio);
+//		responseMus = espAt_returnResponseStatus(&bleRadio);
+//		if(responseMus != ESPAT_RESPONSE_OK && responseMus != ESPAT_RESPONSE_PARSING_ERROR){
+//			dummyCounter++;
+//		}
 	}
 
 	//_________________________________________KEYBOARD_______________________________________
@@ -106,6 +119,7 @@ void airMouseProcess(void) {
 		sleepTimer = 0;
 		amhid_qwertyFlagSendReport = 0;
 		prCounterKeyboard++;
+		reportCounterKBD++;
 		espAt_sendParams(&bleRadio, P_BHK, 7,   //
 				amhid_qwertyReportModifiers,    //
 				amhid_qwertyReportKeys[0],      //

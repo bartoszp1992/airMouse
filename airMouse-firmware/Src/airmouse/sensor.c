@@ -23,7 +23,7 @@ void sensor_init(void){
 
 		sensorStat = lsm6ds_setGRLowPass(&mems, LSM6DS_FTYPE_VHIGH);
 		sensorStat = lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
-		sensorStat = lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_500DPS);
+		sensorStat = lsm6ds_setGRFullScale(&mems, CONFIG_DPS);
 		sensorStat = lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
 
 		cursor_init(&cursor);

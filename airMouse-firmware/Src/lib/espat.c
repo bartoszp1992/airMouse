@@ -17,6 +17,29 @@
 #include <stdint.h>
 #include "espat.h"
 
+
+//special
+#define AT_ECHO_ON "ATE1"
+#define AT_ECHO_OFF "ATE0"
+
+//sending
+#define AT_PREFIX "AT+"
+#define AT_ENDING "\r\n"
+#define AT_ASSIGNMENT "="
+#define AT_QUESTION "?"
+#define AT_ARGUMENTS_BUFFER_SIZE 80
+#define AT_STRING_QUOTE_MARK "\""
+
+//receiving
+#define AT_OK "OK"
+#define AT_ERROR "ERROR"
+#define AT_BUSY "busy p..."
+#define AT_READY "ready"
+
+//others
+#define MAC_SEPARATOR ':'
+#define MAC_PATTERN "00:00:00:00:00:00"
+
 //---------------------------IMPLICIT FUNCTIONS---------------------------
 /*
  * uart send wrapper
@@ -143,6 +166,43 @@ espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 #endif
 
 	return ESPAT_STATE_OK;
+
+}
+
+/*
+ * switch ESP-AT echo
+ * @param: ESPAT_ECHO_ON/OFF
+ */
+espat_state_t espAt_echo(espat_radio_t *radio, espat_echo_t echo) {
+
+	uint16_t length = 0;
+
+	if (echo == ESPAT_ECHO_ON)
+		length = strlen(AT_ECHO_ON);
+	else if (echo == ESPAT_ECHO_OFF)
+		length = strlen(AT_ECHO_OFF);
+
+	uint16_t endingLength = strlen(AT_ENDING);
+
+	uint16_t bufferSize = length + endingLength;
+
+	//create and clear buffer
+	char buffer[bufferSize];
+	memset(buffer, ' ', bufferSize);
+
+	if(echo == ESPAT_ECHO_ON){
+		memcpy(&buffer[0], AT_ECHO_ON, length);
+	}
+
+	else if(echo == ESPAT_ECHO_OFF){
+		memcpy(&buffer[0], AT_ECHO_OFF, length);
+	}
+
+
+	//build command
+	memcpy(&buffer[length], AT_ENDING, endingLength);
+
+	return uartSend(&radio->espUart, buffer, bufferSize);
 
 }
 
@@ -451,6 +511,17 @@ espat_state_t espAt_sendComplex(espat_radio_t *radio, char *command,
 
 	return uartSend(&radio->espUart, buffer, bufferSize);
 
+}
+
+/*
+ * change rxTimeout
+ * @param: radio
+ *
+ * @retval: none
+ */
+void espAt_setRxTimeout(espat_radio_t *radio, uint32_t rxTimeout) {
+
+	radio->espUart.receiveTimeout = rxTimeout;
 }
 
 /*

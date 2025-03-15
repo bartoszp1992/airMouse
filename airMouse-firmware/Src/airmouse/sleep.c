@@ -18,13 +18,18 @@ void sleep_enterSleep(void) {
 
 	if (sleepFlag) {
 		sleepFlag = 0;
+		sleepTimer = 0;
 
 		//radio sleep
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_LONG);
+		espAt_sendParams(&bleRadio, P_BD, 1, 0);
+		espAt_downloadResponse(&bleRadio);
 		espAt_pwrOff(&bleRadio);
 
 		//sensor sleep
-//		lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_PWR_DN);
 		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_DIS);
+
+				lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_PWR_DN);
 
 		//led off
 		ledOff(LED_GREEN);
@@ -60,10 +65,13 @@ void sleep_enterSleep(void) {
 		HAL_Delay(200);
 		HAL_UART_ChangeSpeed(&huart1, CONFIG_BAUDRATE_FAST);
 
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
+
 		//wake up sensor
-//		lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
-//		lsm6ds_setGRFullScale(&mems, LSM6DS_FS_G_500DPS);
 		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
+
+				lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
+				lsm6ds_setGRFullScale(&mems, CONFIG_DPS);
 
 	}
 

@@ -31,23 +31,7 @@ typedef enum {
 } espat_pinState_t;
 #endif
 
-//sending
-#define AT_PREFIX "AT+"
-#define AT_ENDING "\r\n"
-#define AT_ASSIGNMENT "="
-#define AT_QUESTION "?"
-#define AT_ARGUMENTS_BUFFER_SIZE 80
-#define AT_STRING_QUOTE_MARK "\""
 
-//receiving
-#define AT_OK "OK"
-#define AT_ERROR "ERROR"
-#define AT_BUSY "busy p..."
-#define AT_READY "ready"
-
-//others
-#define MAC_SEPARATOR ':'
-#define MAC_PATTERN "00:00:00:00:00:00"
 
 //______________________________________________COMMANDS______________________________________________
 //P- PARAM- sending some data
@@ -67,9 +51,13 @@ typedef enum {
 #define P_BHM "BLEHIDMUS"	//send mouse data (keys, x, y, wheel)
 #define S_BHN "BLEHIDNAME"
 #define P_BHK "BLEHIDKB" //send keyboard data(mod, k1, k2, k3, k4, k5, k6)
-#define P_BCP "BLECONNPARAM"
 
+//BLE
 #define P_BI "BLEINIT"
+#define P_BCP "BLECONNPARAM"
+#define P_BD "BLEDISCONN"
+
+
 #define S_BN "BLENAME"
 #define C_BAP "BLEADVPARAM"
 #define C_BA "BLEADDR"
@@ -84,6 +72,11 @@ typedef enum {
 	ESPAT_STATE_ERROR_PARAM = 6,
 	ESPAT_STATE_MAC_NOT_FOUND = 7
 } espat_state_t;
+
+typedef enum{
+	ESPAT_ECHO_ON,
+	ESPAT_ECHO_OFF
+} espat_echo_t;
 
 typedef enum {
 	ESPAT_RESPONSE_OK = 0,
@@ -136,6 +129,7 @@ typedef struct {
 
 espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 		uint32_t txTimeout, uint32_t rxTimeout); //port
+espat_state_t espAt_echo(espat_radio_t *radio, espat_echo_t echo);
 espat_state_t espAt_sendCommand(espat_radio_t *radio, char *command);
 espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
 		uint16_t paramCount, ...);
@@ -144,6 +138,7 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 		char *string);
 espat_state_t espAt_sendComplex(espat_radio_t *radio, char *command,
 		uint8_t paramCount, ...);
+void espAt_setRxTimeout(espat_radio_t *radio, uint32_t rxTimeout);
 espat_state_t espAt_downloadResponse(espat_radio_t *radio);
 espat_response_t espAt_returnResponseStatus(espat_radio_t *radio);
 espat_state_t espAt_pullPhysicalAddress(espat_radio_t *radio, char *mac);
