@@ -59,6 +59,8 @@ void airMouseSetup(void) {
 }
 void airMouseProcess(void) {
 
+	sleep_enterSleep();
+
 	//_________________________________________MOUSE_________________________________________
 	//read sensor
 	amhid_readCursor();
@@ -130,6 +132,6 @@ void airMouseProcess(void) {
 				);
 	}
 
-	sleep_enterSleep();
+
 
 }
