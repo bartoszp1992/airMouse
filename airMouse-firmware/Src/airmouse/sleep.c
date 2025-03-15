@@ -40,6 +40,7 @@ void sleep_enterSleep(void) {
 		ledOff(LED_RED);
 
 		//MCU sleep
+
 		HAL_PWREx_EnableLowPowerRunMode();
 		HAL_RCC_DeInit();
 		HAL_SuspendTick();
@@ -49,8 +50,8 @@ void sleep_enterSleep(void) {
 		HAL_ResumeTick();
 		SystemClock_Config();
 		HAL_PWREx_DisableLowPowerRunMode();
-		//peripheral wkup
 
+		//peripheral wkup
 		HAL_UART_ChangeSpeed(&huart1, CONFIG_BAUDRATE_DEFAULT);
 
 		//turn on

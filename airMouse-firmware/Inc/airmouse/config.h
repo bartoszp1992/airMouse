@@ -19,7 +19,7 @@
 #define CONFIG_CURSOR_SENSITIVITY 10
 #define CONFIG_CURSOR_ACCELERATION 110
 
-#define CONFIG_ONTIME 5 //in seconds
+#define CONFIG_ONTIME 10 //in seconds
 
 #define CONFIG_DPS LSM6DS_FS_G_500DPS
 
