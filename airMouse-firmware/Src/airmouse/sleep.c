@@ -28,30 +28,27 @@ void sleep_enterSleep(void) {
 
 		//sensor sleep
 		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_DIS);
+		lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_PWR_DN);
 
-				lsm6ds_setGROutputDataRate(&mems, LSM6DS_ODR_G_PWR_DN);
+		lsm6ds_setGRMode(&mems, LSM6DS_G_HM_MODE_HI_PERFORMANCE_DIS);
+		lsm6ds_setXLMode(&mems, LSM6DS_XL_HM_MODE_HI_PERFORMANCE_DIS);
+		lsm6ds_setGRSleep(&mems, LSM6DS_G_SLEEP_EN);
 
-		//led off
+		//led off0
 		ledOff(LED_GREEN);
 		ledOff(LED_BLUE);
 		ledOff(LED_RED);
 
 		//MCU sleep
-		  __HAL_RCC_GPIOC_CLK_DISABLE();
-		  __HAL_RCC_GPIOA_CLK_DISABLE();
-		  __HAL_RCC_GPIOB_CLK_DISABLE();
-		  __HAL_RCC_GPIOD_CLK_DISABLE();
+		HAL_PWREx_EnableLowPowerRunMode();
+		HAL_RCC_DeInit();
 		HAL_SuspendTick();
 		HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
 		//MCU wkup
 		HAL_ResumeTick();
 		SystemClock_Config();
-		  __HAL_RCC_GPIOC_CLK_ENABLE();
-		  __HAL_RCC_GPIOA_CLK_ENABLE();
-		  __HAL_RCC_GPIOB_CLK_ENABLE();
-		  __HAL_RCC_GPIOD_CLK_ENABLE();
-
+		HAL_PWREx_DisableLowPowerRunMode();
 		//peripheral wkup
 
 		HAL_UART_ChangeSpeed(&huart1, CONFIG_BAUDRATE_DEFAULT);
@@ -77,9 +74,12 @@ void sleep_enterSleep(void) {
 
 		//wake up sensor
 		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
-
 		lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
 		lsm6ds_setGRFullScale(&mems, CONFIG_DPS);
+
+		lsm6ds_setGRMode(&mems, LSM6DS_G_HM_MODE_HI_PERFORMANCE_EN);
+		lsm6ds_setXLMode(&mems, LSM6DS_XL_HM_MODE_HI_PERFORMANCE_EN);
+		lsm6ds_setGRSleep(&mems, LSM6DS_G_SLEEP_DIS);
 
 	}
 
@@ -87,6 +87,6 @@ void sleep_enterSleep(void) {
 
 void sleep_timerInc(void) {
 	sleepTimer++;
-	if (sleepTimer > CONFIG_ONTIME*1000)
+	if (sleepTimer > CONFIG_ONTIME * 1000)
 		sleepFlag = 1;
 }

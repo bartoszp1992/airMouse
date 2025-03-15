@@ -5422,18 +5422,18 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "additional parts:\n1x ZH plug ZHR-3\n1x ZH plug ZHR-5\n8x ZH pin w/ cable SZH-200BK26\n1x FPC 04p 10-04-A-0050-C-4-08-4-T / 10-04-A-0101-C-4-08-4-T\n1x FPC 10p 10-10-A-0050-C-4-08-4-T / 10-10-A-0101-C-4-08-4-T\n1x FPC 16p 10-16-A-0050-C-4-08-4-T / 10-16-A-0101-C-4-08-4-T"
+	(text "additional parts:\n1x ZH plug ZHR-3\n1x ZH plug ZHR-5\n8x ZH pin w/ cable SZH-200BK26\n1x FPC 04p 10-04-A-0050-C-4-08-4-T / 10-04-A-0101-C-4-08-4-T\n1x FPC 10p 10-10-A-0050-C-4-08-4-T / 10-10-A-0101-C-4-08-4-T\n1x FPC 16p 10-16-A-0050-C-4-08-4-T / 10-16-A-0101-C-4-08-4-T\n1x antenna 146153-0300"
 		(exclude_from_sim no)
 		(at 198.12 173.99 0)
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 1.1 1.1)
 			)
 			(justify left)
 		)
 		(uuid "7bbdef86-42e4-4718-9327-24d1625c8d56")
 	)
-	(text "remove R3/R4\nC7- change to 0805\nchange converter to: TLV61070A\nmuch much wider BAT- width\nstep up voltage from BAT(charge pump)\nAdd acc circuit\nAdd power switches for peripherals(ESP32, gyro sensor)\nmake place for ESP32 with pcb antenna"
+	(text "remove R3/R4\nC7- change to 0805\nchange converter to: TLV61070A\nmuch much wider BAT- width\nstep up voltage from BAT(charge pump)\nAdd acc circuit\nAdd power switches for peripherals(ESP32, gyro sensor)\nmake place for ESP32 with pcb antenna\nEN have to be push pull, other wise voltage on this pin can't rise. why?"
 		(exclude_from_sim no)
 		(at 293.37 132.08 0)
 		(effects

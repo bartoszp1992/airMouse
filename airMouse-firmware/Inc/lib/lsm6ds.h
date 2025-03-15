@@ -81,6 +81,12 @@ lsm6ds_state_t lsm6ds_setXLFullScale(lsm6ds_sensor_t *sensor, uint8_t fs);
 lsm6ds_state_t lsm6ds_setGROutputDataRate(lsm6ds_sensor_t *sensor, uint8_t odr);
 lsm6ds_state_t lsm6ds_setGRLowPass(lsm6ds_sensor_t *sensor, uint8_t filter);
 lsm6ds_state_t lsm6ds_setGRFullScale(lsm6ds_sensor_t *sensor, uint8_t fs);
+
+lsm6ds_state_t lsm6ds_setGRMode(lsm6ds_sensor_t *sensor, uint8_t mode);
+lsm6ds_state_t lsm6ds_setXLMode(lsm6ds_sensor_t *sensor, uint8_t mode);
+
+lsm6ds_state_t lsm6ds_setGRSleep(lsm6ds_sensor_t *sensor, uint8_t sleep);
+
 lsm6ds_state_t lsm6ds_reset(lsm6ds_sensor_t *sensor);
 lsm6ds_state_t lsm6ds_sleepGR(lsm6ds_sensor_t *sensor, uint8_t sleep);
 lsm6ds_state_t lsm6ds_newDataAvailableCheck(lsm6ds_sensor_t *sensor,

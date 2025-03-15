@@ -228,6 +228,40 @@ lsm6ds_state_t lsm6ds_setGRFullScale(lsm6ds_sensor_t *sensor, uint8_t fs) {
 }
 
 /*
+ * set gyroscope low power or hi-performance mode
+ * @param: sensor
+ * @param: LSM6DS_LSM6DS_G_HM_MODE_HI_PERFORMANCE_EN/DIS
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setGRMode(lsm6ds_sensor_t *sensor, uint8_t mode){
+	return modifyReg(sensor, LSM6DS_REG_CTRL7_G, LSM6DS_MASK_G_HM_MODE, mode);
+}
+
+/*
+ * set accelerometer low power or hi-performance mode
+ * @param: sensor
+ * @param: LSM6DS_LSM6DS_XL_HM_MODE_HI_PERFORMANCE_EN/DIS
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setXLMode(lsm6ds_sensor_t *sensor, uint8_t mode){
+	return modifyReg(sensor, LSM6DS_REG_CTRL6_C, LSM6DS_MASK_XL_HM_MODE, mode);
+}
+
+
+/*
+ * set gyroscope sleep bit
+ * @param: sensor
+ * @param: LSM6DS_G_SLEEP_EN/DIS
+ *
+ * @retval: status
+ */
+lsm6ds_state_t lsm6ds_setGRSleep(lsm6ds_sensor_t *sensor, uint8_t sleep){
+	return modifyReg(sensor, LSM6DS_REG_CTRL4_C, LSM6DS_MASK_G_SLEEP, sleep);
+}
+
+/*
  * software reset
  * @param: sensor
  *

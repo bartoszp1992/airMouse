@@ -16,7 +16,7 @@
 #define CONFIG_TIMEOUT_RX_LONG 1500
 #define CONFIG_TIMEOUT_RX_FAST 10
 
-#define CONFIG_ONTIME 150 //in seconds
+#define CONFIG_ONTIME 5 //in seconds
 
 #define CONFIG_DPS LSM6DS_FS_G_500DPS
 
