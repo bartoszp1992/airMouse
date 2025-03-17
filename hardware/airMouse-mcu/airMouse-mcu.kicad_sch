@@ -5433,7 +5433,7 @@
 		)
 		(uuid "7bbdef86-42e4-4718-9327-24d1625c8d56")
 	)
-	(text "remove R3/R4\nC7- change to 0805\nchange converter to: TLV61070A\nmuch much wider BAT- width\nstep up voltage from BAT(charge pump)\nAdd acc circuit\nAdd power switches for peripherals(ESP32, gyro sensor)\nmake place for ESP32 with pcb antenna\nEN have to be push pull, other wise voltage on this pin can't rise. why?"
+	(text "remove R3/R4\nC7- change to 0805\nchange converter to: TLV61070A\nmuch much wider BAT- width\nstep up voltage from BAT(charge pump)\nAdd acc circuit\nAdd power switches for peripherals(ESP32, gyro sensor)\nmake place for ESP32 with pcb antenna\nEN have to be push pull, other wise voltage on this pin can't rise. why?\nplace buffer capacitor on battery"
 		(exclude_from_sim no)
 		(at 293.37 132.08 0)
 		(effects

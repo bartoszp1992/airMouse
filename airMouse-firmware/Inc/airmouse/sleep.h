@@ -12,6 +12,7 @@
 #include "config.h"
 #include "lsm6ds.h"
 #include "led.h"
+#include "airmouse.h"
 
 
 

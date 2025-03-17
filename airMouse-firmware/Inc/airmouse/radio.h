@@ -11,6 +11,7 @@
 #include "espat.h"
 #include "usart.h"
 #include "config.h"
+#include "led.h"
 
 extern espat_radio_t bleRadio;
 

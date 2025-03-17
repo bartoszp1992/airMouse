@@ -13,7 +13,6 @@
  *      -leds handling
  *      -low battery alert
  *      -sleep mode- gyroscope cant awake
- *      -receiving data from ESP trough DMA.
  *      -DONE keyboard buttons are send too frequently
  *      -FN functionality(backspace, dot, comma, etc)
  *      -back and forward buttons are not working
@@ -28,6 +27,8 @@
  *      Omni	grip
  *      hyper	vortex
  *      hover
+ *
+ *      remember to run first with mouse FWD button to set esp32 baudrate to 1152000
 
  *
  */
@@ -36,13 +37,17 @@
 
 extern void SystemClock_Config(void);
 
-uint32_t reportCounterKBD = 0;
-uint32_t reportCounterMUS = 0;
-uint32_t downloadCounter = 0;
-espat_response_t responseMus = ESPAT_RESPONSE_ERROR;
-uint32_t dummyCounter = 0;
+airmouse_t airmouse;
 
 void airMouseSetup(void) {
+
+	airmouse.reportCounterKBD = 0;
+	airmouse.reportCounterMUS = 0;
+	airmouse.downloadCounter = 0;
+	airmouse.responseMus = ESPAT_RESPONSE_ERROR;
+	airmouse.responseKbd = ESPAT_RESPONSE_ERROR;
+	airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
+	airmouse.message = ESPAT_MESSAGE_BLEHIDDISCONN;
 
 	//_________________________________________KEYS_________________________________________
 
@@ -59,79 +64,105 @@ void airMouseSetup(void) {
 }
 void airMouseProcess(void) {
 
-	sleep_enterSleep();
+	if (airmouse.state == AIRMOUSE_STATE_DISCONNECTED) {
 
-	//_________________________________________MOUSE_________________________________________
-	//read sensor
-	amhid_readCursor();
-	amhid_mouseReportButtonPrevious = amhid_mouseReportButton;
-	amhid_readButtonsMouse();
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_LONG);
+		espAt_downloadMessage(&bleRadio);
+		airmouse.message = espAt_returnMessage(&bleRadio);
+		if(airmouse.message == ESPAT_MESSAGE_BLEHIDCONN){
+			airmouse.state = AIRMOUSE_STATE_CONNECTED;
+		}
 
-	/*
-	 * check with previous report.
-	 * using for detection change from 1 to 0
-	 */
-	if (amhid_mouseReportButton != amhid_mouseReportButtonPrevious
-			|| amhid_mouseReportWheel)
-		amhid_mouseFlagSendReport = 1;
 
-	//send mouse report
-	if (amhid_mouseFlagSendReport) {
-		sleepTimer = 0; //reset sleep timer
-		amhid_mouseFlagSendReport = 0;
+	} else {
+
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
+//		espAt_downloadMessage(&bleRadio);
+//		airmouse.message = espAt_returnMessage(&bleRadio);
+//		if(airmouse.message == ESPAT_MESSAGE_BLEHIDDISCONN)
+//			airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
+
+		//_________________________________________MOUSE_________________________________________
+		//read sensor
+		amhid_readCursor();
+		amhid_mouseReportButtonPrevious = amhid_mouseReportButton;
+		amhid_readButtonsMouse();
+
+		/*
+		 * check with previous report.
+		 * using for detection change from 1 to 0
+		 */
+		if (amhid_mouseReportButton != amhid_mouseReportButtonPrevious
+				|| amhid_mouseReportWheel)
+			amhid_mouseFlagSendReport = 1;
+
 		//send mouse report
-		prCounterMouse++;
-		reportCounterMUS++;
-		espAt_sendParams(&bleRadio, P_BHM, 4,   //
-				amhid_mouseReportButton,        //
-				amhid_mouseXmove,               //
-				amhid_mouseYmove,               //
-				amhid_mouseReportWheel          //
-				);
+		if (amhid_mouseFlagSendReport) {
+			sleepTimer = 0; //reset sleep timer
+			amhid_mouseFlagSendReport = 0;
+			//send mouse report
+			prCounterMouse++;
+			airmouse.reportCounterMUS++;
+			espAt_sendParams(&bleRadio, P_BHM, 4,   //
+					amhid_mouseReportButton,        //
+					amhid_mouseXmove,               //
+					amhid_mouseYmove,               //
+					amhid_mouseReportWheel          //
+					);
 
-//		espAt_downloadResponse(&bleRadio);
-//		responseMus = espAt_returnResponseStatus(&bleRadio);
-//		if(responseMus != ESPAT_RESPONSE_OK && responseMus != ESPAT_RESPONSE_PARSING_ERROR){
-//			dummyCounter++;
-//		}
+			espAt_downloadResponse(&bleRadio);
+			airmouse.responseMus = espAt_returnResponse(&bleRadio);
+
+			if (airmouse.responseMus != ESPAT_RESPONSE_OK
+					&& airmouse.responseMus != ESPAT_RESPONSE_PARSING_ERROR) {
+				airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
+			}
+
+		}
+
+		//_________________________________________KEYBOARD_______________________________________
+
+		memcpy(amhid_qwertyReportKeysPrevious, amhid_qwertyReportKeys,
+				sizeof(amhid_qwertyReportKeys));
+		amhid_qwertyReportModifiersPrevious = amhid_qwertyReportModifiers;
+
+		//read buttons and keys
+
+		amhid_readKeysQwerty();
+
+		if (memcmp(amhid_qwertyReportKeys, amhid_qwertyReportKeysPrevious,
+		KEYS_MAX_KEYS) != 0
+				|| amhid_qwertyReportModifiers
+						!= amhid_qwertyReportModifiersPrevious)
+			amhid_qwertyFlagSendReport = 1;
+		else
+			amhid_qwertyFlagSendReport = 0;
+
+		//send keyboard report
+		if (amhid_qwertyFlagSendReport) {
+			sleepTimer = 0;
+			amhid_qwertyFlagSendReport = 0;
+			prCounterKeyboard++;
+			airmouse.reportCounterKBD++;
+			espAt_sendParams(&bleRadio, P_BHK, 7,   //
+					amhid_qwertyReportModifiers,    //
+					amhid_qwertyReportKeys[0],      //
+					amhid_qwertyReportKeys[1],      //
+					amhid_qwertyReportKeys[2],      //
+					amhid_qwertyReportKeys[3],      //
+					amhid_qwertyReportKeys[4],      //
+					amhid_qwertyReportKeys[5]       //
+					);
+			espAt_downloadResponse(&bleRadio);
+			airmouse.responseKbd = espAt_returnResponse(&bleRadio);
+
+			if (airmouse.responseKbd != ESPAT_RESPONSE_OK
+					&& airmouse.responseKbd != ESPAT_RESPONSE_PARSING_ERROR) {
+				airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
+			}
+		}
 	}
 
-	//_________________________________________KEYBOARD_______________________________________
-
-
-	memcpy(amhid_qwertyReportKeysPrevious, amhid_qwertyReportKeys,
-			sizeof(amhid_qwertyReportKeys));
-	amhid_qwertyReportModifiersPrevious = amhid_qwertyReportModifiers;
-
-	//read buttons and keys
-
-	amhid_readKeysQwerty();
-
-	if (memcmp(amhid_qwertyReportKeys, amhid_qwertyReportKeysPrevious,
-	KEYS_MAX_KEYS) != 0
-			|| amhid_qwertyReportModifiers
-					!= amhid_qwertyReportModifiersPrevious)
-		amhid_qwertyFlagSendReport = 1;
-	else
-		amhid_qwertyFlagSendReport = 0;
-
-	//send keyboard report
-	if (amhid_qwertyFlagSendReport) {
-		sleepTimer = 0;
-		amhid_qwertyFlagSendReport = 0;
-		prCounterKeyboard++;
-		reportCounterKBD++;
-		espAt_sendParams(&bleRadio, P_BHK, 7,   //
-				amhid_qwertyReportModifiers,    //
-				amhid_qwertyReportKeys[0],      //
-				amhid_qwertyReportKeys[1],      //
-				amhid_qwertyReportKeys[2],      //
-				amhid_qwertyReportKeys[3],      //
-				amhid_qwertyReportKeys[4],      //
-				amhid_qwertyReportKeys[5]       //
-				);
-	}
-
-
+	sleep_enterSleep();
 
 }

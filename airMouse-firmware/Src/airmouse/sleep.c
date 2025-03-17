@@ -10,6 +10,11 @@
 extern espat_radio_t bleRadio;
 extern lsm6ds_sensor_t mems;
 extern void SystemClock_Config(void);
+extern I2C_HandleTypeDef hi2c1;
+extern UART_HandleTypeDef huart1;
+extern ADC_HandleTypeDef hadc1;
+extern airmouse_t airmouse;
+
 
 volatile uint32_t sleepTimer = 0;
 volatile uint8_t sleepFlag = 0;
@@ -25,6 +30,7 @@ void sleep_enterSleep(void) {
 		espAt_sendParams(&bleRadio, P_BD, 1, 0);
 		espAt_downloadResponse(&bleRadio);
 		espAt_pwrOff(&bleRadio);
+		airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 
 		//sensor sleep
 		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_DIS);
@@ -39,8 +45,11 @@ void sleep_enterSleep(void) {
 		ledOff(LED_BLUE);
 		ledOff(LED_RED);
 
-		//MCU sleep
+		HAL_UART_MspDeInit(&huart1);
+		HAL_I2C_MspDeInit(&hi2c1);
+		HAL_ADC_MspDeInit(&hadc1);
 
+		//MCU sleep
 		HAL_PWREx_EnableLowPowerRunMode();
 		HAL_RCC_DeInit();
 		HAL_SuspendTick();
@@ -51,11 +60,17 @@ void sleep_enterSleep(void) {
 		SystemClock_Config();
 		HAL_PWREx_DisableLowPowerRunMode();
 
-		//peripheral wkup
+		HAL_UART_MspInit(&huart1);
+		HAL_I2C_MspInit(&hi2c1);
+		HAL_ADC_MspInit(&hadc1);
 		HAL_UART_ChangeSpeed(&huart1, CONFIG_BAUDRATE_DEFAULT);
 
 		//turn on
 		espAt_pwrOn(&bleRadio);
+		espAt_downloadResponse(&bleRadio);
+
+		//turn off echo
+		espAt_echo(&bleRadio, ESPAT_ECHO_OFF);
 		espAt_downloadResponse(&bleRadio);
 
 		//change name
@@ -66,15 +81,11 @@ void sleep_enterSleep(void) {
 		espAt_sendParams(&bleRadio, P_BHI, 1, 1);
 		espAt_downloadResponse(&bleRadio);
 
-		//change baudrate
-		espAt_sendParams(&bleRadio, P_UC, 5, CONFIG_BAUDRATE_FAST, 8, 1, 0, 0);
-		HAL_Delay(200);
-		HAL_UART_ChangeSpeed(&huart1, CONFIG_BAUDRATE_FAST);
-
 		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
 
 		//wake up sensor
-		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
+
+		lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);//lp problem?
 		lsm6ds_setGROutputDataRate(&mems, CONFIG_IMU_ODR);
 		lsm6ds_setGRFullScale(&mems, CONFIG_DPS);
 

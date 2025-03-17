@@ -373,6 +373,7 @@ lsm6ds_state_t lsm6ds_updateGR(lsm6ds_sensor_t *sensor){
 		int16_t combined[3];
 	}outputData;
 
+
 	memset(&outputData, 0, sizeof(outputData));
 
 	status = i2cReceive(&sensor->lsm6dsI2c, sensor->deviceAddr, LSM6DS_REG_OUTX_L_G, outputData.raw, 6);

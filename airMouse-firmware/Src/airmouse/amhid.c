@@ -155,21 +155,21 @@ void amhid_readCursor(void) {
 	if (lsm6ds_flagDataReadyRead(&mems) == LSM6DS_DATA_READY) {
 
 		//update gyro data
-		sensorStat = lsm6ds_updateGR(&mems);
+		sensorStat = lsm6ds_updateGR(&mems); //LP problem
 
 		//send gyro data to cursor lib
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X),
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_X), //lp problem?
 				CURSOR_AXIS_X);
 		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Y),
 				CURSOR_AXIS_Y);
-		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z),
+		cursor_writeInput(&cursor, lsm6ds_readGR(&mems, LSM6DS_AXIS_Z), //lp problem? end
 				CURSOR_AXIS_Z);
 
 		//read mouse movement from cursor lib
 		amhid_mouseXmove = cursor_output(&cursor, CURSOR_AXIS_X);
 		amhid_mouseYmove = cursor_output(&cursor, CURSOR_AXIS_Z);
 
-		if (abs(amhid_mouseXmove) > 0 || abs(amhid_mouseYmove) > 0)
+		if (abs(amhid_mouseXmove) > 0 || abs(amhid_mouseYmove) > 0) //lp problem?
 			amhid_mouseFlagSendReport = 1;
 
 	}

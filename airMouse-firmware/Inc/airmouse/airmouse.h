@@ -21,6 +21,23 @@
 #include "config.h"
 #include "radio.h"
 
+typedef enum{
+	AIRMOUSE_STATE_CONNECTED,
+	AIRMOUSE_STATE_DISCONNECTED
+}airmouse_state_t;
+
+
+typedef struct{
+
+	uint32_t reportCounterKBD;
+	uint32_t reportCounterMUS;
+	uint32_t downloadCounter;
+	espat_response_t responseMus;
+	espat_response_t responseKbd;
+	airmouse_state_t state;
+	espat_message_t message;
+
+}airmouse_t;
 
 
 void airMouseSetup(void);

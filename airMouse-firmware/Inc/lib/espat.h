@@ -34,10 +34,10 @@ typedef enum {
 
 
 //______________________________________________COMMANDS______________________________________________
-//P- PARAM- sending some data
+//P- PARAM- sending numbers
 //S- STRING- sending string
 //G- GENERIC- just command, without sending data, like reset.
-//C- COMPLEX- mix of strings and digits
+//C- COMPLEX- mix of strings and numbers
 
 //general
 #define G_RST "RST"
@@ -68,7 +68,6 @@ typedef enum {
 	ESPAT_STATE_TIMEOUT = 2,
 	ESPAT_STATE_BUSY = 3,
 	ESPAT_STATE_PIN_NOT_DEFINED = 4,
-	ESPAT_STATE_ERROR_DMA_RX_ACTIVE = 5,
 	ESPAT_STATE_ERROR_PARAM = 6,
 	ESPAT_STATE_MAC_NOT_FOUND = 7
 } espat_state_t;
@@ -78,14 +77,28 @@ typedef enum{
 	ESPAT_ECHO_OFF
 } espat_echo_t;
 
+/*
+ * be sure to implement every response in espAt_downloadResponse()
+ */
 typedef enum {
-	ESPAT_RESPONSE_OK = 0,
-	ESPAT_RESPONSE_ERROR = 1,
-	ESPAT_RESPONSE_BUSY = 2,
-	ESPAT_RESPONSE_READY = 3,
-	ESPAT_RESPONSE_PARSING_ERROR = 4
+	ESPAT_RESPONSE_OK,
+	ESPAT_RESPONSE_ERROR,
+	ESPAT_RESPONSE_BUSY,
+	ESPAT_RESPONSE_READY,
+	ESPAT_RESPONSE_PARSING_ERROR
 
 } espat_response_t;
+
+/*
+ * be sure to implement every message in espAt_downloadMessage()
+ */
+typedef enum {
+	ESPAT_MESSAGE_BLECONN,
+	ESPAT_MESSAGE_BLEDISCONN,
+	ESPAT_MESSAGE_BLEHIDCONN,
+	ESPAT_MESSAGE_BLEHIDDISCONN
+} espat_message_t;
+
 
 typedef enum{
 	ESPAT_PARAM_TYPE_STRING = 0,
@@ -115,7 +128,7 @@ typedef struct {
 	espat_uartInstance_t espUart;
 	char rxBuffer[RX_BUFFER_SIZE];
 	espat_response_t response; //response for AT command
-	uint8_t flagDmaReceive;
+	espat_message_t message;
 
 #if (BOOT_SUPPORT == 1)
 	espat_pin_t pinBoot;
@@ -129,6 +142,7 @@ typedef struct {
 
 espat_state_t espAt_init(espat_radio_t *radio, UART_HandleTypeDef *uart,
 		uint32_t txTimeout, uint32_t rxTimeout); //port
+void espAt_setRxTimeout(espat_radio_t *radio, uint32_t rxTimeout);
 espat_state_t espAt_echo(espat_radio_t *radio, espat_echo_t echo);
 espat_state_t espAt_sendCommand(espat_radio_t *radio, char *command);
 espat_state_t espAt_sendParams(espat_radio_t *radio, char *command,
@@ -138,10 +152,11 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 		char *string);
 espat_state_t espAt_sendComplex(espat_radio_t *radio, char *command,
 		uint8_t paramCount, ...);
-void espAt_setRxTimeout(espat_radio_t *radio, uint32_t rxTimeout);
 espat_state_t espAt_downloadResponse(espat_radio_t *radio);
-espat_response_t espAt_returnResponseStatus(espat_radio_t *radio);
-espat_state_t espAt_pullPhysicalAddress(espat_radio_t *radio, char *mac);
+espat_state_t espAt_downloadMessage(espat_radio_t *radio);
+espat_response_t espAt_returnResponse(espat_radio_t *radio);
+espat_message_t espAt_returnMessage(espat_radio_t *radio);
+espat_state_t espAt_returnPhysicalAddress(espat_radio_t *radio, char *mac);
 
 #if (EN_SUPPORT == 1)
 espat_state_t espAt_defineEn(espat_radio_t *radio, espat_port_t *port,
