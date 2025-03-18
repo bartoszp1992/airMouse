@@ -15,7 +15,6 @@
 #include "airmouse.h"
 
 
-
 extern volatile uint32_t sleepTimer;
 extern volatile uint8_t sleepFlag;
 

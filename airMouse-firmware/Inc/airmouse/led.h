@@ -8,15 +8,11 @@
 #ifndef LIB_LED_H_
 #define LIB_LED_H_
 
-#include "main.h"
+#include "blink.h"
 
-enum{
-	LED_GREEN,
-	LED_BLUE,
-	LED_RED
-};
 
-void ledOn(uint8_t led);
-void ledOff(uint8_t led);
+
+void led_init(void);
+
 
 #endif /* LIB_LED_H_ */

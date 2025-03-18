@@ -21,21 +21,20 @@ extern volatile uint32_t prMouse;
 extern volatile uint32_t prKeyboard;
 extern volatile uint32_t prMasterCounter;
 
+extern blink_t ledRed;
+extern blink_t ledGreen;
+extern blink_t ledBlue;
+
 
 void systemTick(void) {
-	ledCounter++;
-	onCounter++;
-	if (ledCounter % 2000 == 0) {
-		HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, 1);
-		onCounter = 0;
-	}
-
-	if (onCounter > 5)
-		HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, 0);
 
 	kbd_scanning(&qwerty);
 	kbd_scanning(&mouseButtons);
 	sleep_timerInc();
+
+	blink_tick(&ledRed);
+	blink_tick(&ledGreen);
+	blink_tick(&ledBlue);
 
 	//polling rate counting
 	prMasterCounter++;

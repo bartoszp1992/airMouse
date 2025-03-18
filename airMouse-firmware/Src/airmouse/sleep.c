@@ -13,8 +13,12 @@ extern void SystemClock_Config(void);
 extern I2C_HandleTypeDef hi2c1;
 extern UART_HandleTypeDef huart1;
 extern ADC_HandleTypeDef hadc1;
+
 extern airmouse_t airmouse;
 
+extern blink_t ledRed;
+extern blink_t ledGreen;
+extern blink_t ledBlue;
 
 volatile uint32_t sleepTimer = 0;
 volatile uint8_t sleepFlag = 0;
@@ -41,9 +45,11 @@ void sleep_enterSleep(void) {
 		lsm6ds_setGRSleep(&mems, LSM6DS_G_SLEEP_EN);
 
 		//led off0
-		ledOff(LED_GREEN);
-		ledOff(LED_BLUE);
-		ledOff(LED_RED);
+		blink_disable(&ledGreen);
+		blink_disable(&ledBlue);
+		blink_enable(&ledRed, BLINK_PATTERN_FAST_SLOW, BLINK_MODE_CONTINOUS);
+		HAL_Delay(150);
+		while(blink_checkBusy(&ledRed)==BLINK_BUSY);
 
 		HAL_UART_MspDeInit(&huart1);
 		HAL_I2C_MspDeInit(&hi2c1);

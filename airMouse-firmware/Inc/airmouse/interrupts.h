@@ -13,6 +13,7 @@
 #include "main.h"
 #include "keyboard.h"
 #include "lsm6ds.h"
+#include "blink.h"
 
 void systemTick(void);
 

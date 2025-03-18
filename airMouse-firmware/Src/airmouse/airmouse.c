@@ -17,6 +17,7 @@
  *      -FN functionality(backspace, dot, comma, etc)
  *      -back and forward buttons are not working
  *      -DONE low polling rate
+ *      -fix busy check in led_blink library- licznik actualBit ma stan 0 przez chwilę po uruchomieniu, ze względu na preskaler. Zatem funkcja busyCheck zwraca READY, jeżeli wywołana zaraz po enable.
  *
  *      name propositions:
  *      IMU		flow
@@ -49,15 +50,19 @@ void airMouseSetup(void) {
 	airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 	airmouse.message = ESPAT_MESSAGE_BLEHIDDISCONN;
 
-	//_________________________________________KEYS_________________________________________
+	//_________________________________________LEDS
+	led_init();
+
+
+	//_________________________________________KEYS
 
 	amhid_init();
 
-	//_________________________________________RADIO_________________________________________
+	//_________________________________________RADIO
 
 	radio_init();
 
-	//_________________________________________IMU SENSOR & CURSOR___________________________
+	//_________________________________________IMU SENSOR & CURSOR
 
 	sensor_init();
 
