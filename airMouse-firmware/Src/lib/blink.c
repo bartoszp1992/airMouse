@@ -46,7 +46,7 @@ void blink_init(blink_t *blink, GPIO_TypeDef *port, uint32_t pin,
 	blink->mode = BLINK_MODE_CONTINOUS;
 	blink->actualBit = 31;
 	blink->masterCounter = 0;
-	blink->sleep = BLINK_SLEEP_EN;
+	blink->status = BLINK_STATUS_READY;
 
 }
 
@@ -54,16 +54,15 @@ void blink_init(blink_t *blink, GPIO_TypeDef *port, uint32_t pin,
  * enable blinking
  * @param: pin
  * @param: pattern
- * @param: BLINK_MODE_CONTINOUS/ONCE
+ * @param: BLINK_MODE_CONTINOUS/SINGLE
  *
- * @retval: BLINK_BUSY/READY
  */
 void blink_enable(blink_t *blink, uint32_t pattern,
 		blink_mode_t mode) {
 
 	blink->pattern = pattern;
 	blink->mode = mode;
-	blink->sleep = BLINK_SLEEP_DIS;
+	blink->status = BLINK_STATUS_BUSY;
 
 	blink->actualBit = 0;
 }
@@ -74,16 +73,18 @@ void blink_enable(blink_t *blink, uint32_t pattern,
  */
 void blink_disable(blink_t *blink) {
 
-	blink->sleep = BLINK_SLEEP_EN;
+	blink->status = BLINK_STATUS_READY;
 	blink_write(blink, BLINK_RESET);
 }
 
-blink_busyFlag_t blink_checkBusy(blink_t *blink) {
-	if (blink->actualBit != 0)
-		return BLINK_BUSY;
-	else {
-		return BLINK_READY;
-	}
+/*
+ * return status
+ * @param: pin
+ *
+ * @retval: BLINK_STATUS_BUSY/SLEEP
+ */
+blink_status_t blink_status(blink_t *blink) {
+	return blink->status;
 }
 
 /*
@@ -93,7 +94,7 @@ blink_busyFlag_t blink_checkBusy(blink_t *blink) {
  */
 void blink_tick(blink_t *blink) {
 
-	if (blink->sleep == BLINK_SLEEP_DIS) {
+	if (blink->status == BLINK_STATUS_BUSY) {
 		blink->masterCounter++;
 		if (blink->masterCounter % blink->prescaler == 0) {
 
@@ -106,12 +107,15 @@ void blink_tick(blink_t *blink) {
 			if (blink->actualBit > 31) {
 				if (blink->mode == BLINK_MODE_CONTINOUS)
 					blink->actualBit = 0;
-				else
+				else{
 					blink->actualBit = 31;
+					blink->status = BLINK_STATUS_READY;
+				}
+
 			}
 
 		}
-	} else if (blink->sleep == BLINK_SLEEP_EN) {
+	} else if (blink->status == BLINK_STATUS_READY) {
 		blink->actualBit = 31;
 		blink_write(blink, BLINK_RESET);
 	}

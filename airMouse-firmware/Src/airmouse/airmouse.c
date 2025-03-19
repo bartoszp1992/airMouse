@@ -17,7 +17,8 @@
  *      -FN functionality(backspace, dot, comma, etc)
  *      -back and forward buttons are not working
  *      -DONE low polling rate
- *      -fix busy check in led_blink library- licznik actualBit ma stan 0 przez chwilę po uruchomieniu, ze względu na preskaler. Zatem funkcja busyCheck zwraca READY, jeżeli wywołana zaraz po enable.
+ *      -DONEfix busy check in led_blink library-
+ *      -you can use BLEHIDINIT=0 to disconnect
  *
  *      name propositions:
  *      IMU		flow
@@ -39,6 +40,9 @@
 extern void SystemClock_Config(void);
 
 airmouse_t airmouse;
+uint32_t counterConn = 0;
+uint32_t counterDisconn = 0;
+volatile uint8_t disconn = 0;
 
 void airMouseSetup(void) {
 
@@ -52,7 +56,6 @@ void airMouseSetup(void) {
 
 	//_________________________________________LEDS
 	led_init();
-
 
 	//_________________________________________KEYS
 
@@ -71,24 +74,38 @@ void airMouseProcess(void) {
 
 	if (airmouse.state == AIRMOUSE_STATE_DISCONNECTED) {
 
+		counterDisconn++;
+
+		if (blink_status(&ledBlue) == BLINK_STATUS_READY)
+			blink_enable(&ledBlue, BLINK_PATTERN_BLINK_X16,
+					BLINK_MODE_SINGLE);
+
 		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_LONG);
+
 		espAt_downloadMessage(&bleRadio);
 		airmouse.message = espAt_returnMessage(&bleRadio);
-		if(airmouse.message == ESPAT_MESSAGE_BLEHIDCONN){
+		if (airmouse.message == ESPAT_MESSAGE_BLEHIDCONN) {
 			airmouse.state = AIRMOUSE_STATE_CONNECTED;
 		}
 
-
 	} else {
 
-		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
-//		espAt_downloadMessage(&bleRadio);
-//		airmouse.message = espAt_returnMessage(&bleRadio);
-//		if(airmouse.message == ESPAT_MESSAGE_BLEHIDDISCONN)
-//			airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
+		counterConn++;
 
-		//_________________________________________MOUSE_________________________________________
-		//read sensor
+		if(disconn == 1){
+			disconn = 0;
+			espAt_sendParams(&bleRadio, P_BD, 1, 0);
+		}
+
+		if (blink_status(&ledBlue) == BLINK_STATUS_READY)
+			blink_enable(&ledBlue, BLINK_PATTERN_SHORT,
+					BLINK_MODE_SINGLE);
+
+
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
+
+//_________________________________________MOUSE_________________________________________
+//read sensor
 		amhid_readCursor();
 		amhid_mouseReportButtonPrevious = amhid_mouseReportButton;
 		amhid_readButtonsMouse();

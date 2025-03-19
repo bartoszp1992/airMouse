@@ -52,6 +52,7 @@ typedef enum {
 #define S_BHN "BLEHIDNAME"
 #define P_BHK "BLEHIDKB" //send keyboard data(mod, k1, k2, k3, k4, k5, k6)
 
+
 //BLE
 #define P_BI "BLEINIT"
 #define P_BCP "BLECONNPARAM"

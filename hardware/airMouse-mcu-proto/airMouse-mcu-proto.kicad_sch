@@ -5445,18 +5445,6 @@
 		(uuid "f56feac7-20ce-4b9e-91af-a328a8da65d4")
 	)
 	(junction
-		(at 212.09 110.49)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "01966d7b-20fc-4b69-b802-cb620daf0408")
-	)
-	(junction
-		(at 55.88 148.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "02e54b1a-c625-4230-a958-79d425d05bfb")
-	)
-	(junction
 		(at 62.23 148.59)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5487,12 +5475,6 @@
 		(uuid "1e1ce692-8d08-450c-ad76-973c0226442d")
 	)
 	(junction
-		(at 34.29 170.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2c369fae-abc8-4946-b9c0-876f6d2ea152")
-	)
-	(junction
 		(at 224.79 118.11)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5517,12 +5499,6 @@
 		(uuid "44366f9b-e170-4d52-b243-bdf0f8948e93")
 	)
 	(junction
-		(at 142.24 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4f4a9b11-4b11-4bf7-a5cc-c0ec3b615742")
-	)
-	(junction
 		(at 43.18 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5539,12 +5515,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6859bd86-e003-4d47-a49a-6d73ab510eb2")
-	)
-	(junction
-		(at 144.78 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "68e1089b-819b-461a-8137-b38907ec90be")
 	)
 	(junction
 		(at 227.33 67.31)
@@ -5595,6 +5565,12 @@
 		(uuid "c7307c00-1412-4592-a195-6d5a268b18d6")
 	)
 	(junction
+		(at 91.44 181.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c7f9c4a0-82a9-425b-89b9-d829c56412e0")
+	)
+	(junction
 		(at 106.68 22.86)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5607,16 +5583,16 @@
 		(uuid "caf5ff96-c9c2-401e-86eb-f22b208660e0")
 	)
 	(junction
-		(at 142.24 36.83)
+		(at 142.24 41.91)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d2478ff3-31d0-4af6-bfd7-0736c1c8f4c5")
+		(uuid "cf397966-c224-44b4-8b6a-dd473d896398")
 	)
 	(junction
-		(at 218.44 110.49)
+		(at 162.56 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "dfc70215-bad8-4b34-af9a-6b4da265dc43")
+		(uuid "d0cc591f-7b78-4b96-a21c-21208a3cbb18")
 	)
 	(junction
 		(at 33.02 38.1)
@@ -5784,7 +5760,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 148.59) (xy 72.39 148.59)
+			(xy 62.23 148.59) (xy 67.31 148.59)
 		)
 		(stroke
 			(width 0)
@@ -5824,7 +5800,7 @@
 	)
 	(wire
 		(pts
-			(xy 196.85 86.36) (xy 196.85 87.63)
+			(xy 111.76 180.34) (xy 111.76 181.61)
 		)
 		(stroke
 			(width 0)
@@ -5852,6 +5828,16 @@
 		)
 		(uuid "087923b4-1164-42d2-97ee-632cd7335a9b")
 	)
+	(wire
+		(pts
+			(xy 17.78 162.56) (xy 17.78 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a76b1a2-3a9b-4c70-bc61-e917748263ae")
+	)
 	(polyline
 		(pts
 			(xy 15.24 97.79) (xy 16.51 99.06)
@@ -5861,6 +5847,16 @@
 			(type default)
 		)
 		(uuid "0a7ee466-7ee8-4eff-b48b-a42599afe327")
+	)
+	(wire
+		(pts
+			(xy 76.2 177.8) (xy 82.55 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ee5d056-6a12-4926-9251-9e962b066600")
 	)
 	(wire
 		(pts
@@ -5881,16 +5877,6 @@
 			(type default)
 		)
 		(uuid "114caa8e-a463-42f9-add6-976f81b2ede1")
-	)
-	(wire
-		(pts
-			(xy 196.85 78.74) (xy 205.74 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1165ce86-c2f3-46cc-9deb-b77b8a836f3c")
 	)
 	(wire
 		(pts
@@ -5964,16 +5950,6 @@
 	)
 	(wire
 		(pts
-			(xy 218.44 110.49) (xy 218.44 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c53d557-18ff-447f-8dbf-e5d324c2a778")
-	)
-	(wire
-		(pts
 			(xy 99.06 137.16) (xy 111.76 137.16)
 		)
 		(stroke
@@ -5981,6 +5957,16 @@
 			(type default)
 		)
 		(uuid "1d1f8489-55d0-4794-b742-122c5ae0aa61")
+	)
+	(wire
+		(pts
+			(xy 142.24 41.91) (xy 142.24 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20d29c6e-432d-4c2b-9f95-7cf6939d63ca")
 	)
 	(wire
 		(pts
@@ -6074,13 +6060,13 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 36.83) (xy 144.78 36.83)
+			(xy 91.44 177.8) (xy 91.44 181.61)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2d5ad787-6920-4803-952b-6caa4c6ffad7")
+		(uuid "2d0678c7-0e46-4876-9d6c-e5f7fe21eceb")
 	)
 	(wire
 		(pts
@@ -6114,6 +6100,16 @@
 	)
 	(wire
 		(pts
+			(xy 76.2 181.61) (xy 82.55 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30508a9f-2eaa-472a-9244-0ba9933865f9")
+	)
+	(wire
+		(pts
 			(xy 87.63 93.98) (xy 96.52 93.98)
 		)
 		(stroke
@@ -6141,16 +6137,6 @@
 			(type default)
 		)
 		(uuid "36b78aa3-939c-45c4-9d96-e1462ae5bd52")
-	)
-	(wire
-		(pts
-			(xy 247.65 101.6) (xy 255.27 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "36bb9df6-6abf-4b83-9336-722f02444d58")
 	)
 	(wire
 		(pts
@@ -6194,23 +6180,13 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 69.85) (xy 124.46 69.85)
+			(xy 110.49 69.85) (xy 124.46 69.85)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "3deb2301-6f00-499c-90f5-f5a994c2ca7b")
-	)
-	(wire
-		(pts
-			(xy 17.78 162.56) (xy 17.78 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3f43a0a8-ec93-4d98-a193-2c51460c076b")
 	)
 	(wire
 		(pts
@@ -6221,16 +6197,6 @@
 			(type default)
 		)
 		(uuid "3ff5c87d-2d6b-40ed-9cc0-f3e44d121bb7")
-	)
-	(wire
-		(pts
-			(xy 34.29 170.18) (xy 34.29 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "41d2bbf6-bb59-408f-afcf-5eee0ce0cda5")
 	)
 	(wire
 		(pts
@@ -6254,7 +6220,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 87.63) (xy 196.85 87.63)
+			(xy 100.33 181.61) (xy 111.76 181.61)
 		)
 		(stroke
 			(width 0)
@@ -6364,26 +6330,6 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 101.6) (xy 240.03 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5aed8f8c-4362-423b-b912-9704bc1baf8b")
-	)
-	(wire
-		(pts
-			(xy 205.74 110.49) (xy 212.09 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5b515b29-6fbf-4780-a185-859519669331")
-	)
-	(wire
-		(pts
 			(xy 17.78 180.34) (xy 44.45 180.34)
 		)
 		(stroke
@@ -6391,16 +6337,6 @@
 			(type default)
 		)
 		(uuid "5be977be-68a5-45bb-8e22-f508b299bf00")
-	)
-	(wire
-		(pts
-			(xy 142.24 34.29) (xy 142.24 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5cc94fe6-ceb9-4e1b-a90b-addbd04c0f4a")
 	)
 	(wire
 		(pts
@@ -6531,6 +6467,16 @@
 			(type default)
 		)
 		(uuid "6b507001-1639-4ce7-a387-906b97432f81")
+	)
+	(wire
+		(pts
+			(xy 91.44 182.88) (xy 91.44 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bed9241-eb12-461c-b639-7d29ea77996a")
 	)
 	(wire
 		(pts
@@ -6684,16 +6630,6 @@
 	)
 	(wire
 		(pts
-			(xy 218.44 110.49) (xy 224.79 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "815b0ade-602c-446d-8478-f1ed12cc175d")
-	)
-	(wire
-		(pts
 			(xy 104.14 53.34) (xy 104.14 80.01)
 		)
 		(stroke
@@ -6714,16 +6650,6 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 167.64) (xy 44.45 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "87ab01c5-bd7a-48e4-9f40-ce056fa1cf89")
-	)
-	(wire
-		(pts
 			(xy 59.69 148.59) (xy 62.23 148.59)
 		)
 		(stroke
@@ -6731,6 +6657,16 @@
 			(type default)
 		)
 		(uuid "880a36d3-3496-462f-a4ea-8c80d69628fa")
+	)
+	(wire
+		(pts
+			(xy 91.44 181.61) (xy 90.17 181.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b8ee3db-0f06-458d-8646-17eb58f60fac")
 	)
 	(polyline
 		(pts
@@ -6794,7 +6730,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 90.17) (xy 205.74 90.17)
+			(xy 100.33 184.15) (xy 120.65 184.15)
 		)
 		(stroke
 			(width 0)
@@ -7001,6 +6937,16 @@
 			(type default)
 		)
 		(uuid "a3f7b4be-7426-43a5-870d-0d45238cb346")
+	)
+	(wire
+		(pts
+			(xy 90.17 177.8) (xy 91.44 177.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a64dc98e-7e1e-486b-8f37-f0b8cf3a854c")
 	)
 	(wire
 		(pts
@@ -7294,16 +7240,6 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 162.56) (xy 17.78 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba03c645-1656-4083-b73d-e69e52755535")
-	)
-	(wire
-		(pts
 			(xy 162.56 138.43) (xy 176.53 138.43)
 		)
 		(stroke
@@ -7331,16 +7267,6 @@
 			(type default)
 		)
 		(uuid "bccc8127-0c64-4ff8-8c15-38611307d789")
-	)
-	(wire
-		(pts
-			(xy 205.74 110.49) (xy 205.74 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bd964ff3-38c4-4ff3-a5cf-6e93f2c41ea3")
 	)
 	(wire
 		(pts
@@ -7474,7 +7400,7 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 63.5) (xy 107.95 69.85)
+			(xy 110.49 63.5) (xy 110.49 69.85)
 		)
 		(stroke
 			(width 0)
@@ -7491,16 +7417,6 @@
 			(type default)
 		)
 		(uuid "ca07134d-1b04-4a42-9aec-e3751ce9cfbc")
-	)
-	(wire
-		(pts
-			(xy 212.09 110.49) (xy 218.44 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ca54c671-4d84-40cb-90de-8b3ccea5280b")
 	)
 	(wire
 		(pts
@@ -7564,6 +7480,16 @@
 	)
 	(wire
 		(pts
+			(xy 39.37 170.18) (xy 44.45 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce7f3f4e-3448-453b-8980-30cdf76d4598")
+	)
+	(wire
+		(pts
 			(xy 87.63 53.34) (xy 104.14 53.34)
 		)
 		(stroke
@@ -7594,6 +7520,16 @@
 	)
 	(wire
 		(pts
+			(xy 39.37 167.64) (xy 44.45 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3a410fe-7c5b-41ca-8557-079c891b3d24")
+	)
+	(wire
+		(pts
 			(xy 43.18 20.32) (xy 48.26 20.32)
 		)
 		(stroke
@@ -7611,16 +7547,6 @@
 			(type default)
 		)
 		(uuid "d51a419c-4a2a-4e27-84eb-68f8a866988d")
-	)
-	(wire
-		(pts
-			(xy 34.29 170.18) (xy 44.45 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d5769663-390a-4aa3-af24-0acdc9aa8f8b")
 	)
 	(wire
 		(pts
@@ -7704,16 +7630,6 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 36.83) (xy 142.24 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e21abce9-042d-4f3d-b547-c3e19778fa7a")
-	)
-	(wire
-		(pts
 			(xy 204.47 72.39) (xy 214.63 72.39)
 		)
 		(stroke
@@ -7721,16 +7637,6 @@
 			(type default)
 		)
 		(uuid "e457fa26-2ba1-4dce-bb1a-6c3f3943ffbf")
-	)
-	(wire
-		(pts
-			(xy 212.09 110.49) (xy 212.09 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e4ed7d49-3213-4a23-b865-34ac52ab48e9")
 	)
 	(wire
 		(pts
@@ -7794,23 +7700,13 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 90.17) (xy 205.74 86.36)
+			(xy 120.65 184.15) (xy 120.65 180.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "eea7536d-9df6-4b72-bdf5-70dfb21fab73")
-	)
-	(wire
-		(pts
-			(xy 34.29 175.26) (xy 34.29 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eed67e63-6fb2-4d96-855d-2daeb343d2b6")
 	)
 	(wire
 		(pts
@@ -7893,7 +7789,7 @@
 		(uuid "fefcb1c1-7d30-4723-b1a6-5919701c8c13")
 	)
 	(label "SDA"
-		(at 185.42 87.63 0)
+		(at 100.33 181.61 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7942,16 +7838,6 @@
 		)
 		(uuid "0fb3f9c0-9e34-44f2-9690-529d1cd4e206")
 	)
-	(label "SENSOR_3V3"
-		(at 30.48 162.56 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "103667cb-901c-43e7-b309-a22b4a8549cf")
-	)
 	(label "COL5"
 		(at 171.45 115.57 180)
 		(effects
@@ -7981,16 +7867,6 @@
 			(justify right bottom)
 		)
 		(uuid "16745b05-c08d-4094-a769-3e3da7819dca")
-	)
-	(label "SENSOR_3V3"
-		(at 59.69 148.59 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1995428b-d911-439d-8cae-26699f895216")
 	)
 	(label "PRG_ESP_RX"
 		(at 41.91 95.25 180)
@@ -8143,7 +8019,7 @@
 		(uuid "461fa2a2-23a2-4aeb-aa44-ca5701849b76")
 	)
 	(label "SCL"
-		(at 185.42 90.17 0)
+		(at 100.33 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8151,16 +8027,6 @@
 			(justify left bottom)
 		)
 		(uuid "4edbd2f4-6b8c-43de-a00f-b077779af1e2")
-	)
-	(label "ESP_3V3"
-		(at 255.27 101.6 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5a576bfd-52f6-4f15-aab6-3b8e12037497")
 	)
 	(label "GYRO_INT"
 		(at 176.53 59.69 180)
@@ -8172,15 +8038,15 @@
 		)
 		(uuid "5be47031-2114-414c-9449-bb277de8900f")
 	)
-	(label "MCU_3V3"
-		(at 196.85 78.74 0)
+	(label "SCX"
+		(at 76.2 181.61 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "62b5ced5-e2ff-4c8b-8dce-b0bd132d2d5a")
+		(uuid "668abb57-2a14-4063-b595-2a2cdd844d7a")
 	)
 	(label "COL7"
 		(at 96.52 91.44 180)
@@ -8222,16 +8088,6 @@
 		)
 		(uuid "723dc426-399f-4134-8725-d53d05006fa3")
 	)
-	(label "MCU_3V3"
-		(at 151.13 36.83 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7688a905-6bb5-4c29-9d4b-a39d9fbf11e5")
-	)
 	(label "SWDIO"
 		(at 39.37 69.85 180)
 		(effects
@@ -8272,8 +8128,18 @@
 		)
 		(uuid "7fac9bca-d9ff-4fe7-aa79-57f5f6f51bf0")
 	)
+	(label "SDX"
+		(at 76.2 177.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "835ebeb0-2351-4d3d-bb15-a3d8791906f2")
+	)
 	(label "RST"
-		(at 107.95 69.85 0)
+		(at 110.49 69.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8382,16 +8248,6 @@
 		)
 		(uuid "a6b5a734-583d-47f7-b863-d38f5da81478")
 	)
-	(label "MCU_3V3"
-		(at 107.95 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "abb34aee-5bc7-4485-85f3-70cdf86d00df")
-	)
 	(label "COL9"
 		(at 96.52 96.52 180)
 		(effects
@@ -8492,16 +8348,6 @@
 		)
 		(uuid "df5757e0-c308-4917-910f-61766fe64bca")
 	)
-	(label "ESP_3V3"
-		(at 205.74 110.49 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e1afcc52-6c3d-4ecb-9a81-22ed80e61839")
-	)
 	(label "PRG_ESP_TX"
 		(at 283.21 120.65 180)
 		(effects
@@ -8521,6 +8367,26 @@
 			(justify left bottom)
 		)
 		(uuid "e20a68ac-3308-4325-aeb0-38ec954fad26")
+	)
+	(label "SDX"
+		(at 39.37 167.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e80ec010-26fe-439b-8830-efb523207a56")
+	)
+	(label "SCX"
+		(at 39.37 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "efea403e-9911-4460-9aa3-f7b0907151ac")
 	)
 	(label "GYRO_INT"
 		(at 85.09 165.1 180)
@@ -8635,6 +8501,71 @@
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 212.09 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "07c15350-417e-4684-88be-ddf8afae7ad5")
+		(property "Reference" "#PWR036"
+			(at 212.09 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 212.09 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 212.09 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 212.09 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 212.09 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b081eef6-3b7b-4f44-8ed9-90460fdd98eb")
+		)
+		(instances
+			(project ""
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -8990,7 +8921,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 34.29 175.26 0)
+		(at 91.44 182.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8998,7 +8929,7 @@
 		(dnp no)
 		(uuid "10896b83-43d8-40fb-9d27-4908e92859ff")
 		(property "Reference" "#PWR018"
-			(at 34.29 181.61 0)
+			(at 91.44 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9007,7 +8938,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 36.83 179.07 0)
+			(at 91.44 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9015,7 +8946,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 34.29 175.26 0)
+			(at 91.44 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9024,7 +8955,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 34.29 175.26 0)
+			(at 91.44 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9033,7 +8964,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 34.29 175.26 0)
+			(at 91.44 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9045,7 +8976,7 @@
 			(uuid "e2a8d90f-f382-4d29-b0ab-facc88a9bca5")
 		)
 		(instances
-			(project "airMouse-mcu"
+			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "#PWR018")
 					(unit 1)
@@ -9256,6 +9187,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 224.79 110.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "13ccf9b4-aa00-4f1a-b891-7a064da7ed2e")
+		(property "Reference" "#PWR038"
+			(at 224.79 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 224.79 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 224.79 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 224.79 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "83209ddf-3883-47b0-9e81-2d51590d8bf4")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR038")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 91.44 39.37 0)
 		(mirror y)
@@ -9458,74 +9455,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 234.95 101.6 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1e1754c5-2701-442b-881b-336c1f4772f5")
-		(property "Reference" "#PWR084"
-			(at 234.95 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 234.95 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 234.95 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 234.95 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 234.95 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "371e7aff-784a-4c91-9255-30c1502cd622")
-		)
-		(instances
-			(project "airMouse-mcu"
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR084")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
-		(at 205.74 82.55 0)
+		(at 120.65 176.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9534,7 +9465,7 @@
 		(fields_autoplaced yes)
 		(uuid "2171a01e-39ca-4b47-92dd-6860ed3407d7")
 		(property "Reference" "R9"
-			(at 208.28 81.2799 0)
+			(at 123.19 175.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9543,7 +9474,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 208.28 83.8199 0)
+			(at 123.19 177.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9552,7 +9483,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 203.962 82.55 90)
+			(at 118.872 176.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9561,7 +9492,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 205.74 82.55 0)
+			(at 120.65 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9570,7 +9501,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 205.74 82.55 0)
+			(at 120.65 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9654,75 +9585,6 @@
 			(project "airMouse-pcb"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "#PWR032")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 55.88 144.78 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "269d6f9e-6692-4aed-84b8-829411e55b59")
-		(property "Reference" "R4"
-			(at 52.07 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "0R"
-			(at 52.07 146.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 54.102 144.78 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 55.88 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 55.88 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "bce676b8-db9c-44e9-9e20-644320e99a8f")
-		)
-		(pin "1"
-			(uuid "9ba31211-dbc8-4eaa-8920-9fd54020cbcb")
-		)
-		(instances
-			(project "airMouse-mcu"
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -10132,6 +9994,204 @@
 			(project "airMouse-mcu"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 120.65 172.72 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3d78c522-8e8c-4f85-a403-d8d64ed8c26b")
+		(property "Reference" "#PWR026"
+			(at 120.65 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 120.65 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 120.65 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 120.65 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 120.65 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2e4d4551-4fa2-48d3-84c5-5b7278c59167")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 255.27 101.6 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3dbcb08f-9069-4bf2-b41c-7e1f9ee1ae7f")
+		(property "Reference" "#PWR041"
+			(at 255.27 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 255.27 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 255.27 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 255.27 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 255.27 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3f298caf-c0d8-490c-94b8-a45500106bd2")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 111.76 172.72 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4017f80c-3b6a-41cb-a63d-2dfe7072470c")
+		(property "Reference" "#PWR024"
+			(at 111.76 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 111.76 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 111.76 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 111.76 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 111.76 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ac5f9cc4-a5be-42c2-8622-f9234cbf1e2a")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -10943,6 +11003,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 17.78 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "695304d6-c233-4622-b521-b6d9b0945de4")
+		(property "Reference" "#PWR01"
+			(at 17.78 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 21.59 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 17.78 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 17.78 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 17.78 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1d70e267-975d-496c-bbbb-f5fa44e68024")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 116.84 59.69 0)
 		(unit 1)
@@ -11076,34 +11201,33 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 243.84 101.6 90)
+		(lib_id "power:+3V3")
+		(at 59.69 148.59 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "70a1abc5-f3a8-4f63-afc3-6ce21a9c0091")
-		(property "Reference" "R55"
-			(at 242.5699 99.06 90)
+		(uuid "71e08d40-0e89-4a7b-a0b5-073a2e7a24c9")
+		(property "Reference" "#PWR013"
+			(at 59.69 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(hide yes)
 			)
 		)
-		(property "Value" "0R"
-			(at 246.38 99.06 90)
+		(property "Value" "+3V3"
+			(at 63.5 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 243.84 103.378 90)
+			(at 59.69 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11111,8 +11235,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 243.84 101.6 0)
+		(property "Datasheet" ""
+			(at 59.69 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11120,25 +11244,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
-			(at 243.84 101.6 0)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 59.69 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(pin "2"
-			(uuid "77acb41a-3b96-4683-9689-d97920413dbb")
 		)
 		(pin "1"
-			(uuid "c23ca2f1-b10c-48fd-ac32-1a0b1737bc89")
+			(uuid "50420d66-2f50-418e-b04a-6bc98b291dea")
 		)
 		(instances
-			(project "airMouse-mcu"
+			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "R55")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -11567,7 +11688,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 196.85 82.55 0)
+		(at 111.76 176.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11576,7 +11697,7 @@
 		(fields_autoplaced yes)
 		(uuid "7b9abe89-a930-40fc-95c6-7d889c963052")
 		(property "Reference" "R8"
-			(at 199.39 81.2799 0)
+			(at 114.3 175.2599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11585,7 +11706,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 199.39 83.8199 0)
+			(at 114.3 177.7999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11594,7 +11715,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 195.072 82.55 90)
+			(at 109.982 176.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11603,7 +11724,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 196.85 82.55 0)
+			(at 111.76 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11612,7 +11733,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 196.85 82.55 0)
+			(at 111.76 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11767,6 +11888,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 218.44 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "84fd23eb-812d-445d-8300-ba62fc25eae4")
+		(property "Reference" "#PWR037"
+			(at 218.44 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 218.44 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 218.44 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 218.44 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 218.44 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "36296d76-916d-41f3-b680-519241777c5e")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR037")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 71.12 33.02 0)
 		(unit 1)
@@ -11827,6 +12013,73 @@
 			(project "airMouse-mcu"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "#PWR016")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 86.36 181.61 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8bc1eda4-9129-4a98-ab74-86c5652eb40b")
+		(property "Reference" "R4"
+			(at 93.98 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 82.55 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 86.36 183.388 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 86.36 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 86.36 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "418dae68-8401-494f-8053-3ed9a65595b7")
+		)
+		(pin "2"
+			(uuid "12b0a905-6f63-4786-9873-7b9995467959")
+		)
+		(instances
+			(project ""
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -11954,72 +12207,6 @@
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "Logo1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 55.88 140.97 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "93e4b665-8145-4681-afd9-c55769a93d2d")
-		(property "Reference" "#PWR031"
-			(at 55.88 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 55.88 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 55.88 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 55.88 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 55.88 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "97734364-bdb9-4f7a-a12e-9b6164cc218e")
-		)
-		(instances
-			(project "airMouse-mcu"
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -12575,6 +12762,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 162.56 36.83 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ae887913-ad0f-47cb-b991-0cb9c317d436")
+		(property "Reference" "#PWR031"
+			(at 162.56 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 162.56 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 162.56 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 162.56 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 162.56 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e2badff5-5082-476c-a9bd-094539329a1b")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR031")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 101.6 26.67 0)
 		(unit 1)
@@ -12745,6 +12998,71 @@
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 205.74 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ba2994fc-ab0b-47e5-8add-682d8f4eddc4")
+		(property "Reference" "#PWR035"
+			(at 205.74 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 205.74 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.74 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 205.74 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 205.74 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3c2554c3-309e-4408-9df5-d2ef6f2b7575")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -13220,7 +13538,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 107.95 59.69 0)
+		(at 110.49 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13228,7 +13546,7 @@
 		(dnp no)
 		(uuid "c55338f7-a9d1-4791-ac6e-c1f3496aa467")
 		(property "Reference" "R7"
-			(at 110.49 58.42 0)
+			(at 110.49 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13237,7 +13555,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 110.49 60.96 0)
+			(at 110.49 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13246,7 +13564,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 106.172 59.69 90)
+			(at 108.712 59.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13255,7 +13573,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 107.95 59.69 0)
+			(at 110.49 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13264,7 +13582,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 107.95 59.69 0)
+			(at 110.49 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13625,76 +13943,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 142.24 30.48 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d32f25d4-0e57-413e-b304-80a73f6d429e")
-		(property "Reference" "R3"
-			(at 144.78 29.2099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "0R"
-			(at 144.78 31.7499 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 140.462 30.48 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 142.24 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 142.24 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "50e03b73-61bd-4dc0-870c-017c17d318ad")
-		)
-		(pin "1"
-			(uuid "f48ffb7a-b8c2-4577-b36b-2dba8eab9284")
-		)
-		(instances
-			(project ""
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "R3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "airMouseLib:KEY")
 		(at 270.51 58.42 90)
 		(unit 1)
@@ -13989,15 +14237,16 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 72.39 152.4 0)
+		(at 67.31 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
+		(fields_autoplaced yes)
 		(uuid "db0f4bb6-6aed-4c34-8930-4a244c616bdb")
 		(property "Reference" "C5"
-			(at 64.77 151.13 0)
+			(at 71.12 151.1299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14006,7 +14255,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 64.77 153.67 0)
+			(at 71.12 153.6699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14015,7 +14264,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 73.3552 156.21 0)
+			(at 68.2752 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14024,7 +14273,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 72.39 152.4 0)
+			(at 67.31 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14033,7 +14282,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 72.39 152.4 0)
+			(at 67.31 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14194,7 +14443,7 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 142.24 26.67 0)
+		(at 142.24 36.83 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -14203,7 +14452,7 @@
 		(dnp no)
 		(uuid "e0240318-08f2-4b47-8194-929353bb70bc")
 		(property "Reference" "#PWR028"
-			(at 142.24 30.48 0)
+			(at 142.24 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14212,7 +14461,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 142.24 21.59 0)
+			(at 142.24 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14220,7 +14469,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 142.24 26.67 0)
+			(at 142.24 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14229,7 +14478,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 142.24 26.67 0)
+			(at 142.24 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14238,7 +14487,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 142.24 26.67 0)
+			(at 142.24 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14260,7 +14509,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 72.39 156.21 0)
+		(at 67.31 156.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14268,7 +14517,7 @@
 		(dnp no)
 		(uuid "e1a0fae2-341b-465d-8c73-a515123426b8")
 		(property "Reference" "#PWR015"
-			(at 72.39 162.56 0)
+			(at 67.31 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14277,7 +14526,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 76.2 157.48 0)
+			(at 71.12 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14285,7 +14534,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 72.39 156.21 0)
+			(at 67.31 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14294,7 +14543,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 156.21 0)
+			(at 67.31 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14303,7 +14552,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 72.39 156.21 0)
+			(at 67.31 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14791,6 +15040,139 @@
 			(project "airMouse-pcb"
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "D4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 110.49 55.88 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e9aef766-f3c2-46dd-ba56-1aecf9959a0c")
+		(property "Reference" "#PWR021"
+			(at 110.49 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 110.49 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 110.49 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 110.49 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 110.49 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "acfc5fcb-82f3-4ec8-9a6b-5d10d197ce76")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 86.36 177.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f35053ab-4f3b-4e84-b496-cbb199c47507")
+		(property "Reference" "R3"
+			(at 93.98 176.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0R"
+			(at 82.55 176.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 86.36 179.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 86.36 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 86.36 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8e0fbe8b-0592-4feb-a868-1be68639452b")
+		)
+		(pin "2"
+			(uuid "03b52d4a-ed7f-4984-97e7-212ee509c5da")
+		)
+		(instances
+			(project "airMouse-pcb"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "R3")
 					(unit 1)
 				)
 			)

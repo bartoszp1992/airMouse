@@ -17,8 +17,8 @@ void led_init(void){
 	blink_init(&ledGreen, LED_GREEN_GPIO_Port, LED_GREEN_Pin, 100);
 	blink_init(&ledBlue, LED_BLUE_GPIO_Port, LED_BLUE_Pin, 100);
 
-	blink_enable(&ledRed, BLINK_PATTERN_SLOW_FAST, BLINK_MODE_ONCE);
-	blink_enable(&ledBlue, BLINK_PATTERN_BLINK_X16, BLINK_MODE_ONCE);
+	blink_enable(&ledGreen, BLINK_PATTERN_SLOW_FAST, BLINK_MODE_SINGLE);
+
 
 }
 

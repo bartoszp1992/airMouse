@@ -10,7 +10,9 @@
 
 #include "blink.h"
 
-
+extern blink_t ledRed;
+extern blink_t ledGreen;
+extern blink_t ledBlue;
 
 void led_init(void);
 

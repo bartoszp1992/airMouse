@@ -33,6 +33,8 @@ void sleep_enterSleep(void) {
 		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_LONG);
 		espAt_sendParams(&bleRadio, P_BD, 1, 0);
 		espAt_downloadResponse(&bleRadio);
+		espAt_sendParams(&bleRadio, P_BHI, 1, 0);
+		espAt_downloadResponse(&bleRadio);
 		espAt_pwrOff(&bleRadio);
 		airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 
@@ -45,11 +47,11 @@ void sleep_enterSleep(void) {
 		lsm6ds_setGRSleep(&mems, LSM6DS_G_SLEEP_EN);
 
 		//led off0
+		blink_enable(&ledRed, BLINK_PATTERN_FAST_SLOW, BLINK_MODE_SINGLE);
+		while(blink_status(&ledRed)==BLINK_STATUS_BUSY);
 		blink_disable(&ledGreen);
 		blink_disable(&ledBlue);
-		blink_enable(&ledRed, BLINK_PATTERN_FAST_SLOW, BLINK_MODE_CONTINOUS);
-		HAL_Delay(150);
-		while(blink_checkBusy(&ledRed)==BLINK_BUSY);
+
 
 		HAL_UART_MspDeInit(&huart1);
 		HAL_I2C_MspDeInit(&hi2c1);
@@ -69,9 +71,9 @@ void sleep_enterSleep(void) {
 		HAL_UART_MspInit(&huart1);
 		HAL_I2C_MspInit(&hi2c1);
 		HAL_ADC_MspInit(&hadc1);
-		HAL_UART_ChangeSpeed(&huart1, CONFIG_BAUDRATE_DEFAULT);
 
 		//turn on
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_LONG);
 		espAt_pwrOn(&bleRadio);
 		espAt_downloadResponse(&bleRadio);
 
