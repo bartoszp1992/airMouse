@@ -93,7 +93,7 @@ void MX_GPIO_Init(void)
                           |KBD_COL4_Pin|KBD_COL5_Pin|KBD_COL6_Pin|KBD_COL7_Pin
                           |KBD_COL8_Pin|KBD_COL9_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : ESP_BOOT_Pin */

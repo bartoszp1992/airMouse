@@ -1972,90 +1972,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Mechanical:MountingHole"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim yes)
-			(in_bom no)
-			(on_board yes)
-			(property "Reference" "H"
-				(at 0 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "MountingHole"
-				(at 0 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Mounting Hole without connection"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "mounting hole"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "MountingHole*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "MountingHole_0_1"
-				(circle
-					(center 0 0)
-					(radius 1.27)
-					(stroke
-						(width 1.27)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "RF_Module:ESP32-C3-WROOM-02U"
+		(symbol "RF_Module:ESP32-C3-WROOM-02"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2067,16 +1984,16 @@
 					)
 				)
 			)
-			(property "Value" "ESP32-C3-WROOM-02U"
-				(at 12.7 21.336 0)
+			(property "Value" "ESP32-C3-WROOM-02"
+				(at 12.192 21.336 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "RF_Module:ESP32-C3-WROOM-02U"
-				(at 0 -0.635 0)
+			(property "Footprint" "RF_Module:ESP32-C3-WROOM-02"
+				(at 0 0.635 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2085,7 +2002,7 @@
 				)
 			)
 			(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-c3-wroom-02_datasheet_en.pdf"
-				(at 0 -0.635 0)
+				(at 0 0.635 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2094,7 +2011,7 @@
 				)
 			)
 			(property "Description" "802.11 b/g/n Wi­Fi and Bluetooth 5 module, ESP32­C3 SoC, RISC­V microprocessor, On-board antenna"
-				(at 0 -0.635 0)
+				(at 0 0.635 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2111,7 +2028,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "ESP32?C3*WROOM?02U*"
+			(property "ki_fp_filters" "ESP32?C3*WROOM?02*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2120,7 +2037,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "ESP32-C3-WROOM-02U_1_1"
+			(symbol "ESP32-C3-WROOM-02_1_1"
 				(rectangle
 					(start -12.7 20.32)
 					(end 12.7 -20.32)
@@ -5433,7 +5350,7 @@
 		)
 		(uuid "7bbdef86-42e4-4718-9327-24d1625c8d56")
 	)
-	(text "remove R3/R4\nC7- change to 0805\nchange converter to: TLV61070A\nmuch much wider BAT- width\nstep up voltage from BAT(charge pump)\nAdd acc circuit\nAdd power switches for peripherals(ESP32, gyro sensor)\nmake place for ESP32 with pcb antenna\nEN have to be push pull, other wise voltage on this pin can't rise. why?\nplace buffer capacitor on battery"
+	(text "DONE much much wider BAT- width\nDEPRECATED step up voltage from BAT(charge pump)\nDEPRECATED Add acc circuit\nDEPRECATED Add power switches for peripherals(ESP32, gyro sensor)\nmake place for ESP32 with pcb antenna\nEN have to be push pull, other wise voltage on this pin can't rise. why?\nplace buffer capacitor on battery"
 		(exclude_from_sim no)
 		(at 293.37 132.08 0)
 		(effects
@@ -5575,12 +5492,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a85068a7-db79-44e6-8730-0e33e66bcb88")
-	)
-	(junction
-		(at 38.1 135.89)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b6318e87-be8b-48b8-ab44-baa968ea97b7")
 	)
 	(junction
 		(at 151.13 36.83)
@@ -5864,6 +5775,16 @@
 	)
 	(wire
 		(pts
+			(xy 110.49 110.49) (xy 110.49 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f765434-82ff-4f47-ad00-1e0fa8cbb59a")
+	)
+	(wire
+		(pts
 			(xy 110.49 130.81) (xy 124.46 130.81)
 		)
 		(stroke
@@ -5871,16 +5792,6 @@
 			(type default)
 		)
 		(uuid "0ffb823a-a37a-4e30-b80d-5db59564d4b5")
-	)
-	(polyline
-		(pts
-			(xy 19.05 124.46) (xy 20.32 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "114caa8e-a463-42f9-add6-976f81b2ede1")
 	)
 	(wire
 		(pts
@@ -6001,26 +5912,6 @@
 			(type default)
 		)
 		(uuid "247a3f16-596e-4f62-b628-c35a6704b3c7")
-	)
-	(polyline
-		(pts
-			(xy 15.24 128.27) (xy 16.51 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "27022f5d-92dc-41b3-8721-74b20cd421c2")
-	)
-	(wire
-		(pts
-			(xy 22.86 135.89) (xy 38.1 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "277afd2c-46e1-487d-a720-7c5a86ee6a67")
 	)
 	(wire
 		(pts
@@ -6254,6 +6145,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 102.87) (xy 105.41 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4746ce65-5a86-46e5-9bee-b7e3405b5094")
+	)
+	(wire
+		(pts
 			(xy 185.42 87.63) (xy 196.85 87.63)
 		)
 		(stroke
@@ -6282,16 +6183,6 @@
 		)
 		(uuid "4d43d04c-e427-458f-bd25-e6f30a0ecb82")
 	)
-	(polyline
-		(pts
-			(xy 19.05 127) (xy 20.32 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4da53808-066d-46a8-8c6c-e6d84b59add9")
-	)
 	(wire
 		(pts
 			(xy 184.15 50.8) (xy 184.15 67.31)
@@ -6301,16 +6192,6 @@
 			(type default)
 		)
 		(uuid "4f50290c-e561-4792-b698-84bd399957fc")
-	)
-	(wire
-		(pts
-			(xy 27.94 125.73) (xy 39.37 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "517cc23d-e780-4adc-b060-b9baf8ecdbe0")
 	)
 	(wire
 		(pts
@@ -6341,16 +6222,6 @@
 			(type default)
 		)
 		(uuid "55c293f9-4745-4e19-b0f4-3d66280c572a")
-	)
-	(wire
-		(pts
-			(xy 27.94 128.27) (xy 39.37 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "56ab9d22-31bc-468a-a114-4cd5e9bd0d82")
 	)
 	(wire
 		(pts
@@ -6524,16 +6395,6 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 113.03) (xy 124.46 113.03)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6b507001-1639-4ce7-a387-906b97432f81")
-	)
-	(wire
-		(pts
 			(xy 236.22 128.27) (xy 236.22 130.81)
 		)
 		(stroke
@@ -6554,6 +6415,16 @@
 	)
 	(wire
 		(pts
+			(xy 110.49 110.49) (xy 124.46 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "708d0dd6-5f21-44a8-8d1c-ebdcccc82f38")
+	)
+	(wire
+		(pts
 			(xy 101.6 22.86) (xy 106.68 22.86)
 		)
 		(stroke
@@ -6561,16 +6432,6 @@
 			(type default)
 		)
 		(uuid "713b7350-51f9-4710-82f8-b531cf97e2c7")
-	)
-	(polyline
-		(pts
-			(xy 15.24 125.73) (xy 20.32 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7225c7b6-f0ee-4b2a-b01a-8f24ae83047c")
 	)
 	(wire
 		(pts
@@ -6731,16 +6592,6 @@
 			(type default)
 		)
 		(uuid "880a36d3-3496-462f-a4ea-8c80d69628fa")
-	)
-	(polyline
-		(pts
-			(xy 15.24 128.27) (xy 16.51 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8ba65c77-cc2c-4c97-85d4-500b4625a89b")
 	)
 	(wire
 		(pts
@@ -6911,16 +6762,6 @@
 			(type default)
 		)
 		(uuid "98e43baf-7eba-4804-9e0a-4a5c1882113a")
-	)
-	(wire
-		(pts
-			(xy 110.49 110.49) (xy 124.46 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "99da07fb-e4b5-424b-b8e2-d602a2f9a5ea")
 	)
 	(wire
 		(pts
@@ -7122,16 +6963,6 @@
 		)
 		(uuid "adcb4815-bfc4-4c0c-bfb7-0244950d207e")
 	)
-	(polyline
-		(pts
-			(xy 15.24 128.27) (xy 20.32 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "adf3a778-162f-4e68-b346-162a82cf6c57")
-	)
 	(wire
 		(pts
 			(xy 60.96 25.4) (xy 57.15 25.4)
@@ -7142,16 +6973,6 @@
 		)
 		(uuid "aed71552-0785-47ff-be82-bc387b276290")
 	)
-	(polyline
-		(pts
-			(xy 15.24 128.27) (xy 16.51 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aed9a00b-3967-4821-86a0-0c2170891d46")
-	)
 	(wire
 		(pts
 			(xy 87.63 96.52) (xy 96.52 96.52)
@@ -7161,16 +6982,6 @@
 			(type default)
 		)
 		(uuid "af623cb1-7e80-4a48-b978-1a9bdb3910fd")
-	)
-	(wire
-		(pts
-			(xy 38.1 130.81) (xy 38.1 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b065abfb-1044-4e29-a38d-3c9573ed0a15")
 	)
 	(wire
 		(pts
@@ -7374,6 +7185,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 113.03) (xy 124.46 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c21b5791-6c32-4368-903b-46235917abe3")
+	)
+	(wire
+		(pts
 			(xy 43.18 20.32) (xy 43.18 24.13)
 		)
 		(stroke
@@ -7541,16 +7362,6 @@
 			(type default)
 		)
 		(uuid "cd5090b4-3782-47f3-9dac-9ed995d01fa5")
-	)
-	(wire
-		(pts
-			(xy 38.1 130.81) (xy 27.94 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cdce16f3-ca57-4e9e-ad6f-897209b213ef")
 	)
 	(wire
 		(pts
@@ -7933,7 +7744,7 @@
 		(uuid "0dc3dbaa-df4a-41e2-ac34-4d8164075cc7")
 	)
 	(label "AT_MCU_RX"
-		(at 110.49 113.03 0)
+		(at 111.76 113.03 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8131,16 +7942,6 @@
 			(justify right bottom)
 		)
 		(uuid "44b810c8-92f9-40fb-b276-00fce0976108")
-	)
-	(label "AT_MCU_TX"
-		(at 39.37 125.73 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "461fa2a2-23a2-4aeb-aa44-ca5701849b76")
 	)
 	(label "SCL"
 		(at 185.42 90.17 0)
@@ -8402,16 +8203,6 @@
 		)
 		(uuid "ad645f55-10d0-4d7e-8f8a-fb41c0c3386f")
 	)
-	(label "AT_MCU_RX"
-		(at 39.37 128.27 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b5674a50-a8de-40d8-be2c-e8fe527ae6ff")
-	)
 	(label "STBY"
 		(at 186.69 72.39 0)
 		(effects
@@ -8423,7 +8214,7 @@
 		(uuid "bb6b1d3b-f6db-4762-99c0-6c47a9409f62")
 	)
 	(label "AT_MCU_TX"
-		(at 110.49 110.49 0)
+		(at 111.76 110.49 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9256,6 +9047,126 @@
 		)
 	)
 	(symbol
+		(lib_id "RF_Module:ESP32-C3-WROOM-02")
+		(at 255.27 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "12df5102-aee5-401d-a4dc-581327afe11b")
+		(property "Reference" "U5"
+			(at 259.08 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "ESP32-C3-WROOM-02"
+			(at 259.08 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "RF_Module:ESP32-C3-WROOM-02"
+			(at 255.27 135.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-c3-wroom-02_datasheet_en.pdf"
+			(at 255.27 135.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "802.11 b/g/n Wi­Fi and Bluetooth 5 module, ESP32­C3 SoC, RISC­V microprocessor, On-board antenna"
+			(at 255.27 135.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "ef6fbbba-ef14-4a74-96c5-1ae363f08128")
+		)
+		(pin "8"
+			(uuid "22827c93-3bf2-45ab-8182-38de70cdfcee")
+		)
+		(pin "4"
+			(uuid "957263c0-1136-465b-94ef-08458e8708f5")
+		)
+		(pin "17"
+			(uuid "604e17b9-84b2-4060-acc1-3fc333e81d1f")
+		)
+		(pin "19"
+			(uuid "ea314bd2-67e1-4e62-b966-9e750e27b31c")
+		)
+		(pin "12"
+			(uuid "902a83cd-12cf-41f2-bd04-0c22832b311b")
+		)
+		(pin "1"
+			(uuid "fcae4ae0-8e14-43c5-8055-1c8a3ecb2147")
+		)
+		(pin "6"
+			(uuid "18d3fb8e-b12e-424b-9536-a36ba473e431")
+		)
+		(pin "13"
+			(uuid "b8b9d2dc-90b3-4434-962b-782ff5f6a93a")
+		)
+		(pin "2"
+			(uuid "519cb9e0-b565-46f5-951f-83ba7e6f0651")
+		)
+		(pin "18"
+			(uuid "1e05cb7c-fc3d-4359-89f7-f675e5952b81")
+		)
+		(pin "16"
+			(uuid "cf7c3ee3-e1de-46aa-95db-cf8bbb7901c1")
+		)
+		(pin "14"
+			(uuid "03a2c7d1-dea1-4305-9932-d9f446b2d08c")
+		)
+		(pin "7"
+			(uuid "9ef9c4b6-db62-433c-8390-3a56e3d996aa")
+		)
+		(pin "10"
+			(uuid "2462cc9d-cfaf-46f4-8d11-d1fa2c4f05d8")
+		)
+		(pin "15"
+			(uuid "fc99d050-cf2e-4a7b-b0b9-839ab08e326b")
+		)
+		(pin "9"
+			(uuid "4e1d1c6d-926f-44c9-9660-95e2a3a009f0")
+		)
+		(pin "11"
+			(uuid "62c18af1-dbe6-4618-8d8a-c94e9f02041f")
+		)
+		(pin "5"
+			(uuid "a24dd6ba-ca52-4308-bd57-576a35a0078b")
+		)
+		(instances
+			(project ""
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "U5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 91.44 39.37 0)
 		(mirror y)
@@ -9415,7 +9326,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 107.6452 30.48 0)
 			(effects
 				(font
@@ -9686,7 +9597,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 54.102 144.78 90)
 			(effects
 				(font
@@ -10074,70 +9985,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 227.33 31.75 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3b14f4fd-de96-48d9-809f-ae5fd4d0526f")
-		(property "Reference" "H3"
-			(at 229.87 30.4799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole"
-			(at 229.87 33.0199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_ISO14580"
-			(at 227.33 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 227.33 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 227.33 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "airMouse-mcu"
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "H3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 151.13 40.64 0)
 		(unit 1)
@@ -10477,6 +10324,72 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 105.41 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "544e35d0-2aa8-4209-b0a7-016e259a17b2")
+		(property "Reference" "TP3"
+			(at 100.33 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "AT_MCU_RX"
+			(at 100.33 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 110.49 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 110.49 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 105.41 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "112457b6-4231-46ae-978e-4d396daaff2e")
+		)
+		(instances
+			(project "airMouse-mcu"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "TP3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 133.35 49.53 0)
 		(unit 1)
@@ -10560,8 +10473,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
-			(at 226.06 116.84 0)
+		(property "Value" "10k(NM)"
+			(at 226.06 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10813,70 +10726,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 227.33 21.59 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "651be82d-e0ef-4a26-81c2-0df7cac8c520")
-		(property "Reference" "H1"
-			(at 229.87 20.3199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole"
-			(at 229.87 22.8599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_ISO14580"
-			(at 227.33 21.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 227.33 21.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 227.33 21.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "H1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 43.18 38.1 0)
 		(unit 1)
@@ -11102,7 +10951,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 243.84 103.378 90)
 			(effects
 				(font
@@ -12026,88 +11875,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic_MountingPin:Conn_01x03_MountingPin")
-		(at 22.86 128.27 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "96246f89-6349-4260-8fcc-ce73f77a4739")
-		(property "Reference" "J3"
-			(at 22.86 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AT"
-			(at 22.86 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "airMouseLib:JST_ZH_S3B-ZR-SM4A-TF_1x03-1MP_P1.50mm_Horizontal"
-			(at 22.86 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 22.86 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connectable mounting pin connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 22.86 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Field5" "S3B-ZR-SM4A-TF (LF)(SN)"
-			(at 26.67 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "MP"
-			(uuid "bd84a705-26db-4408-b9b3-b78fef767a52")
-		)
-		(pin "1"
-			(uuid "4c4d5609-5542-4fdb-a23f-3e33851fba71")
-		)
-		(pin "2"
-			(uuid "ffda1427-97cb-4851-80c9-3461e42d22cb")
-		)
-		(pin "3"
-			(uuid "d0ab76e9-9807-41bd-ad66-8b4ec8456fd5")
-		)
-		(instances
-			(project ""
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3V3")
 		(at 270.51 53.34 0)
 		(unit 1)
@@ -12240,72 +12007,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 38.1 135.89 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a428008e-344e-44b9-b12f-b0879e0eec41")
-		(property "Reference" "#PWR07"
-			(at 38.1 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 38.1 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 38.1 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 38.1 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 38.1 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ff5a859b-6386-4fd1-a68a-f9880da224ac")
-		)
-		(instances
-			(project "airMouse-pcb"
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "#PWR07")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 91.44 26.67 0)
 		(unit 1)
@@ -12370,70 +12071,6 @@
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 227.33 26.67 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ac6d3f7b-550b-41e5-9b4a-b0061bc0dd5b")
-		(property "Reference" "H2"
-			(at 229.87 25.3999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole"
-			(at 229.87 27.9399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2_ISO14580"
-			(at 227.33 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 227.33 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 227.33 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "airMouse-mcu"
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -13099,126 +12736,6 @@
 		)
 	)
 	(symbol
-		(lib_id "RF_Module:ESP32-C3-WROOM-02U")
-		(at 255.27 135.89 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c53ad636-74ac-4a9b-a4c3-2e45e9e010b4")
-		(property "Reference" "U4"
-			(at 248.92 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "ESP32-C3-WROOM-02U"
-			(at 228.6 161.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "RF_Module:ESP32-C3-WROOM-02U"
-			(at 255.27 136.525 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-c3-wroom-02_datasheet_en.pdf"
-			(at 255.27 136.525 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "802.11 b/g/n Wi­Fi and Bluetooth 5 module, ESP32­C3 SoC, RISC­V microprocessor, On-board antenna"
-			(at 255.27 136.525 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "6"
-			(uuid "91651d1f-182e-42ad-ad21-6a303e7f829a")
-		)
-		(pin "18"
-			(uuid "fcc3fcab-e1b3-4faf-b4e8-44ce934be236")
-		)
-		(pin "8"
-			(uuid "7e175a49-127c-4a0c-8786-333101df56c8")
-		)
-		(pin "5"
-			(uuid "5800dee5-7d97-4a83-abbe-aa7f10eab9a9")
-		)
-		(pin "17"
-			(uuid "4de14ccd-a4c2-4e00-9d09-27076f564ed9")
-		)
-		(pin "12"
-			(uuid "2a2b0788-6399-41d1-a01e-214f8b71b16c")
-		)
-		(pin "3"
-			(uuid "20ca103a-d4d4-4ffc-b5a8-b63b0e49a3bd")
-		)
-		(pin "19"
-			(uuid "827e0062-9117-4a66-89ee-ba2c01423a74")
-		)
-		(pin "9"
-			(uuid "c539f81d-0af1-484e-9466-21e6d0181661")
-		)
-		(pin "16"
-			(uuid "ed644968-c878-41a7-a1ec-e906542eea08")
-		)
-		(pin "2"
-			(uuid "a14ca34e-7233-4399-ac90-469f28e00a9c")
-		)
-		(pin "7"
-			(uuid "7d133ed5-55e3-47f2-bf6b-07bb446394d7")
-		)
-		(pin "11"
-			(uuid "af748a5a-35cd-4558-bbde-645bac6a8a1e")
-		)
-		(pin "13"
-			(uuid "a0323240-8172-43c0-9767-67fe5870aeed")
-		)
-		(pin "10"
-			(uuid "66189e3f-22ff-47d4-99bf-b2592f320afe")
-		)
-		(pin "14"
-			(uuid "c2a30661-0a42-47d8-ae74-d792a1a746b7")
-		)
-		(pin "1"
-			(uuid "1ab9d86e-ec94-4dfd-b59f-4f301b3c7ccf")
-		)
-		(pin "4"
-			(uuid "1f7ae276-bf7f-4ca7-a82d-054cf7a24730")
-		)
-		(pin "15"
-			(uuid "a932aa4f-2be6-47a0-97da-224dc21d1f37")
-		)
-		(instances
-			(project ""
-				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
-					(reference "U4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 107.95 59.69 0)
 		(unit 1)
@@ -13652,7 +13169,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 140.462 30.48 90)
 			(effects
 				(font
@@ -14117,6 +13634,72 @@
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 110.49 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dc2fb5ef-8f98-440b-8f74-70fb68d87515")
+		(property "Reference" "TP4"
+			(at 111.76 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "AT_MCU_TX"
+			(at 111.76 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 115.57 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 115.57 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 110.49 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "240b598c-2d50-4d9b-bb00-fe3d316e602a")
+		)
+		(instances
+			(project "airMouse-mcu"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "TP4")
 					(unit 1)
 				)
 			)

@@ -10,15 +10,17 @@
  *      DONE -on moving, not connected: HID reports sending only if connected(depending on the receiving data)
  *      -accelerometer used to correct cursor movement(simple or vector)
  *      -presicion move when the back of the hand is placed upwards
- *      -leds handling
+ *      -DONE leds handling
  *      -low battery alert
- *      -sleep mode- gyroscope cant awake
+ *      -DONE sleep mode- gyroscope cant awake
  *      -DONE keyboard buttons are send too frequently
  *      -FN functionality(backspace, dot, comma, etc)
  *      -back and forward buttons are not working
  *      -DONE low polling rate
  *      -DONEfix busy check in led_blink library-
- *      -you can use BLEHIDINIT=0 to disconnect
+ *      -DONE you can use BLEHIDINIT=0 to disconnect
+ *      -scrolling too fast
+ *      -DPI switch
  *
  *      name propositions:
  *      IMU		flow
