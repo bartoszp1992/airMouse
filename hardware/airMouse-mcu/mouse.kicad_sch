@@ -5,9 +5,9 @@
 	(uuid "3b2d4ac7-1890-47a8-bb02-eb880b07c39e")
 	(paper "A4")
 	(title_block
-		(title "EtherPointer mcu")
-		(date "2025-02-15")
-		(rev "RC1")
+		(title "Neuro Glider")
+		(date "2025-03-21")
+		(rev "v1.0")
 		(company "Bart's Design")
 		(comment 1 "Bartosz Pracz")
 	)

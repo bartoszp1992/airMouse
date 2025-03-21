@@ -1,7 +1,7 @@
 {
   "board": {
     "active_layer": 2,
-    "active_layer_preset": "routing",
+    "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
     "hidden_nets": [],
@@ -48,7 +48,7 @@
       "locked_item_shadows",
       "conflict_shadows"
     ],
-    "visible_layers": "00000000_00000000_00000000_a200a00f",
+    "visible_layers": "00000000_00000000_00000000_a200a08f",
     "zone_display_mode": 0
   },
   "git": {

@@ -1,0 +1,36 @@
+### Footprint positions - created on 2025-03-21T22:08:14+0100 ###
+### Printed by KiCad version 9.0.0-1.fc40
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref     Val                  Package                                                 PosX       PosY       Rot  Side
+BT1       BC-0401              BC-0401                                             138.0000  -103.1000  -90.0000  top
+C1        1u                   C_0603_1608Metric                                   146.5875   -92.1500  180.0000  top
+C2        4u7                  C_0805_2012Metric                                   145.9500  -100.8000  180.0000  top
+C3        100n                 C_0603_1608Metric                                   146.5875   -93.7500  180.0000  top
+C6        100n                 C_0603_1608Metric                                   145.7125  -108.9500  180.0000  top
+C7        10u                  C_0805_2012Metric                                   145.5125  -106.8500  180.0000  top
+C13       100n                 C_0603_1608Metric                                   157.8000   -95.1000  180.0000  top
+D1        MBR0530              D_SOD-123                                           150.7125  -103.6000   90.0000  top
+D2        BT                   LED_0603_1608Metric                                 166.4000   -85.1000    0.0000  top
+D3        LOW_BAT              LED_0603_1608Metric                                 166.4000   -88.4000    0.0000  top
+D4        STBY                 LED_0603_1608Metric                                 166.4000   -86.7500    0.0000  top
+J1        MCU_PRG              JST_ZH_S5B-ZR-SM4A-TF_1x05-1MP_P1.50mm_Horizontal   163.0500  -111.1500   90.0000  top
+J4        DS1020-07-16VBT1A-R  DS1020-07-16VBT1A-R                                 156.1000  -120.4000    0.0000  top
+L1        4u7                  L_Ferrocore_DLG-0403                                145.3125   -97.0500  180.0000  top
+LD1       70115420             PinHeader_1x02_P2.54mm_Vertical                     166.4000   -79.6000    0.0000  top
+Q1        IRLML6346            SOT-23                                              150.1125   -95.7125   90.0000  top
+R5        1M                   R_0603_1608Metric                                   148.7125  -106.2500   90.0000  top
+R6        180k                 R_0603_1608Metric                                   148.7125  -103.2500   90.0000  top
+R10       1k                   R_0603_1608Metric                                   157.8000   -93.6000  180.0000  top
+R14       2k2                  R_0603_1608Metric                                   163.5500  -102.5000  -90.0000  top
+R15       2k2                  R_0603_1608Metric                                   166.7500  -102.5000  -90.0000  top
+R16       2k2                  R_0603_1608Metric                                   165.1500  -102.5000  -90.0000  top
+R20       100R                 R_0603_1608Metric                                   151.5000  -117.0000  -90.0000  top
+R21       100R                 R_0603_1608Metric                                   150.0000  -117.0000  -90.0000  top
+R22       100R                 R_0603_1608Metric                                   148.5000  -117.0000  -90.0000  top
+R23       100R                 R_0603_1608Metric                                   147.0000  -117.0000  -90.0000  top
+R24       100R                 R_0603_1608Metric                                   145.5000  -117.0000  -90.0000  top
+R55       0R                   R_0603_1608Metric                                   142.4250   -78.2000    0.0000  top
+U2        TLV61070ADBV         SOT-23-6                                            145.7500  -103.8000    0.0000  top
+U5        ESP32-C3-WROOM-02    ESP32-C3-WROOM-02                                   154.3500   -83.8000    0.0000  top
+## End

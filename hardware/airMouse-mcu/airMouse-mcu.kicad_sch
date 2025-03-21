@@ -5,9 +5,9 @@
 	(uuid "7db98094-2aea-4dd7-9887-4079cb1655e3")
 	(paper "A4")
 	(title_block
-		(title "EtherPointer mcu")
-		(date "2025-02-15")
-		(rev "RC1")
+		(title "Neuro Glider")
+		(date "2025-03-21")
+		(rev "v1.0")
 		(company "Bart's Design")
 		(comment 1 "Bartosz Pracz")
 	)
@@ -5386,6 +5386,12 @@
 		(uuid "0cc7c567-32ab-4117-b2ca-b2efc1371536")
 	)
 	(junction
+		(at 72.39 148.59)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0ddf835f-922f-4c6f-91cf-267bdc78c8c4")
+	)
+	(junction
 		(at 101.6 22.86)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5402,6 +5408,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1e1ce692-8d08-450c-ad76-973c0226442d")
+	)
+	(junction
+		(at 270.51 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "25d765de-9e4e-470a-8b59-ddf82c9da2be")
 	)
 	(junction
 		(at 34.29 170.18)
@@ -5432,6 +5444,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "44366f9b-e170-4d52-b243-bdf0f8948e93")
+	)
+	(junction
+		(at 162.56 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ad77975-5f50-4bc2-b444-fdeedda84f14")
 	)
 	(junction
 		(at 142.24 41.91)
@@ -5892,6 +5910,16 @@
 			(type default)
 		)
 		(uuid "1d1f8489-55d0-4794-b742-122c5ae0aa61")
+	)
+	(wire
+		(pts
+			(xy 72.39 144.78) (xy 72.39 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ea7befb-7e46-4cde-963f-46df51105844")
 	)
 	(wire
 		(pts
@@ -7202,6 +7230,16 @@
 			(type default)
 		)
 		(uuid "c23c27a9-af6b-4e31-bc0f-3010358608a8")
+	)
+	(wire
+		(pts
+			(xy 162.56 33.02) (xy 162.56 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c270b1ce-94d6-4abc-a7df-17ae04d39063")
 	)
 	(wire
 		(pts
@@ -9505,6 +9543,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 72.39 144.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "24371c03-36f8-43b0-bedb-95ecc49584e1")
+		(property "Reference" "#FLG04"
+			(at 72.39 142.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 72.39 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 72.39 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 72.39 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 72.39 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5af0be8e-d612-49de-9949-381fd8c8daf1")
+		)
+		(instances
+			(project "airMouse-mcu"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#FLG04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 162.56 44.45 0)
 		(unit 1)
@@ -11133,6 +11237,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 162.56 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "74256a6f-b70b-4cf9-839f-b2f7be2a7d60")
+		(property "Reference" "#FLG05"
+			(at 162.56 31.115 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 162.56 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 162.56 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 162.56 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 162.56 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "34d9b1c3-4bd6-470f-ae46-019dcffd16f9")
+		)
+		(instances
+			(project "airMouse-mcu"
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#FLG05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 43.18 27.94 0)
 		(unit 1)
@@ -12001,6 +12171,72 @@
 			(project ""
 				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
 					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 270.51 101.6 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a9edc9a3-bf17-414b-a26b-8f2a969da9bf")
+		(property "Reference" "#FLG03"
+			(at 270.51 99.695 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 270.51 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 270.51 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 270.51 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 270.51 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "65630b90-a1a5-4dd8-86b2-f28a1882030a")
+		)
+		(instances
+			(project ""
+				(path "/7db98094-2aea-4dd7-9887-4079cb1655e3"
+					(reference "#FLG03")
 					(unit 1)
 				)
 			)
