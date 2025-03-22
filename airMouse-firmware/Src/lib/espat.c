@@ -19,7 +19,6 @@
 #include <stdint.h>
 #include "espat.h"
 
-
 //special commands, not beginning with AT+
 #define AT_ECHO_ON "ATE1"
 #define AT_ECHO_OFF "ATE0"
@@ -89,7 +88,6 @@ espat_state_t uartReceive(espat_uartInstance_t *uart, char *data, uint32_t size)
 	else
 		return ESPAT_STATE_ERR;
 }
-
 
 #if (BOOT_SUPPORT == 1) || (EN_SUPPORT == 1)
 /*
@@ -194,14 +192,13 @@ espat_state_t espAt_echo(espat_radio_t *radio, espat_echo_t echo) {
 	char buffer[bufferSize];
 	memset(buffer, ' ', bufferSize);
 
-	if(echo == ESPAT_ECHO_ON){
+	if (echo == ESPAT_ECHO_ON) {
 		memcpy(&buffer[0], AT_ECHO_ON, length);
 	}
 
-	else if(echo == ESPAT_ECHO_OFF){
+	else if (echo == ESPAT_ECHO_OFF) {
 		memcpy(&buffer[0], AT_ECHO_OFF, length);
 	}
-
 
 	//build command
 	memcpy(&buffer[length], AT_ENDING, endingLength);
@@ -517,8 +514,6 @@ espat_state_t espAt_sendComplex(espat_radio_t *radio, char *command,
 
 }
 
-
-
 /*
  * receive raw data from ESP. send command first, before run this function.
  * @param: radio struct
@@ -548,9 +543,13 @@ espat_state_t espAt_downloadResponse(espat_radio_t *radio) {
 			uint8_t sizeErr = strlen(AT_RESPONSE_ERROR);
 			uint8_t sizeBusy = strlen(AT_RESPONSE_BUSY);
 			uint8_t sizeReady = strlen(AT_RESPONSE_READY);
+			uint8_t sizeBleConn = strlen(AT_MESSAGE_BLECONN);
+			uint8_t sizeBleDisconn = strlen(AT_MESSAGE_BLEDISCONN);
+			uint8_t sizeBleHidConn = strlen(AT_MESSAGE_BLEHIDCONN);
+			uint8_t sizeBleHidDisconn = strlen(AT_MESSAGE_BLEHIDDISCONN);
 
-			if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeOk], AT_RESPONSE_OK,
-					sizeOk) == 0) {
+			if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeOk],
+					AT_RESPONSE_OK, sizeOk) == 0) {
 				radio->response = ESPAT_RESPONSE_OK;
 				break;
 			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeErr],
@@ -565,65 +564,28 @@ espat_state_t espAt_downloadResponse(espat_radio_t *radio) {
 			AT_RESPONSE_READY, sizeReady) == 0) {
 				radio->response = ESPAT_RESPONSE_READY;
 				break;
+			}else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBleConn],
+					AT_MESSAGE_BLECONN, sizeBleConn) == 0) {
+				radio->response = ESPAT_RESPONSE_BLECONN;
+				break;
+			} else if (memcmp(
+					&radio->rxBuffer[actualReceived - 1 - sizeBleDisconn],
+					AT_MESSAGE_BLEDISCONN, sizeBleDisconn) == 0) {
+				radio->response = ESPAT_RESPONSE_BLEDISCONN;
+				break;
+			} else if (memcmp(
+					&radio->rxBuffer[actualReceived - 1 - sizeBleHidConn],
+					AT_MESSAGE_BLEHIDCONN, sizeBleHidConn) == 0) {
+				radio->response = ESPAT_RESPONSE_BLEHIDCONN;
+				break;
+			} else if (memcmp(
+					&radio->rxBuffer[actualReceived - 1 - sizeBleHidDisconn],
+					AT_MESSAGE_BLEHIDDISCONN, sizeBleHidDisconn) == 0) {
+				radio->response = ESPAT_RESPONSE_BLEHIDDISCONN;
+				break;
 			}
 		} else {
 			radio->response = ESPAT_RESPONSE_PARSING_ERROR;
-		}
-	}
-	return state;
-
-}
-
-
-/*
- * receive message from ESP.
- * @param: radio struct
- * @output: ESPAT_RESPONSE_OK/ERROR/BUSY/PARSING_ERROR
- *
- * @retval: state
- */
-espat_state_t espAt_downloadMessage(espat_radio_t *radio) {
-
-	memset(radio->rxBuffer, ' ', RX_BUFFER_SIZE);
-	espat_state_t state;
-
-	for (uint32_t actualReceived = 0; actualReceived < RX_BUFFER_SIZE;
-			actualReceived++) {
-
-		state = uartReceive(&radio->espUart, &radio->rxBuffer[actualReceived],
-				1);
-
-		if (state != ESPAT_STATE_OK)
-			return state;
-
-		if (radio->rxBuffer[actualReceived] == '\n'
-				&& radio->rxBuffer[actualReceived - 1] == '\r'
-				&& actualReceived > 1) {
-
-			uint8_t sizeBleConn = strlen(AT_MESSAGE_BLECONN);
-			uint8_t sizeBleDisconn = strlen(AT_MESSAGE_BLEDISCONN);
-			uint8_t sizeBleHidConn = strlen(AT_MESSAGE_BLEHIDCONN);
-			uint8_t sizeBleHidDisconn = strlen(AT_MESSAGE_BLEHIDDISCONN);
-
-			if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBleConn], AT_MESSAGE_BLECONN,
-					sizeBleConn) == 0) {
-				radio->message = ESPAT_MESSAGE_BLECONN;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBleDisconn],
-			AT_MESSAGE_BLEDISCONN, sizeBleDisconn) == 0) {
-				radio->message = ESPAT_MESSAGE_BLEDISCONN;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBleHidConn],
-			AT_MESSAGE_BLEHIDCONN, sizeBleHidConn) == 0) {
-				radio->message = ESPAT_MESSAGE_BLEHIDCONN;
-				break;
-			} else if (memcmp(&radio->rxBuffer[actualReceived - 1 - sizeBleHidDisconn],
-			AT_MESSAGE_BLEHIDDISCONN, sizeBleHidDisconn) == 0) {
-				radio->message = ESPAT_MESSAGE_BLEHIDDISCONN;
-				break;
-			}
-		} else {
-			radio->message = ESPAT_RESPONSE_PARSING_ERROR;
 		}
 	}
 	return state;
@@ -640,15 +602,6 @@ espat_response_t espAt_returnResponse(espat_radio_t *radio) {
 	return radio->response;
 }
 
-/*
- * return last ESP message
- * @param: radio
- *
- * @retval: ESPAT_MESSAGE_*
- */
-espat_message_t espAt_returnMessage(espat_radio_t *radio) {
-	return radio->message;
-}
 
 /*
  * search and copy mac from rxdata as a string

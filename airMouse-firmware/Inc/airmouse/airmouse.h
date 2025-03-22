@@ -35,7 +35,6 @@ typedef struct{
 	espat_response_t responseMus;
 	espat_response_t responseKbd;
 	airmouse_state_t state;
-	espat_message_t message;
 
 }airmouse_t;
 

@@ -48,7 +48,7 @@ void sleep_enterSleep(void) {
 
 		//led off0
 		blink_enable(&ledRed, BLINK_PATTERN_FAST_SLOW, BLINK_MODE_SINGLE);
-		while(blink_status(&ledRed)==BLINK_STATUS_BUSY);
+		while(blink_returnStatus(&ledRed)==BLINK_STATUS_BUSY);
 		blink_disable(&ledGreen);
 		blink_disable(&ledBlue);
 

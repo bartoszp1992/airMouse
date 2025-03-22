@@ -86,19 +86,14 @@ typedef enum {
 	ESPAT_RESPONSE_ERROR,
 	ESPAT_RESPONSE_BUSY,
 	ESPAT_RESPONSE_READY,
+	ESPAT_RESPONSE_BLECONN,
+	ESPAT_RESPONSE_BLEDISCONN,
+	ESPAT_RESPONSE_BLEHIDCONN,
+	ESPAT_RESPONSE_BLEHIDDISCONN,
 	ESPAT_RESPONSE_PARSING_ERROR
 
 } espat_response_t;
 
-/*
- * be sure to implement every message in espAt_downloadMessage()
- */
-typedef enum {
-	ESPAT_MESSAGE_BLECONN,
-	ESPAT_MESSAGE_BLEDISCONN,
-	ESPAT_MESSAGE_BLEHIDCONN,
-	ESPAT_MESSAGE_BLEHIDDISCONN
-} espat_message_t;
 
 
 typedef enum{
@@ -129,7 +124,6 @@ typedef struct {
 	espat_uartInstance_t espUart;
 	char rxBuffer[RX_BUFFER_SIZE];
 	espat_response_t response; //response for AT command
-	espat_message_t message;
 
 #if (BOOT_SUPPORT == 1)
 	espat_pin_t pinBoot;
@@ -154,9 +148,7 @@ espat_state_t espAt_sendString(espat_radio_t *radio, char *command,
 espat_state_t espAt_sendComplex(espat_radio_t *radio, char *command,
 		uint8_t paramCount, ...);
 espat_state_t espAt_downloadResponse(espat_radio_t *radio);
-espat_state_t espAt_downloadMessage(espat_radio_t *radio);
 espat_response_t espAt_returnResponse(espat_radio_t *radio);
-espat_message_t espAt_returnMessage(espat_radio_t *radio);
 espat_state_t espAt_returnPhysicalAddress(espat_radio_t *radio, char *mac);
 
 #if (EN_SUPPORT == 1)

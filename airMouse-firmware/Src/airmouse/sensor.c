@@ -32,6 +32,6 @@ void sensor_init(void){
 		cursor_setReverse(&cursor, CURSOR_AXIS_Z, CURSOR_NOT_REVERSED);
 
 		cursor_setSensitivity(&cursor, CONFIG_CURSOR_SENSITIVITY);
-		cursor_setAcceleration(&cursor, CONFIG_CURSOR_ACCELERATION, CURSOR_ACCELERATION_MULTIPLY);
-		cursor_setMax(&cursor, 40);
+		cursor_setAcceleration(&cursor, CONFIG_CURSOR_ACCELERATION, CURSOR_ACCELERATION_POWER);
+		cursor_setMax(&cursor, CONFIG_CURSOR_MAX_MOVEMENT);
 }

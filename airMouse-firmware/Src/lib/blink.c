@@ -83,8 +83,18 @@ void blink_disable(blink_t *blink) {
  *
  * @retval: BLINK_STATUS_BUSY/SLEEP
  */
-blink_status_t blink_status(blink_t *blink) {
+blink_status_t blink_returnStatus(blink_t *blink) {
 	return blink->status;
+}
+
+/*
+ * return actual set pattern
+ * @param: pin
+ *
+ * @retval: BLINK_STATUS_BUSY/SLEEP
+ */
+uint32_t blink_returnPattern(blink_t *blink) {
+	return blink->pattern;
 }
 
 /*

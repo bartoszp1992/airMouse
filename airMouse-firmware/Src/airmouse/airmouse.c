@@ -21,6 +21,7 @@
  *      -DONE you can use BLEHIDINIT=0 to disconnect
  *      -scrolling too fast
  *      -DPI switch
+ *      -button hold - ESP automatically send button release
  *
  *      name propositions:
  *      IMU		flow
@@ -54,7 +55,6 @@ void airMouseSetup(void) {
 	airmouse.responseMus = ESPAT_RESPONSE_ERROR;
 	airmouse.responseKbd = ESPAT_RESPONSE_ERROR;
 	airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
-	airmouse.message = ESPAT_MESSAGE_BLEHIDDISCONN;
 
 	//_________________________________________LEDS
 	led_init();
@@ -78,33 +78,38 @@ void airMouseProcess(void) {
 
 		counterDisconn++;
 
-		if (blink_status(&ledBlue) == BLINK_STATUS_READY)
+		if (blink_returnPattern(&ledBlue) != BLINK_PATTERN_BLINK_X16)
 			blink_enable(&ledBlue, BLINK_PATTERN_BLINK_X16,
-					BLINK_MODE_SINGLE);
+					BLINK_MODE_CONTINOUS);
 
-		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_LONG);
-
-		espAt_downloadMessage(&bleRadio);
-		airmouse.message = espAt_returnMessage(&bleRadio);
-		if (airmouse.message == ESPAT_MESSAGE_BLEHIDCONN) {
+		espAt_sendParams(&bleRadio, P_BHM, 4,   //
+				amhid_mouseReportButton,        //
+				amhid_mouseXmove,               //
+				amhid_mouseYmove,               //
+				amhid_mouseReportWheel          //
+				);
+		espAt_downloadResponse(&bleRadio);
+		airmouse.responseMus = espAt_returnResponse(&bleRadio);
+		if (airmouse.responseMus == ESPAT_RESPONSE_BLEHIDCONN
+				|| airmouse.responseMus == ESPAT_RESPONSE_OK) {
 			airmouse.state = AIRMOUSE_STATE_CONNECTED;
+			sleepTimer = 0;
+
 		}
 
 	} else {
 
+		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
+
 		counterConn++;
 
-		if(disconn == 1){
+		if (disconn == 1) {
 			disconn = 0;
 			espAt_sendParams(&bleRadio, P_BD, 1, 0);
 		}
 
-		if (blink_status(&ledBlue) == BLINK_STATUS_READY)
-			blink_enable(&ledBlue, BLINK_PATTERN_SHORT,
-					BLINK_MODE_SINGLE);
-
-
-		espAt_setRxTimeout(&bleRadio, CONFIG_TIMEOUT_RX_FAST);
+		if (blink_returnPattern(&ledBlue) != BLINK_PATTERN_SHORT)
+			blink_enable(&ledBlue, BLINK_PATTERN_SHORT, BLINK_MODE_CONTINOUS);
 
 //_________________________________________MOUSE_________________________________________
 //read sensor
@@ -141,8 +146,9 @@ void airMouseProcess(void) {
 					&& airmouse.responseMus != ESPAT_RESPONSE_PARSING_ERROR) {
 				airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 			}
-
 		}
+
+
 
 		//_________________________________________KEYBOARD_______________________________________
 
@@ -185,6 +191,7 @@ void airMouseProcess(void) {
 				airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 			}
 		}
+
 	}
 
 	sleep_enterSleep();

@@ -50,7 +50,8 @@ void blink_init(blink_t *blink, GPIO_TypeDef* port, uint32_t pin, uint32_t presc
 void blink_enable(blink_t *blink, uint32_t pattern, blink_mode_t mode);
 void blink_disable(blink_t *blink);
 
-blink_status_t blink_status(blink_t *blink);
+blink_status_t blink_returnStatus(blink_t *blink);
+uint32_t blink_returnPattern(blink_t *blink);
 
 void blink_tick(blink_t *blink);
 
