@@ -328,7 +328,12 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "pin_to_pin|444500|1676400|1abe6db7-c4ce-4c4e-950d-7a54bb22104f|a180b27f-fc59-42e6-9ace-e9a985b74196|/7db98094-2aea-4dd7-9887-4079cb1655e3|/7db98094-2aea-4dd7-9887-4079cb1655e3|/7db98094-2aea-4dd7-9887-4079cb1655e3",
+        ""
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -592,7 +597,7 @@
       "plot": "output/250321/GBR/",
       "pos_files": "output/250321/POS/",
       "specctra_dsn": "",
-      "step": "../../housing/pcb_model/airMouse-mcu.stl",
+      "step": "../../housing/pcb_model/airMouse-mcuv1.0.step",
       "svg": "",
       "vrml": ""
     },
