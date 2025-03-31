@@ -166,8 +166,8 @@ void amhid_readCursor(void) {
 				CURSOR_AXIS_Z);
 
 		//read mouse movement from cursor lib
-		amhid_mouseXmove = cursor_output(&cursor, CURSOR_AXIS_X);
-		amhid_mouseYmove = cursor_output(&cursor, CURSOR_AXIS_Z);
+		amhid_mouseXmove = cursor_output(&cursor, CURSOR_AXIS_Z);
+		amhid_mouseYmove = cursor_output(&cursor, CURSOR_AXIS_X);
 
 		if (abs(amhid_mouseXmove) > 0 || abs(amhid_mouseYmove) > 0) //lp problem?
 			amhid_mouseFlagSendReport = 1;

@@ -148,6 +148,10 @@
 #define HID_MOD_RALT			    0xe6
 #define HID_MOD_RGUI			    0xe7
 
+//consumer
+#define HID_KEY_NEXT				0xb5
+#define HID_KEY_PREV				0xb6
+
 
 
 #endif /* LIB_KEY_CODES_H_ */

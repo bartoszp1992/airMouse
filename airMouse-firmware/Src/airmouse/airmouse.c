@@ -57,6 +57,8 @@ void airMouseSetup(void) {
 	airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 
 	//_________________________________________LEDS
+
+
 	led_init();
 
 	//_________________________________________KEYS
@@ -70,6 +72,8 @@ void airMouseSetup(void) {
 	//_________________________________________IMU SENSOR & CURSOR
 
 	sensor_init();
+
+
 
 }
 void airMouseProcess(void) {

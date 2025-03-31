@@ -42,7 +42,7 @@ void blink_init(blink_t *blink, GPIO_TypeDef *port, uint32_t pin,
 	blink->port = port;
 	blink->pin = pin;
 	blink->prescaler = prescaler;
-	blink->pattern = 0xaaaaaaaa;
+	blink->pattern = 0x0;
 	blink->mode = BLINK_MODE_CONTINOUS;
 	blink->actualBit = 31;
 	blink->masterCounter = 0;
