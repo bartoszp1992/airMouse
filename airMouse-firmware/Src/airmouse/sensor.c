@@ -27,9 +27,9 @@ void sensor_init(void){
 		sensorStat = lsm6ds_setInt1Drdy(&mems, LSM6DS_INT1_DRDY_G);
 
 		cursor_init(&cursor);
-		cursor_setReverse(&cursor, CURSOR_AXIS_X, CURSOR_NOT_REVERSED);
-		cursor_setReverse(&cursor, CURSOR_AXIS_Y, CURSOR_NOT_REVERSED);
-		cursor_setReverse(&cursor, CURSOR_AXIS_Z, CURSOR_NOT_REVERSED);
+		cursor_setReverse(&cursor, CURSOR_AXIS_X, CURSOR_REVERSED);
+		cursor_setReverse(&cursor, CURSOR_AXIS_Y, CURSOR_REVERSED);
+		cursor_setReverse(&cursor, CURSOR_AXIS_Z, CURSOR_REVERSED);
 
 		cursor_setSensitivity(&cursor, CONFIG_CURSOR_SENSITIVITY);
 		cursor_setAcceleration(&cursor, CONFIG_CURSOR_ACCELERATION, CURSOR_ACCELERATION_POWER);

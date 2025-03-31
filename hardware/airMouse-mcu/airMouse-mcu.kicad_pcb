@@ -8393,7 +8393,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -8407,7 +8407,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
@@ -16619,6 +16619,80 @@
 				(thickness 0.125)
 			)
 			(justify left bottom mirror)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "User.1")
+		(uuid "5182cd81-10e5-43a8-a54c-26f8e02e9263")
+		(pts
+			(xy 168.2 129) (xy 168.2 76)
+		)
+		(height 6.1)
+		(orientation 1)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "53.0000 mm"
+			(at 173.15 102.5 90)
+			(layer "User.1")
+			(uuid "5182cd81-10e5-43a8-a54c-26f8e02e9263")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(dimension
+		(type orthogonal)
+		(layer "User.1")
+		(uuid "8d71f752-3815-47ad-a9b7-3482bbe65f91")
+		(pts
+			(xy 132 129) (xy 168.2 129)
+		)
+		(height 8)
+		(orientation 0)
+		(format
+			(prefix "")
+			(suffix "")
+			(units 3)
+			(units_format 1)
+			(precision 4)
+		)
+		(style
+			(thickness 0.1)
+			(arrow_length 1.27)
+			(text_position_mode 0)
+			(arrow_direction outward)
+			(extension_height 0.58642)
+			(extension_offset 0.5)
+			(keep_text_aligned yes)
+		)
+		(gr_text "36.2000 mm"
+			(at 150.1 135.85 0)
+			(layer "User.1")
+			(uuid "8d71f752-3815-47ad-a9b7-3482bbe65f91")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
 		)
 	)
 	(segment
@@ -28629,8 +28703,7 @@
 		)
 		(polygon
 			(pts
-				(xy 140.54 109.85) (xy 140.54 109.85) (xy 140.54 96.25) (xy 146.5 96.25) (xy 146.5 99.3) (xy 143.9375 99.3)
-				(xy 143.9375 109.85)
+				(xy 140.54 109.85) (xy 140.54 96.25) (xy 146.5 96.25) (xy 146.5 99.3) (xy 143.9375 99.3) (xy 143.9375 109.85)
 			)
 		)
 		(filled_polygon

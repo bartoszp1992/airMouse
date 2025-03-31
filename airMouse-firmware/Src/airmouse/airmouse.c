@@ -58,7 +58,6 @@ void airMouseSetup(void) {
 
 	//_________________________________________LEDS
 
-
 	led_init();
 
 	//_________________________________________KEYS
@@ -72,8 +71,6 @@ void airMouseSetup(void) {
 	//_________________________________________IMU SENSOR & CURSOR
 
 	sensor_init();
-
-
 
 }
 void airMouseProcess(void) {
@@ -115,6 +112,11 @@ void airMouseProcess(void) {
 		if (blink_returnPattern(&ledBlue) != BLINK_PATTERN_SHORT)
 			blink_enable(&ledBlue, BLINK_PATTERN_SHORT, BLINK_MODE_CONTINOUS);
 
+		if (amhid_mouseReportButton & 1)
+			cursor_setSensitivity(&cursor, CONFIG_CUROSR_SENSITIVITY_LMB);
+		else
+			cursor_setSensitivity(&cursor, CONFIG_CURSOR_SENSITIVITY);
+
 //_________________________________________MOUSE_________________________________________
 //read sensor
 		amhid_readCursor();
@@ -151,8 +153,6 @@ void airMouseProcess(void) {
 				airmouse.state = AIRMOUSE_STATE_DISCONNECTED;
 			}
 		}
-
-
 
 		//_________________________________________KEYBOARD_______________________________________
 
